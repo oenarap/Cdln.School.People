@@ -1,4 +1,4 @@
-﻿# CDLN - People
+# CDLN - People
 
 <p align="left">
   <img src="https://github.com/oenarap/CDLNPeople/blob/master/SchoolPeople.Uwp.App/Assets/cdln.png">
