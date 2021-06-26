@@ -1,13 +1,15 @@
 ﻿using System;
 
-namespace Cdln.School.People.Uwp.Data
+namespace Cdln.School.People.Uwp
 {
-    public struct UserCredentials
+    public class UserCredentials : IUserCredentials
     {
+        public Guid Id { get; }
         public string Email { get; }
         public string Password { get; }
-        public UserCredentials(string email, string password)
+        public UserCredentials(Guid id, string email, string password)
         {
+            Id = id;
             Email = email;
             Password = password;
         }

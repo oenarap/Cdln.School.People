@@ -119,24 +119,36 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="Abstracts\IAddNewItem.cs" />
+    <Compile Include="Abstracts\IApiClient.cs" />
     <Compile Include="Abstracts\INavigationContext.cs" />
+    <Compile Include="Abstracts\IPeopleContextsListViewModel.cs" />
+    <Compile Include="Abstracts\IUserCredentials.cs" />
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Bases\AttributeViewModel.cs" />
+    <Compile Include="Bases\AuxiliaryViewModel.cs" />
     <Compile Include="Bases\ContextDescriptor.cs" />
-    <Compile Include="Bases\Event.cs" />
     <Compile Include="Bases\IndexedModel.cs" />
+    <Compile Include="Bases\Message.cs" />
+    <Compile Include="Bases\MessageCommand.cs" />
     <Compile Include="Bases\Model.cs" />
+    <Compile Include="Bases\Saga.cs" />
     <Compile Include="Command.cs" />
+    <Compile Include="Enums\SericeStatusEnums.cs" />
+    <Compile Include="Handles.cs" />
     <Compile Include="Data\CommentsRepository.cs" />
     <Compile Include="Data\ApiClient.cs" />
     <Compile Include="Data\UserCredentials.cs" />
     <Compile Include="Enums\ContextEnums.cs" />
-    <Compile Include="EventHub.cs" />
-    <Compile Include="Events\ApiClientEvents.cs" />
-    <Compile Include="Events\ContextEvents.cs" />
-    <Compile Include="Events\PeopleEvents.cs" />
+    <Compile Include="Messages\ApiClientEvents.cs" />
+    <Compile Include="Messages\AttributesCommands.cs" />
+    <Compile Include="Messages\ContextEvents.cs" />
+    <Compile Include="Messages\DataEvents.cs" />
+    <Compile Include="Messages\PeopleEvents.cs" />
     <Compile Include="Extensions.cs" />
+    <Compile Include="Abstracts\INavigationService.cs" />
+    <Compile Include="Abstracts\IMessageHub.cs" />
     <Compile Include="Ioc.cs" />
     <Compile Include="Lists\PeopleContextDescriptors.cs" />
     <Compile Include="Lists\PersonnelAttributesContextDescriptors.cs" />
@@ -147,6 +159,10 @@
     <Compile Include="MainPage.xaml.cs">
       <DependentUpon>MainPage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="MessageHub.cs" />
+    <Compile Include="Messages\AttributesQueries.cs" />
+    <Compile Include="Messages\PeopleCommands.cs" />
+    <Compile Include="Messages\PeopleQueries.cs" />
     <Compile Include="Models\Addresses\BranchAddress.cs" />
     <Compile Include="Models\Addresses\LeafAddress.cs" />
     <Compile Include="Models\Addresses\RootAddress.cs" />
@@ -186,12 +202,24 @@
       <DependentUpon>RegistrationCertificate.xaml</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Sagas\StudentsSaga.cs" />
     <Compile Include="Utils\BirthdateValidator.cs" />
     <Compile Include="Utils\Converters.cs" />
     <Compile Include="Utils\IndexLogger.cs" />
     <Compile Include="Utils\PersonValidator.cs" />
+    <Compile Include="ViewModels\AttributeContextsListViewModel.cs" />
+    <Compile Include="ViewModels\AttributePaneViewModel.cs" />
+    <Compile Include="ViewModels\Attributes\FamilyBackgroundViewModel.cs" />
+    <Compile Include="ViewModels\Auxiliaries\CommentsViewModel.cs" />
+    <Compile Include="ViewModels\ConspectusViewModel.cs" />
+    <Compile Include="ViewModels\PeopleContextsListViewModel.cs" />
+    <Compile Include="ViewModels\PeopleListViewModel.cs" />
+    <Compile Include="ViewModels\PeopleListViewModel.EventHandlers.cs" />
     <Compile Include="Views\ActivePeopleView.xaml.cs">
       <DependentUpon>ActivePeopleView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\AddPersonDialog.xaml.cs">
+      <DependentUpon>AddPersonDialog.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\Attributes\CivicWorksView.xaml.cs">
       <DependentUpon>CivicWorksView.xaml</DependentUpon>
@@ -226,6 +254,9 @@
     <Compile Include="Views\Auxiliaries\CommentsView.xaml.cs">
       <DependentUpon>CommentsView.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Views\ErrorPage.xaml.cs">
+      <DependentUpon>ErrorPage.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\InactivePeopleView.xaml.cs">
       <DependentUpon>InactivePeopleView.xaml</DependentUpon>
     </Compile>
@@ -240,6 +271,9 @@
     </Compile>
     <Compile Include="Views\Panes\PeopleList.xaml.cs">
       <DependentUpon>PeopleList.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\SettingsView.xaml.cs">
+      <DependentUpon>SettingsView.xaml</DependentUpon>
     </Compile>
   </ItemGroup>
   <ItemGroup>
@@ -303,6 +337,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Views\AddPersonDialog.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Views\Attributes\CivicWorksView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -347,6 +385,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Views\ErrorPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Views\InactivePeopleView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -367,6 +409,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Views\SettingsView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="Autofac">
@@ -382,15 +428,21 @@
       <Version>13.0.1</Version>
     </PackageReference>
     <PackageReference Include="School.People.Core">
-      <Version>1.0.6</Version>
+      <Version>1.0.7</Version>
     </PackageReference>
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Commands\" />
     <Folder Include="Constants\" />
+    <Folder Include="Models\Attributes\" />
   </ItemGroup>
   <ItemGroup>
     <None Include="appsettings.json" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\School.People.Uwp.Controls\School.People.Uwp.Controls.csproj">
+      <Project>{b2a5f284-2d64-460e-a5fe-87f88225135a}</Project>
+      <Name>School.People.Uwp.Controls</Name>
+    </ProjectReference>
   </ItemGroup>
   <PropertyGroup Condition=" '$(VisualStudioVersion)' == '' or '$(VisualStudioVersion)' &lt; '14.0' ">
     <VisualStudioVersion>14.0</VisualStudioVersion>

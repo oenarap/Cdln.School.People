@@ -11,8 +11,8 @@ namespace Cdln.School.People.Uwp.Models
         private static void OnRelationshipPropertyChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
         {
             RelatedPerson model = (RelatedPerson)d;
-            Relationship? rel = (Relationship?)e.NewValue;
-            model.Markers[M05] = rel == null;
+            Relationship? relationship = (Relationship?)e.NewValue;
+            model.Markers[M05] = relationship == null;
             model.Markers[Default] = model.IsInitializing;
         }
 

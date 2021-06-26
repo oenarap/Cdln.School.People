@@ -6,9 +6,203 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d"
-    Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+    Background="White" Width="816" Height="1248">
 
-    <Grid>
+    <Canvas x:Name="RootCanvas" Margin="24" RequestedTheme="Light">
 
-    </Grid>
+        <!-- page's sections column header backgrounds -->
+        <Rectangle Height="42" Width="768" Fill="LightGray" Canvas.Top="18"/>
+        <Rectangle Fill="LightGray" Width="768" Height="54" Canvas.Top="290"/>
+        <Rectangle Fill="LightGray" Width="768" Height="36" Canvas.Top="972"/>
+        <!-- footer signature & date backgrounds -->
+        <Rectangle Fill="LightGray" Width="96" Height="26" Canvas.Top="1174"/>
+        <Rectangle Fill="LightGray" Width="120" Height="26" Canvas.Top="1174" Canvas.Left="402"/>
+
+        <!-- vertical lines -->
+        <Line Stroke="Black" StrokeThickness="1" X1="192" X2="192" Y1="972" Y2="1162"/>
+        <Line Stroke="Black" StrokeThickness="1" X1="324" X2="324" Y1="18" Y2="942"/>
+        <Line Stroke="Black" StrokeThickness="1" X1="372" X2="372" Y1="48" Y2="242"/>
+        <Line Stroke="Black" StrokeThickness="1" X1="372" X2="372" Y1="332" Y2="942"/>
+        <Line Stroke="Black" StrokeThickness="1" X1="420" X2="420" Y1="18" Y2="942"/>
+        <Line Stroke="Black" StrokeThickness="1" X1="468" X2="468" Y1="18" Y2="942"/>
+        <Line Stroke="Black" StrokeThickness="1" X1="522" X2="522" Y1="290" Y2="1200"/>
+        <!-- footer signature & date vertical lines -->
+        <Line Stroke="Black" StrokeThickness="1" X1="96" X2="96" Y1="1174" Y2="1200"/>
+        <Line Stroke="Black" StrokeThickness="1" X1="402" X2="402" Y1="1174" Y2="1200"/>
+
+        <!-- voluntary/civic works section header -->
+        <Border Width="768" Height="18" BorderBrush="Black" BorderThickness="1" Background="#FF969696" Padding="2">
+            <TextBlock HorizontalAlignment="Left" VerticalAlignment="Center" Foreground="White" FontStretch="ExtraCondensed" FontSize="11" FontStyle="Italic"
+                       Text="VI.  VOLUNTARY WORK OR INVOLVEMENT IN CIVIC / NON-GOVERNMENT / PEOPLE / VOLUNTARY ORGANIZATION/S" FontWeight="Bold"/>
+        </Border>
+
+        <!-- voluntary/civic works section footer -->
+        <Rectangle Fill="LightGray" Width="768" Height="12" Canvas.Top="242"/>
+        <Line Stroke="Black" StrokeThickness="1" X1="0" X2="768" Y1="242" Y2="242"/>
+        <TextBlock FontSize="8" FontStretch="ExtraCondensed" Canvas.Top="242" Canvas.Left="304" FontStyle="Italic" FontWeight="Bold"
+                   Text="(Continue on separate sheet if necessary)" Foreground="Red"/>
+        <Grid Height="42" Width="768" Canvas.Top="18">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="18"/>
+                <ColumnDefinition Width="306"/>
+                <ColumnDefinition Width="48"/>
+                <ColumnDefinition Width="48"/>
+                <ColumnDefinition Width="48"/>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="30"/>
+                <RowDefinition/>
+            </Grid.RowDefinitions>
+            <TextBlock FontSize="9" FontStretch="ExtraCondensed" Padding="4" Text="29." VerticalAlignment="Center" HorizontalTextAlignment="Center"/>
+            <TextBlock FontSize="9" FontStretch="ExtraCondensed" Padding="4" VerticalAlignment="Center" HorizontalTextAlignment="Center"
+                       Text="NAME &amp; ADDRESS OF ORGANIZATION&#x0a;(Write in full)" Grid.Column="1" Grid.RowSpan="2"/>
+            <TextBlock FontSize="9" FontStretch="ExtraCondensed" Padding="4" VerticalAlignment="Center" HorizontalTextAlignment="Center"
+                       Text="INCLUSIVE DATES&#x0a;(mm/dd/yyyy)" Grid.Column="2" Grid.ColumnSpan="2"/>
+            <TextBlock FontSize="9" FontStretch="ExtraCondensed" Padding="4" VerticalAlignment="Center" HorizontalTextAlignment="Center"
+                       Text="From" Grid.Column="2" Grid.Row="1"/>
+            <TextBlock FontSize="9" FontStretch="ExtraCondensed" Padding="4" VerticalAlignment="Center" HorizontalTextAlignment="Center"
+                       Text="To" Grid.Column="3" Grid.Row="1"/>
+            <TextBlock FontSize="9" FontStretch="ExtraCondensed" Padding="4" VerticalAlignment="Center" HorizontalTextAlignment="Center"
+                       Text="NUMBER OF HOURS" Grid.Column="4" Grid.RowSpan="2" TextWrapping="Wrap"/>
+            <TextBlock FontSize="9" FontStretch="ExtraCondensed" Padding="4" VerticalAlignment="Center" HorizontalTextAlignment="Center"
+                       Text="POSITION / NATURE OF WORK" Grid.Column="5" Grid.RowSpan="2"/>
+        </Grid>
+
+        <Line Stroke="Black" StrokeThickness="1" X1="324" X2="420" Y1="48" Y2="48"/>
+        <Line Stroke="Black" StrokeThickness="1" X1="0" X2="768" Y1="60" Y2="60"/>
+        <Line Stroke="Black" StrokeThickness="1" X1="0" X2="768" Y1="86" Y2="86"/>
+        <Line Stroke="Black" StrokeThickness="1" X1="0" X2="768" Y1="112" Y2="112"/>
+        <Line Stroke="Black" StrokeThickness="1" X1="0" X2="768" Y1="138" Y2="138"/>
+        <Line Stroke="Black" StrokeThickness="1" X1="0" X2="768" Y1="164" Y2="164"/>
+        <Line Stroke="Black" StrokeThickness="1" X1="0" X2="768" Y1="190" Y2="190"/>
+        <Line Stroke="Black" StrokeThickness="1" X1="0" X2="768" Y1="216" Y2="216"/>
+
+
+        <!-- learning & development section header -->
+        <Border Width="768" Height="36" BorderBrush="Black" BorderThickness="1" Background="#FF969696" Padding="2" Canvas.Top="254">
+            <StackPanel>
+                <TextBlock HorizontalAlignment="Left" VerticalAlignment="Center" Foreground="White" FontStretch="ExtraCondensed" FontSize="11" FontStyle="Italic"
+                       Text="VII.  LEARNING AND DEVELOPMENT (L&amp;D) INTERVENTIONS/TRAINING PROGRAMS ATTENDED" FontWeight="Bold"/>
+                <TextBlock HorizontalAlignment="Left" VerticalAlignment="Center" Foreground="White" FontStretch="ExtraCondensed" FontSize="10" FontStyle="Italic"
+                           FontWeight="Bold" Text="(Start from the most recent L&amp;D/training program and include only the relevant L&amp;D/training taken for the last five (5) years for Division Chief/Executive/Managerial positions)"/>
+            </StackPanel>
+        </Border>
+
+        <Grid Height="54" Width="768" Canvas.Top="290">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="18"/>
+                <ColumnDefinition Width="306"/>
+                <ColumnDefinition Width="48"/>
+                <ColumnDefinition Width="48"/>
+                <ColumnDefinition Width="48"/>
+                <ColumnDefinition Width="54"/>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="42"/>
+                <RowDefinition/>
+            </Grid.RowDefinitions>
+            <TextBlock FontSize="9" FontStretch="ExtraCondensed" Padding="4" Text="30." VerticalAlignment="Center" HorizontalTextAlignment="Center"/>
+            <TextBlock FontSize="9" FontStretch="ExtraCondensed" Padding="4" VerticalAlignment="Center" HorizontalTextAlignment="Center"
+                       Text="TITLE OF LEARNING AND DEVELOPMENT INTERVENTIONS/TRAINING PROGRAMS&#x0a;(Write in full)" Grid.Column="1" Grid.RowSpan="2"/>
+            <TextBlock FontSize="9" FontStretch="ExtraCondensed" Padding="4" VerticalAlignment="Center" HorizontalTextAlignment="Center"
+                       Text="INCLUSIVE DATES OF&#x0a;ATTENDANCE&#x0a;(mm/dd/yyyy)" Grid.Column="2" Grid.ColumnSpan="2"/>
+            <TextBlock FontSize="9" FontStretch="ExtraCondensed" Padding="4" VerticalAlignment="Center" HorizontalTextAlignment="Center"
+                       Text="From" Grid.Column="2" Grid.Row="1"/>
+            <TextBlock FontSize="9" FontStretch="ExtraCondensed" Padding="4" VerticalAlignment="Center" HorizontalTextAlignment="Center"
+                       Text="To" Grid.Column="3" Grid.Row="1"/>
+            <TextBlock FontSize="9" FontStretch="ExtraCondensed" Padding="4" VerticalAlignment="Center" HorizontalTextAlignment="Center"
+                       Text="NUMBER OF HOURS" Grid.Column="4" Grid.RowSpan="2" TextWrapping="Wrap"/>
+            <TextBlock FontSize="9" FontStretch="ExtraCondensed" Padding="4" VerticalAlignment="Center" HorizontalTextAlignment="Center"
+                       Text="Type of LD&#x0a;(Managerial/&#x0a;Supervisory/&#x0a;Technical/etc)" Grid.Column="5" Grid.RowSpan="2"/>
+            <TextBlock FontSize="9" FontStretch="ExtraCondensed" Padding="4" VerticalAlignment="Center" HorizontalTextAlignment="Center"
+                       Text="CONDUCTED/SPONSORED BY&#x0a;(Write in full)" Grid.Column="6" Grid.RowSpan="2"/>
+        </Grid>
+
+        <Line Stroke="Black" StrokeThickness="1" X1="324" X2="420" Y1="332" Y2="332"/>
+        <Line Stroke="Black" StrokeThickness="1" X1="0" X2="768" Y1="344" Y2="344"/>
+        <Line Stroke="Black" StrokeThickness="1" X1="0" X2="768" Y1="370" Y2="370"/>
+        <Line Stroke="Black" StrokeThickness="1" X1="0" X2="768" Y1="396" Y2="396"/>
+        <Line Stroke="Black" StrokeThickness="1" X1="0" X2="768" Y1="422" Y2="422"/>
+        <Line Stroke="Black" StrokeThickness="1" X1="0" X2="768" Y1="448" Y2="448"/>
+        <Line Stroke="Black" StrokeThickness="1" X1="0" X2="768" Y1="474" Y2="474"/>
+        <Line Stroke="Black" StrokeThickness="1" X1="0" X2="768" Y1="500" Y2="500"/>
+        <Line Stroke="Black" StrokeThickness="1" X1="0" X2="768" Y1="526" Y2="526"/>
+        <Line Stroke="Black" StrokeThickness="1" X1="0" X2="768" Y1="552" Y2="552"/>
+        <Line Stroke="Black" StrokeThickness="1" X1="0" X2="768" Y1="578" Y2="578"/>
+        <Line Stroke="Black" StrokeThickness="1" X1="0" X2="768" Y1="604" Y2="604"/>
+        <Line Stroke="Black" StrokeThickness="1" X1="0" X2="768" Y1="630" Y2="630"/>
+        <Line Stroke="Black" StrokeThickness="1" X1="0" X2="768" Y1="656" Y2="656"/>
+        <Line Stroke="Black" StrokeThickness="1" X1="0" X2="768" Y1="682" Y2="682"/>
+        <Line Stroke="Black" StrokeThickness="1" X1="0" X2="768" Y1="708" Y2="708"/>
+        <Line Stroke="Black" StrokeThickness="1" X1="0" X2="768" Y1="734" Y2="734"/>
+        <Line Stroke="Black" StrokeThickness="1" X1="0" X2="768" Y1="760" Y2="760"/>
+        <Line Stroke="Black" StrokeThickness="1" X1="0" X2="768" Y1="786" Y2="786"/>
+        <Line Stroke="Black" StrokeThickness="1" X1="0" X2="768" Y1="812" Y2="812"/>
+        <Line Stroke="Black" StrokeThickness="1" X1="0" X2="768" Y1="838" Y2="838"/>
+        <Line Stroke="Black" StrokeThickness="1" X1="0" X2="768" Y1="864" Y2="864"/>
+        <Line Stroke="Black" StrokeThickness="1" X1="0" X2="768" Y1="890" Y2="890"/>
+        <Line Stroke="Black" StrokeThickness="1" X1="0" X2="768" Y1="916" Y2="916"/>
+
+        <!-- learning & development section footer -->
+        <Rectangle Fill="LightGray" Width="768" Height="12" Canvas.Top="942"/>
+        <Line Stroke="Black" StrokeThickness="1" X1="0" X2="768" Y1="942" Y2="942"/>
+        <TextBlock FontSize="8" FontStretch="ExtraCondensed" Canvas.Top="942" Canvas.Left="304" FontStyle="Italic" FontWeight="Bold"
+                   Text="(Continue on separate sheet if necessary)" Foreground="Red"/>
+
+
+        <!-- other information section -->
+        <Border Width="768" Height="18" BorderBrush="Black" BorderThickness="1" Canvas.Top="954" Background="#FF969696" Padding="2">
+            <TextBlock HorizontalAlignment="Left" VerticalAlignment="Center" Foreground="White" FontStretch="ExtraCondensed" FontSize="11" FontStyle="Italic"
+                       Text="VIII.  OTHER INFORMATION" FontWeight="Bold"/>
+        </Border>
+
+        <Grid Height="36" Width="768" Canvas.Top="972">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="18"/>
+                <ColumnDefinition Width="174"/>
+                <ColumnDefinition Width="18"/>
+                <ColumnDefinition Width="312"/>
+                <ColumnDefinition Width="18"/>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+            <TextBlock FontSize="9" FontStretch="ExtraCondensed" Padding="4" Text="31." VerticalAlignment="Center" HorizontalTextAlignment="Center"/>
+            <TextBlock FontSize="9" FontStretch="ExtraCondensed" Padding="4" VerticalAlignment="Center" HorizontalTextAlignment="Center"
+                       Text="SPECIAL SKILLS and HOBBIES" Grid.Column="1" Grid.RowSpan="2"/>
+            <TextBlock FontSize="9" FontStretch="ExtraCondensed" Padding="4" Text="32." VerticalAlignment="Center" HorizontalTextAlignment="Center" Grid.Column="2"/>
+            <TextBlock FontSize="9" FontStretch="ExtraCondensed" Padding="4" VerticalAlignment="Center" HorizontalTextAlignment="Center"
+                       Text="NON-ACADEMIC DISTINCTIONS / RECOGNITION&#x0a;(Write in full)" Grid.Column="3"/>
+            <TextBlock FontSize="9" FontStretch="ExtraCondensed" Padding="4" Text="33." VerticalAlignment="Center" HorizontalTextAlignment="Center" Grid.Column="4"/>
+            <TextBlock FontSize="9" FontStretch="ExtraCondensed" Padding="4" VerticalAlignment="Center" HorizontalTextAlignment="Center"
+                       Text="MEMBERSHIP IN ASSOCIATION/ORGANIZATION&#x0a;(Write in full)" Grid.Column="5"/>
+        </Grid>
+
+        <Line Stroke="Black" StrokeThickness="1" X1="0" X2="768" Y1="1008" Y2="1008"/>
+        <Line Stroke="Black" StrokeThickness="1" X1="0" X2="768" Y1="1034" Y2="1034"/>
+        <Line Stroke="Black" StrokeThickness="1" X1="0" X2="768" Y1="1060" Y2="1060"/>
+        <Line Stroke="Black" StrokeThickness="1" X1="0" X2="768" Y1="1086" Y2="1086"/>
+        <Line Stroke="Black" StrokeThickness="1" X1="0" X2="768" Y1="1112" Y2="1112"/>
+        <Line Stroke="Black" StrokeThickness="1" X1="0" X2="768" Y1="1138" Y2="1138"/>
+        <Line Stroke="Black" StrokeThickness="1" X1="0" X2="768" Y1="1008" Y2="1008"/>
+
+        <!-- page footer -->
+        <Rectangle Fill="LightGray" Width="768" Height="12" Canvas.Top="1162"/>
+        <Line Stroke="Black" StrokeThickness="1" X1="0" X2="768" Y1="1162" Y2="1162"/>
+        <Line Stroke="Black" StrokeThickness="1" X1="0" X2="768" Y1="1174" Y2="1174"/>
+        <TextBlock FontSize="8" FontStretch="ExtraCondensed" Canvas.Top="1162" Canvas.Left="304" FontStyle="Italic" FontWeight="Bold"
+                   Text="(Continue on separate sheet if necessary)" Foreground="Red"/>
+        <TextBlock FontSize="11" FontStretch="ExtraCondensed" Canvas.Top="1180" Text="SIGNATURE" HorizontalTextAlignment="Center" 
+                   Width="96" FontWeight="Bold" FontStyle="Italic"/>
+        <TextBlock FontSize="11" FontStretch="ExtraCondensed" Canvas.Top="1180" Text="DATE" HorizontalTextAlignment="Center" 
+                   FontWeight="Bold" FontStyle="Italic" Width="120" Canvas.Left="408"/>
+
+
+
+        <!-- page border & form info -->
+        <Rectangle Stroke="Black" StrokeThickness="1" Canvas.Left="0" Canvas.Top="0" Height="1200" Width="768"/>
+        <TextBlock FontSize="7" FontStretch="ExtraCondensed" FontStyle="Italic" Canvas.Top="1200" Canvas.Left="648" Width="120"
+                   Text="CS Form No. 212 (Revised 2017), Page 3 of 4" HorizontalTextAlignment="Right" HorizontalAlignment="Right"/>
+
+    </Canvas>
 </Page>

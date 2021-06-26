@@ -1,14 +1,16 @@
 ﻿using System;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
+using Windows.UI.Xaml.Navigation;
+using Cdln.School.People.Uwp.Views;
 using Windows.UI.Xaml.Media.Animation;
 
 namespace Cdln.School.People.Uwp
 {
-    public sealed class NavigationService
+    public sealed class NavigationService : INavigationService
     {
         private readonly Frame frame;
-        private object lastparam;
+        private NavigationContext context;
 
         public bool CanGoBack => frame.CanGoBack;
 
@@ -17,6 +19,12 @@ namespace Cdln.School.People.Uwp
         public NavigationService(Frame initialFrame = null)
         {
             frame = initialFrame ?? Window.Current.Content as Frame;
+            frame.NavigationFailed += OnNavigationFailed;
+        }
+
+        private void OnNavigationFailed(object sender, NavigationFailedEventArgs e)
+        {
+            Navigate(typeof(ErrorPage), context);
         }
 
         public bool GoBack()
@@ -26,7 +34,7 @@ namespace Cdln.School.People.Uwp
                 int lastIndex = frame.BackStackDepth - 1;
                 var entry = frame.BackStack[lastIndex];
                 frame.BackStack.RemoveAt(lastIndex);
-                var result = Navigate(entry.SourcePageType, lastparam);
+                var result = Navigate(entry.SourcePageType, context);
                 if (result == true) { frame.BackStack.RemoveAt(lastIndex); }
                 return result;
             }
@@ -35,21 +43,21 @@ namespace Cdln.School.People.Uwp
 
         public void GoForward() => frame.GoForward();
 
-        public bool Navigate(Type sourcePageType, object parameter = null, NavigationTransitionInfo navigationTransitionInfo = null)
+        public bool Navigate(Type sourcePageType, NavigationContext context = null, NavigationTransitionInfo navigationTransitionInfo = null)
         {
-            var result = frame.Navigate(sourcePageType, parameter, navigationTransitionInfo);
-            if (result == true) { lastparam = parameter; }
+            var result = frame.Navigate(sourcePageType, context, navigationTransitionInfo);
+            if (result == true) { this.context = context; }
             return result;
         }
 
-        public bool NavigateBack(Type sourcePageType, object parameter = null, NavigationTransitionInfo navigationTransitionInfo = null)
+        public bool NavigateBack(Type sourcePageType, NavigationContext context = null, NavigationTransitionInfo navigationTransitionInfo = null)
         {
             int count = frame.BackStackDepth;
             for (int i = count - 1; i >= 0; i--)
             {
                 var entry = frame.BackStack[i];
                 frame.BackStack.RemoveAt(i);
-                if (entry.SourcePageType == sourcePageType) { return Navigate(sourcePageType, parameter, navigationTransitionInfo); }
+                if (entry.SourcePageType == sourcePageType) { return Navigate(sourcePageType, context, navigationTransitionInfo); }
             }
             return false;
         }

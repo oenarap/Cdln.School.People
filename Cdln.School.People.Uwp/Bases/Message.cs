@@ -3,21 +3,18 @@ using Apps.Communication.Core;
 
 namespace Cdln.School.People.Uwp
 {
-    public abstract class Event<T> : Event, IEvent<T>
+    public abstract class Message<T> : Message
     {
         public T Data { get; }
 
-        protected Event(Guid id, T data)
+        public Message(Guid id, T data)
             : base(id) { Data = data; }
     }
 
-    public abstract class Event : IEvent
+    public abstract class Message : IMessage
     {
         public Guid Id { get; }
 
-        protected Event(Guid id)
-        {
-            Id = id;
-        }
+        public Message(Guid id) { Id = id; }
     }
 }

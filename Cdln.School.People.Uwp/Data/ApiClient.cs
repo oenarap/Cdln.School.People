@@ -1,71 +1,103 @@
 ﻿using System;
 using System.Net.Http;
 using Newtonsoft.Json;
+using System.Threading;
 using System.Threading.Tasks;
-using Apps.Communication.Core;
 using System.Collections.Generic;
-using Cdln.School.People.Uwp.Events;
+using Cdln.School.People.Uwp.Messages;
 
 namespace Cdln.School.People.Uwp.Data
 {
-    public class ApiClient : IDisposable
+    public class ApiClient : IDisposable, IApiClient
     {
-        public async void Get(Guid requestId, Uri requestUri, object content = null)
+        public ServiceStatus ServiceStatus
         {
-            try
+            get => serviceStatus;
+
+            private set
             {
-                var response = await GetResponseAsync(HttpMethod.Get, requestId, requestUri, content).ConfigureAwait(false);
-                Hub.Dispatch(new GetResponseReceivedEvent(requestId, response));
-            }
-            catch (Exception ex)
-            {
-                Hub.Dispatch(new RequestErrorEvent(requestId, ex.Message));
+                if (value != serviceStatus)
+                {
+                    serviceStatus = value;
+                    Hub.Dispatch(new SericeStatusChangedEvent(serviceStatus));
+                }
             }
         }
 
-        public async void Delete(Guid requestId, Uri requestUri, object content = null)
+        // GET requests must be filtered so that API call(s) will be ignored, except the last one.
+        // In theory, this filtering could keep the app UI nimble even in
+        // a slow low-bandwidth network connection.
+        public void Get(Guid requestId, Uri requestUri, Guid? tokenId = null, object content = null)
         {
-            try
+            SignalToCopy.WaitOne();
+            SignalToCopy.Reset();
+
+            RequestId = requestId;
+            RequestUri = requestUri;
+            TokenId = tokenId;
+            Content = content;
+
+            SignalToCopy.Set();
+            SignalToProcess.Set();
+        }
+
+        private async void ProcessGetRequests()
+        {
+            Guid requestId;
+            Uri requestUri;
+            Guid? tokenId;
+            object content;
+
+            while (!disposing)
             {
-                var response = await GetResponseAsync(HttpMethod.Delete, requestId, requestUri, content).ConfigureAwait(false);
-                Hub.Dispatch(new DeleteResponseReceivedEvent(requestId, response));
-            }
-            catch (Exception ex)
-            {
-                Hub.Dispatch(new RequestErrorEvent(requestId, ex.Message));
+                SignalToProcess.WaitOne();
+                SignalToProcess.Reset();
+
+                try
+                {
+                    SignalToCopy.WaitOne();
+                    SignalToCopy.Reset();
+
+                    requestId = RequestId;
+                    requestUri = RequestUri;
+                    tokenId = TokenId;
+                    content = Content;
+
+                    SignalToCopy.Set();
+
+                    var response = await GetResponseAsync(HttpMethod.Get, RequestUri, TokenId, Content);
+                    Hub.Dispatch(new GetResponseReceivedEvent(requestId, response));
+                }
+                catch (Exception ex)
+                {
+                    Hub.Dispatch(new RequestErrorEvent(requestId, ex.Message));
+                }
             }
         }
 
-        public async void Put(Guid requestId, Uri requestUri, object content = null)
+        public async Task<HttpResponseMessage> Delete(Guid tokenId, Uri requestUri, object content = null)
         {
-            try
-            {
-                var response = await GetResponseAsync(HttpMethod.Put, requestId, requestUri, content).ConfigureAwait(false);
-                Hub.Dispatch(new PutResponseReceivedEvent(requestId, response));
-            }
-            catch (Exception ex)
-            {
-                Hub.Dispatch(new RequestErrorEvent(requestId, ex.Message));
-            }
+            var response = await GetResponseAsync(HttpMethod.Delete, requestUri, tokenId, content).ConfigureAwait(false);
+            return response;
         }
 
-        public async void Post(Guid requestId, Uri requestUri, object content = null)
+        public async Task<HttpResponseMessage> Put(Guid tokenId, Uri requestUri, object content = null)
         {
-            try
-            {
-                var response = await GetResponseAsync(HttpMethod.Post, requestId, requestUri, content).ConfigureAwait(false);
-                Hub.Dispatch(new PostResponseReceivedEvent(requestId, response));
-            }
-            catch (Exception ex)
-            {
-                Hub.Dispatch(new RequestErrorEvent(requestId, ex.Message));
-            }
+            var response = await GetResponseAsync(HttpMethod.Put, requestUri, tokenId, content).ConfigureAwait(false);
+            return response;
         }
 
-        public async Task<Guid?> GetToken(Uri requestUri, UserCredentials credentials)
+        public async Task<HttpResponseMessage> Post(Guid tokenId, Uri requestUri, object content = null)
+        {
+            var response = await GetResponseAsync(HttpMethod.Post, requestUri, tokenId, content).ConfigureAwait(false);
+            return response;
+        }
+
+        public async void GetTokenId(Guid requestId, Uri requestUri, UserCredentials credentials)
         {
             try
             {
+                Guid? tokenId = null;
                 var content = JsonConvert.SerializeObject(credentials);
                 var message = new HttpRequestMessage(HttpMethod.Post, requestUri)
                 {
@@ -76,17 +108,20 @@ namespace Cdln.School.People.Uwp.Data
                 {
                     if (await response.Content.ReadAsStringAsync() is string token)
                     {
-                        var id = Guid.NewGuid();
-                        Tokens.Add(id, token);
-                        return id;
+                        var newId = Guid.NewGuid();
+                        Tokens.Add(newId, token);
+                        tokenId = newId;
                     }
                 }
-                return null;
+                Hub.Dispatch(new TokenAcquiredEvent(requestId, tokenId));
             }
-            catch { return null; }
+            catch (Exception ex)
+            {
+                Hub.Dispatch(new RequestErrorEvent(requestId, ex.Message));
+            }
         }
 
-        private async Task<HttpResponseMessage> GetResponseAsync(HttpMethod method, Guid requestId, Uri requestUri, object content = null)
+        private async Task<HttpResponseMessage> GetResponseAsync(HttpMethod method, Uri requestUri, Guid? tokenId = null, object content = null)
         {
             try
             {
@@ -96,8 +131,11 @@ namespace Cdln.School.People.Uwp.Data
                     var json = JsonConvert.SerializeObject(content);
                     request.Content = new StringContent(json, System.Text.Encoding.UTF8, "application/json");
                 }
-                Tokens.TryGetValue(requestId, out string token);
-                request.Headers.Add("Authorization", token);
+                if (tokenId is Guid id)
+                {
+                    Tokens.TryGetValue(id, out string token);
+                    request.Headers.Add("Authorization", token);
+                }
                 return await Client.SendAsync(request).ConfigureAwait(false);
             }
             catch (Exception ex)
@@ -106,17 +144,43 @@ namespace Cdln.School.People.Uwp.Data
             }
         }
 
-        public ApiClient(IEventHub hub)
+        public ApiClient(IMessageHub messageHub)
         {
             Tokens = new Dictionary<Guid, string>();
+            SignalToCopy = new ManualResetEvent(true);
+            SignalToProcess = new ManualResetEvent(true);
             Client = new HttpClient();
-            Hub = hub;
+            Hub = messageHub;
+
+            GetRequestThread = new Thread(ProcessGetRequests)
+            {
+                Name = "InboundDataAgentThread",
+                Priority = ThreadPriority.BelowNormal
+            };
+            GetRequestThread.Start();
         }
 
-        public void Dispose() => Client.Dispose();
+        public void Dispose()
+        {
+            disposing = true;
+            SignalToCopy.Dispose();
+            SignalToProcess.Dispose();
+            Client.Dispose();
+        }
+
+        [ThreadStatic] private Guid? TokenId;
+        [ThreadStatic] private Guid RequestId;
+        [ThreadStatic] private Uri RequestUri;
+        [ThreadStatic] private object Content;
+
+        private readonly Thread GetRequestThread;
 
         private readonly Dictionary<Guid, string> Tokens;
+        private readonly ManualResetEvent SignalToCopy;
+        private readonly ManualResetEvent SignalToProcess;
         private readonly HttpClient Client;
-        private readonly IEventHub Hub;
+        private readonly IMessageHub Hub;
+        private bool disposing;
+        private ServiceStatus serviceStatus;
     }
 }

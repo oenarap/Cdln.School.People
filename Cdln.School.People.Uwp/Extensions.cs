@@ -6,6 +6,12 @@ namespace Cdln.School.People.Uwp
 {
     public static class Extensions
     {
+        public static string FullName(this IPerson person)
+        {
+            string nameExtension = person.NameExtension == null ? null : $", {person.NameExtension}";
+            return $"{person.Title} {person.FirstName} {person.MiddleName} {person.LastName}{nameExtension}";
+        }
+
         public static async void FireAndForget(this Task task, bool continueOnCapturedContext = true, Action<Exception> onException = null)
         {
             try
@@ -16,12 +22,6 @@ namespace Cdln.School.People.Uwp
             {
                 onException(ex);
             }
-        }
-
-        public static string FullName(this IPerson person)
-        {
-            string nameExtension = person.NameExtension == null ? null : $", {person.NameExtension}";
-            return $"{person.Title} {person.FirstName} {person.MiddleName} {person.LastName}{nameExtension}";
         }
     }
 }

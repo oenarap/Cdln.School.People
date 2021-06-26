@@ -1,30 +1,67 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Runtime.InteropServices.WindowsRuntime;
-using Windows.Foundation;
-using Windows.Foundation.Collections;
+using Autofac;
+using Windows.UI;
 using Windows.UI.Xaml;
+using System.Threading.Tasks;
+using Apps.Communication.Core;
 using Windows.UI.Xaml.Controls;
-using Windows.UI.Xaml.Controls.Primitives;
-using Windows.UI.Xaml.Data;
-using Windows.UI.Xaml.Input;
-using Windows.UI.Xaml.Media;
-using Windows.UI.Xaml.Navigation;
-
-// The Blank Page item template is documented at https://go.microsoft.com/fwlink/?LinkId=402352&clcid=0x409
+using Windows.UI.ViewManagement;
+using Windows.ApplicationModel.Core;
+using Cdln.School.People.Uwp.Messages;
 
 namespace Cdln.School.People.Uwp
 {
-    /// <summary>
-    /// An empty page that can be used on its own or navigated to within a Frame.
-    /// </summary>
-    public sealed partial class MainPage : Page
+    public sealed partial class MainPage : Page, IHandle<PeopleContextChangedEvent>, IHandle<SericeStatusChangedEvent>
     {
+        public static readonly DependencyProperty ContextsProperty = DependencyProperty.Register(nameof(Contexts), typeof(IPeopleContextsListViewModel), typeof(MainPage), new PropertyMetadata(null));
+        private static readonly DependencyProperty UsernameProperty = DependencyProperty.Register(nameof(Username), typeof(string), typeof(MainPage), new PropertyMetadata(null));
+        private static readonly DependencyProperty ServiceStatusTextProperty = DependencyProperty.Register(nameof(ServiceStatusText), typeof(string), typeof(MainPage), new PropertyMetadata(null));
+
+        private readonly NavigationService NavigationService;
+        private readonly NavigationContext NavigationContext;
+
+        public IPeopleContextsListViewModel Contexts => (IPeopleContextsListViewModel)GetValue(ContextsProperty);
+        public string Username => (string)GetValue(UsernameProperty);
+        public string ServiceStatusText => (string)GetValue(ServiceStatusTextProperty);
+
         public MainPage()
         {
             this.InitializeComponent();
+
+            this.Loaded += OnMainPageLoaded;
+            this.appNavigationView.BackRequested += (sender, args) => OnBackRequested();
+
+            NavigationService = new NavigationService(this.contentFrame);
+            NavigationContext = new NavigationContext();
         }
+
+        public async Task Handle(SericeStatusChangedEvent message)
+        {
+            await Dispatcher.RunAsync(Windows.UI.Core.CoreDispatcherPriority.Normal, () =>
+            {
+                if (message.Data == ServiceStatus.Online) { VisualStateManager.GoToState(this, "Online", true); }
+                else { VisualStateManager.GoToState(this, "Offline", true); }
+            });
+        }
+
+        private void OnMainPageLoaded(object sender, RoutedEventArgs e)
+        {
+            var hub = App.Container.Resolve<IMessageHub>();
+            hub.RegisterHandler<MainPage, PeopleContextChangedEvent>(this);
+            hub.RegisterHandler<MainPage, SericeStatusChangedEvent>(this);
+        }
+
+        public Task Handle(PeopleContextChangedEvent message)
+        {
+            return new Task(() =>
+            {
+                if (message.Data?.AssociatedViewType is Type associatedType)
+                {
+                    NavigationService.Navigate(associatedType, NavigationContext);
+                }
+            });
+        }
+
+        private void OnBackRequested() => NavigationService.GoBack();
     }
 }

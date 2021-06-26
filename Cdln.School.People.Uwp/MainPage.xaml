@@ -1,14 +1,84 @@
-﻿<Page
+﻿<Page x:Name="mainpage"
     x:Class="Cdln.School.People.Uwp.MainPage"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-    xmlns:local="using:Cdln.School.People.Uwp"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    mc:Ignorable="d"
-    Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+    xmlns:controls="using:School.People.Uwp.Controls"
+    xmlns:models="using:Cdln.School.People.Uwp.Models"
+    Background="{ThemeResource NavigationViewDefaultPaneBackground}"
+    mc:Ignorable="d">
 
-    <Grid>
+    <Page.Resources>
+        <controls:DoubleToGridLengthGridLengthToDoubleConverter x:Key="DoubleToGridLengthGridLengthToDoubleConverter"/>
+    </Page.Resources>
 
+    <Grid x:Name="rootGrid">
+        <NavigationView x:Name="appNavigationView" 
+                        ExpandedModeThresholdWidth="2400" 
+                        IsBackEnabled="True"
+                        OpenPaneLength="240" 
+                        CompactPaneLength="48" 
+                        AlwaysShowHeader="False" 
+                        IsSettingsVisible="True"
+                        MenuItemsSource="{Binding Contexts.View, ElementName=mainpage}">
+            <NavigationView.PaneHeader>
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition/>
+                    </Grid.ColumnDefinitions>
+                    <Image Source="ms-appx:///Assets/cdln.png"/>
+                    <TextBlock Grid.Column="1" 
+                               Margin="16,0,0,0"
+                               VerticalAlignment="Center"
+                               FontWeight="Bold"
+                               Text="Temp"/>
+                </Grid>
+            </NavigationView.PaneHeader>
+            <NavigationView.MenuItemTemplate>
+                <DataTemplate x:DataType="models:PeopleContextDescriptor">
+                    <NavigationViewItem Content="{Binding Description}">
+                        <NavigationViewItem.Icon>
+                            <FontIcon Glyph="{Binding Glyph}"/>
+                        </NavigationViewItem.Icon>
+                        <NavigationViewItem.KeyboardAccelerators>
+                            <KeyboardAccelerator Key="{Binding KeyboardAccelerator.Key}"
+                                                 Modifiers="{Binding KeyboardAccelerator.Modifiers}"/>
+                        </NavigationViewItem.KeyboardAccelerators>
+                    </NavigationViewItem>
+                </DataTemplate>
+            </NavigationView.MenuItemTemplate>
+            <Frame x:Name="contentFrame" Margin="0,-32,0,0"/>
+            <NavigationView.PaneFooter>
+                <StackPanel Orientation="Vertical">
+                    <NavigationViewItem Content="{Binding Username, ElementName=mainpage}">
+                        <NavigationViewItem.Icon>
+                            <FontIcon Glyph=""/>
+                        </NavigationViewItem.Icon>
+                    </NavigationViewItem>
+                    <NavigationViewItem x:Name="statusItem" 
+                                        Content="{Binding ServiceStatusText, ElementName=mainpage}">
+                        <NavigationViewItem.Icon>
+                            <FontIcon x:Name="statusIcon" Glyph="" Foreground="Lime"/>
+                        </NavigationViewItem.Icon>
+                    </NavigationViewItem>
+                </StackPanel>
+            </NavigationView.PaneFooter>
+        </NavigationView>
+        <VisualStateManager.VisualStateGroups>
+            <VisualStateGroup x:Name="DataStates">
+                <VisualState x:Name="Online"/>
+                <VisualState x:Name="Offline">
+                    <VisualState.Setters>
+                        <Setter Target="statusItem.Background" Value="Red"/>
+                        <Setter Target="statusItem.Content" Value="Offline"/>
+                        <Setter Target="statusIcon.Glyph" Value=""/>
+                        <Setter Target="statusIcon.Foreground" Value="White"/>
+                        <Setter Target="statusItem.Foreground" Value="White"/>
+                    </VisualState.Setters>
+                </VisualState>
+            </VisualStateGroup>
+        </VisualStateManager.VisualStateGroups>
     </Grid>
 </Page>

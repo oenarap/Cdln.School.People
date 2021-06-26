@@ -5,10 +5,410 @@
     xmlns:local="using:Cdln.School.People.Uwp.Printables.Pds"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    mc:Ignorable="d"
-    Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+    mc:Ignorable="d" Height="1248" Width="816"
+    Background="White">
 
-    <Grid>
+    <Canvas x:Name="RootCanvas" Margin="24" Width="768"
+            RequestedTheme="Light">
+        <!-- header section -->
+        <TextBlock FontSize="11" Padding="2" FontStyle="Italic" Text="CS Form No. 212" FontWeight="Bold"/>
+        <TextBlock FontSize="9" Padding="2" FontStyle="Italic" Text="Revised 2017" Canvas.Top="12" FontWeight="Bold"/>
+        <TextBlock FontWeight="Black" HorizontalTextAlignment="Center" Width="500"
+                   Text="PERSONAL DATA SHEET" Canvas.Left="134" Canvas.Top="24" FontSize="22"/>
+        <TextBlock FontSize="8" TextWrapping="Wrap" Width="700" Padding="2" FontStyle="Italic" Canvas.Top="60" FontWeight="Bold"
+                   Text="WARNING: Any misinterpretation made in the Personal Data Sheet and the Work Experience Sheet shall cause the filing of administrative/criminal case/s against the person concerned."/>
+        <TextBlock FontSize="8" Padding="2" FontStyle="Italic" Canvas.Top="80" FontWeight="Bold"
+                   Text="READ THE ATTACHED GUIDE TO FILLING OUT THE PERSONAL DATA SHEET (PDS) BEFORE ACCOMPLISHING THE PDSPage1 FORM."/>
+        <TextBlock FontSize="9" Padding="2" Canvas.Top="90" FontStretch="ExtraCondensed"
+                   Text="Print legibly. Tick appropriate boxes □ and use separate sheet if necessary. Indicate N/A in not applicable. DO NOT ABBREVIATE."/>
+        <Border Width="48" Height="14" BorderBrush="Black" BorderThickness="0.5" Canvas.Top="90" Background="#FF969696" Padding="1" Canvas.Left="528">
+            <TextBlock HorizontalAlignment="Left" VerticalAlignment="Center" FontStretch="ExtraCondensed" FontSize="8"
+                       Text="1.  CS ID No."/>
+        </Border>
+        <Border Width="192" Height="14" BorderBrush="Black" BorderThickness="0.5" Canvas.Top="90" Padding="1" Canvas.Left="576">
+            <TextBlock HorizontalAlignment="Right" VerticalAlignment="Center" FontStretch="ExtraCondensed" FontSize="8"
+                       Text="(Do not fill up. For CSC use only.)"/>
+        </Border>
 
-    </Grid>
+        <!-- background elements -->
+        <Rectangle Fill="LightGray" Width="114" Height="1094" Canvas.Top="104"/>
+        <Rectangle Fill="LightGray" Width="768" Height="58" Canvas.Top="920"/>
+        <Rectangle Fill="LightGray" Width="96" Height="26" Canvas.Top="1174" Canvas.Left="480"/>
+        <Rectangle Fill="LightGray" Width="348" Height="23" Canvas.Top="594" Canvas.Left="420"/>
+        <Rectangle Fill="LightGray" Width="348" Height="23" Canvas.Top="880" Canvas.Left="420"/>
+
+        <Line Stroke="Black" StrokeThickness="1" X1="114" X2="114" Y1="104" Y2="1200"/>
+
+        <Rectangle Fill="LightGray" Width="108" Height="22" Canvas.Top="638" Canvas.Left="312"/>
+        <Rectangle Fill="LightGray" Width="108" Height="22" Canvas.Top="792" Canvas.Left="312"/>
+        <Rectangle Fill="LightGray" Width="192" Height="24" Canvas.Top="146" Canvas.Left="576"/>
+        <Line Stroke="Black" StrokeThickness="1" X1="0" X2="768" Y1="264" Y2="264"/>
+        <Rectangle Fill="LightGray" Width="168" Height="96" Canvas.Top="194" Canvas.Left="312"/>
+
+        <!-- personal information section -->
+        <Border Width="768" Height="18" BorderBrush="Black" BorderThickness="1" Canvas.Top="104" Background="#FF969696" Padding="2">
+            <TextBlock HorizontalAlignment="Left" VerticalAlignment="Center" Foreground="White" FontStretch="ExtraCondensed" FontSize="11" FontStyle="Italic"
+                       Text="I.  PERSONAL INFORMATION" FontWeight="Bold"/>
+        </Border>
+        <Line Stroke="Black" StrokeThickness="1" X1="114" X2="768" Y1="146" Y2="146"/>
+        <Line Stroke="Black" StrokeThickness="1" X1="114" X2="768" Y1="170" Y2="170"/>
+        <Line Stroke="Black" StrokeThickness="1" X1="0" X2="768" Y1="194" Y2="194"/>
+        <Line Stroke="Black" StrokeThickness="1" X1="0" X2="312" Y1="224" Y2="224"/>
+        <Line Stroke="Black" StrokeThickness="0.5" X1="420" X2="768" Y1="306" Y2="306"/>
+        <Line Stroke="Black" StrokeThickness="1" X1="420" X2="768" Y1="316" Y2="316"/>
+        <Line Stroke="Black" StrokeThickness="0.5" X1="420" X2="768" Y1="332" Y2="332"/>
+        <Line Stroke="Black" StrokeThickness="1" X1="0" X2="768" Y1="342" Y2="342"/>
+        <Line Stroke="Black" StrokeThickness="0.5" X1="420" X2="768" Y1="358" Y2="358"/>
+        <Line Stroke="Black" StrokeThickness="1" X1="0" X2="768" Y1="368" Y2="368"/>
+        <Line Stroke="Black" StrokeThickness="0.5" X1="420" X2="768" Y1="410" Y2="410"/>
+        <Line Stroke="Black" StrokeThickness="1" X1="0" X2="768" Y1="420" Y2="420"/>
+        <Line Stroke="Black" StrokeThickness="0.5" X1="420" X2="768" Y1="436" Y2="436"/>
+        <Line Stroke="Black" StrokeThickness="1" X1="0" X2="768" Y1="446" Y2="446"/>
+        <Line Stroke="Black" StrokeThickness="0.5" X1="420" X2="768" Y1="462" Y2="462"/>
+        <Line Stroke="Black" StrokeThickness="1" X1="0" X2="768" Y1="472" Y2="472"/>
+
+        <Rectangle Fill="LightGray" Width="108" Height="304" Canvas.Top="290" Canvas.Left="312"/>
+
+        <Line Stroke="Black" StrokeThickness="1" X1="0" X2="768" Y1="290" Y2="290"/>
+        <Line Stroke="Black" StrokeThickness="1" X1="0" X2="768" Y1="394" Y2="394"/>
+        <Line Stroke="Black" StrokeThickness="1" X1="0" X2="768" Y1="498" Y2="498"/>
+        <Line Stroke="Black" StrokeThickness="1" X1="0" X2="768" Y1="524" Y2="524"/>
+        <Line Stroke="Black" StrokeThickness="1" X1="0" X2="768" Y1="550" Y2="550"/>
+
+        <TextBlock FontSize="8" FontStretch="ExtraCondensed" Padding="4" Canvas.Top="126" Text=" 2. SURNAME"/>
+        <TextBlock FontSize="8" FontStretch="ExtraCondensed" Padding="4" Canvas.Top="150" Text="FIRST NAME" Canvas.Left="8"/>
+        <TextBlock FontSize="8" FontStretch="ExtraCondensed" Padding="4" Canvas.Top="174" Text="MIDDLE NAME" Canvas.Left="8"/>
+        <TextBlock FontSize="7" FontStretch="ExtraCondensed" Padding="4" Canvas.Top="144" Text="NAME EXTENSION (JR., SR.)" Canvas.Left="576"/>
+        <TextBlock FontSize="8" FontStretch="ExtraCondensed" Padding="4" Canvas.Top="194" Text=" 3. DATE OF BIRTH"/>
+        <TextBlock FontSize="8" FontStretch="ExtraCondensed" Padding="4" Canvas.Top="206" Text="(mm/dd/yyyy)" Canvas.Left="8"/>
+        <TextBlock FontSize="8" FontStretch="ExtraCondensed" Padding="4" Canvas.Top="228" Text=" 4. PLACE OF BIRTH"/>
+
+        <!--
+        
+        <TextBlock Text="{x:Bind LastName}" FontSize="12" Padding="2" FontWeight="Bold" Canvas.Top="126" Canvas.Left="118"/>
+        <TextBlock Text="{x:Bind FirstName}" FontSize="12" Padding="2" FontWeight="Bold" Canvas.Top="150" Canvas.Left="118"/>
+        <TextBlock Text="{x:Bind MiddleName}" FontSize="12" Padding="2" FontWeight="Bold" Canvas.Top="174" Canvas.Left="118"/>
+        <TextBlock Text="{x:Bind NameExtension}" FontSize="12" Padding="2" FontWeight="Bold" Canvas.Top="150" Canvas.Left="660"/>
+        <TextBlock Text="{x:Bind Birthdate}" FontSize="12" Padding="2" FontWeight="Bold" Canvas.Top="200" Canvas.Left="118"/>
+        <TextBlock Text="{x:Bind Birthplace}" FontSize="12" Padding="2" FontWeight="Bold" Canvas.Top="228" Canvas.Left="118" Width="196" TextWrapping="Wrap"/>
+
+        <TextBlock FontSize="8" FontStretch="ExtraCondensed" Padding="4" Canvas.Top="268" Text=" 5. SEX"/>
+        <TextBlock Text="{x:Bind Male}" FontFamily="Segoe MDL2 Assets" FontSize="12" Padding="4" Canvas.Top="268" Canvas.Left="116"/>
+        <TextBlock FontSize="10" FontStretch="ExtraCondensed" Padding="4" Canvas.Top="268" Canvas.Left="132" Text="Male"/>
+        <TextBlock Text="{x:Bind Female}" FontFamily="Segoe MDL2 Assets" FontSize="12" Padding="4" Canvas.Top="268" Canvas.Left="240"/>
+        <TextBlock FontSize="10" FontStretch="ExtraCondensed" Padding="4" Canvas.Top="268" Canvas.Left="256" Text="Female"/>
+
+        <TextBlock FontSize="8" FontStretch="ExtraCondensed" Padding="4" Canvas.Top="290" Text=" 6. CIVIL STATUS"/>
+        <TextBlock Text="{x:Bind Single}" FontFamily="Segoe MDL2 Assets" FontSize="12" Padding="4" Canvas.Top="290" Canvas.Left="116"/>
+        <TextBlock FontSize="10" FontStretch="ExtraCondensed" Padding="4" Canvas.Top="290" Canvas.Left="132" Text="Single"/>
+        <TextBlock Text="{x:Bind Married}" FontFamily="Segoe MDL2 Assets" FontSize="12" Padding="4" Canvas.Top="290" Canvas.Left="240"/>
+        <TextBlock FontSize="10" FontStretch="ExtraCondensed" Padding="4" Canvas.Top="290" Canvas.Left="256" Text="Married"/>
+        <TextBlock Text="{x:Bind Widowed}" FontFamily="Segoe MDL2 Assets" FontSize="12" Padding="4" Canvas.Top="306" Canvas.Left="116"/>
+        <TextBlock FontSize="10" FontStretch="ExtraCondensed" Padding="4" Canvas.Top="306" Canvas.Left="132" Text="Widowed"/>
+        <TextBlock Text="{x:Bind Separated}" FontFamily="Segoe MDL2 Assets" FontSize="12" Padding="4" Canvas.Top="306" Canvas.Left="240"/>
+        <TextBlock FontSize="10" FontStretch="ExtraCondensed" Padding="4" Canvas.Top="306" Canvas.Left="256" Text="Separated"/>
+        <TextBlock Text="{x:Bind Other}" FontFamily="Segoe MDL2 Assets" FontSize="12" Padding="4" Canvas.Top="322" Canvas.Left="116"/>
+        <TextBlock FontSize="10" FontStretch="ExtraCondensed" Padding="4" Canvas.Top="322" Canvas.Left="132" Text="Other"/>
+        <TextBlock Text="{x:Bind OtherCivilStatus}" FontSize="12" Padding="4" Canvas.Top="322" Canvas.Left="164"/>
+        
+        -->
+
+        <TextBlock FontSize="8" FontStretch="ExtraCondensed" Padding="4" Canvas.Top="346" Text=" 7. HEIGHT (m)"/>
+        <TextBlock FontSize="8" FontStretch="ExtraCondensed" Padding="4" Canvas.Top="372" Text=" 8. WEIGHT (Kg)"/>
+        <TextBlock FontSize="8" FontStretch="ExtraCondensed" Padding="4" Canvas.Top="398" Text=" 9. BLOOD TYPE"/>
+        <TextBlock FontSize="8" FontStretch="ExtraCondensed" Padding="4" Canvas.Top="424" Text="10. GSIS ID NO."/>
+        <TextBlock FontSize="8" FontStretch="ExtraCondensed" Padding="4" Canvas.Top="450" Text="11. PAG-IBIG ID NO."/>
+        <TextBlock FontSize="8" FontStretch="ExtraCondensed" Padding="4" Canvas.Top="476" Text="12. PHILHEALTH NO."/>
+        <TextBlock FontSize="8" FontStretch="ExtraCondensed" Padding="4" Canvas.Top="502" Text="13. SSS NO."/>
+        <TextBlock FontSize="8" FontStretch="ExtraCondensed" Padding="4" Canvas.Top="528" Text="14. TIN NO."/>
+        <TextBlock FontSize="8" FontStretch="ExtraCondensed" Padding="4" Canvas.Top="554" Text="15. AGENCY EMPLOYEE NO."/>
+
+        <!--
+        
+        <TextBlock Text="{x:Bind HeightInCentimeters}" FontSize="12" Padding="2" FontWeight="Bold" Canvas.Top="346" Canvas.Left="118"/>
+        <TextBlock Text="{x:Bind WeightInKilograms}" FontSize="12" Padding="2" FontWeight="Bold" Canvas.Top="372" Canvas.Left="118"/>
+        <TextBlock Text="{x:Bind BloodType}" FontSize="12" Padding="2" FontWeight="Bold" Canvas.Top="398" Canvas.Left="118"/>
+        <TextBlock Text="{x:Bind GsisIdNumber}" FontSize="12" Padding="2" FontWeight="Bold" Canvas.Top="424" Canvas.Left="118"/>
+        <TextBlock Text="{x:Bind PagIbigIdNumber}" FontSize="12" Padding="2" FontWeight="Bold" Canvas.Top="450" Canvas.Left="118"/>
+        <TextBlock Text="{x:Bind PhilhealthNumber}" FontSize="12" Padding="2" FontWeight="Bold" Canvas.Top="476" Canvas.Left="118"/>
+        <TextBlock Text="{x:Bind SssNumber}" FontSize="12" Padding="2" FontWeight="Bold" Canvas.Top="502" Canvas.Left="118"/>
+        <TextBlock Text="{x:Bind Tin}" FontSize="12" Padding="2" FontWeight="Bold" Canvas.Top="528" Canvas.Left="118"/>
+        <TextBlock Text="{x:Bind AgencyId}" FontSize="12" Padding="2" FontWeight="Bold" Canvas.Top="554" Canvas.Left="118"/>
+        
+        -->
+
+        <TextBlock FontSize="8" FontStretch="ExtraCondensed" Padding="4" Canvas.Top="200" Canvas.Left="312" Text="16. CITIZENSHIP"/>
+        <TextBlock FontSize="8" FontStretch="ExtraCondensed" Padding="4" Canvas.Top="242" Canvas.Left="342" TextWrapping="Wrap" Width="100"
+                   Text="If holder of dual citizenship, please indicate the details."/>
+        <TextBlock FontSize="8" FontStretch="ExtraCondensed" Padding="4" Canvas.Top="290" Canvas.Left="312" Text="17. RESIDENTIAL ADDRESS"/>
+        <TextBlock FontSize="8" FontStretch="ExtraCondensed" Padding="4" Canvas.Top="372" Canvas.Left="342" Text="ZIP CODE"/>
+        <TextBlock FontSize="8" FontStretch="ExtraCondensed" Padding="4" Canvas.Top="398" Canvas.Left="312" Text="18. PERMANENT ADDRESS"/>
+        <TextBlock FontSize="8" FontStretch="ExtraCondensed" Padding="4" Canvas.Top="476" Canvas.Left="342" Text="ZIP CODE"/>
+        <TextBlock FontSize="8" FontStretch="ExtraCondensed" Padding="4" Canvas.Top="502" Canvas.Left="312" Text="19. TELEPHONE NO."/>
+        <TextBlock FontSize="8" FontStretch="ExtraCondensed" Padding="4" Canvas.Top="528" Canvas.Left="312" Text="20. MOBILE NO."/>
+        <TextBlock FontSize="8" FontStretch="ExtraCondensed" Padding="4" Canvas.Top="554" Canvas.Left="312" Text="21. E-MAIL ADDRESS (if any)"/>
+
+        <!--
+        
+        <TextBlock Text="{x:Bind Country}" FontSize="12" Padding="2" FontWeight="Bold" Canvas.Top="268" Canvas.Left="492"/>
+
+        <TextBlock Text="{x:Bind ResidentialHouseBlockLotNumber}" Width="168" HorizontalTextAlignment="Center" TextTrimming="CharacterEllipsis" 
+                   FontStretch="Condensed" FontSize="11" Padding="2" FontWeight="Bold" Canvas.Top="290" Canvas.Left="424"/>
+        <TextBlock Text="{x:Bind ResidentialStreet}" Width="168" HorizontalTextAlignment="Center" TextTrimming="CharacterEllipsis"
+                   FontStretch="Condensed" FontSize="11" Padding="2" FontWeight="Bold" Canvas.Top="290" Canvas.Left="600"/>
+        <TextBlock Text="{x:Bind ResidentialSubdivisionVillage}" Width="168" HorizontalTextAlignment="Center" TextTrimming="CharacterEllipsis"
+                   FontStretch="Condensed" FontSize="11" Padding="2" FontWeight="Bold" Canvas.Top="316" Canvas.Left="424"/>
+        <TextBlock Text="{x:Bind ResidentialBarangay}" Width="168" HorizontalTextAlignment="Center" TextTrimming="CharacterEllipsis"
+                   FontStretch="Condensed" FontSize="11" Padding="2" FontWeight="Bold" Canvas.Top="316" Canvas.Left="600"/>
+        <TextBlock Text="{x:Bind ResidentialCityMunicipality}" Width="168" HorizontalTextAlignment="Center" TextTrimming="CharacterEllipsis"
+                   FontStretch="Condensed" FontSize="11" Padding="2" FontWeight="Bold" Canvas.Top="342" Canvas.Left="424"/>
+        <TextBlock Text="{x:Bind ResidentialProvince}" Width="168" HorizontalTextAlignment="Center" TextTrimming="CharacterEllipsis"
+                   FontStretch="Condensed" FontSize="11" Padding="2" FontWeight="Bold" Canvas.Top="342" Canvas.Left="600"/>
+        <TextBlock Text="{x:Bind ResidentialZipCode}" FontSize="12" Padding="2" FontWeight="Bold" Canvas.Top="372" Canvas.Left="424"/>
+
+        <TextBlock Text="{x:Bind PermanentHouseBlockLotNumber}" Width="168" HorizontalTextAlignment="Center" TextTrimming="CharacterEllipsis" 
+                   FontStretch="Condensed" FontSize="11" Padding="2" FontWeight="Bold" Canvas.Top="394" Canvas.Left="424"/>
+        <TextBlock Text="{x:Bind PermanentStreet}" Width="168" HorizontalTextAlignment="Center" TextTrimming="CharacterEllipsis"
+                   FontStretch="Condensed" FontSize="11" Padding="2" FontWeight="Bold" Canvas.Top="394" Canvas.Left="600"/>
+        <TextBlock Text="{x:Bind PermanentSubdivisionVillage}" Width="168" HorizontalTextAlignment="Center" TextTrimming="CharacterEllipsis"
+                   FontStretch="Condensed" FontSize="11" Padding="2" FontWeight="Bold" Canvas.Top="420" Canvas.Left="424"/>
+        <TextBlock Text="{x:Bind PermanentBarangay}" Width="168" HorizontalTextAlignment="Center" TextTrimming="CharacterEllipsis"
+                   FontStretch="Condensed" FontSize="11" Padding="2" FontWeight="Bold" Canvas.Top="420" Canvas.Left="600"/>
+        <TextBlock Text="{x:Bind PermanentCityMunicipality}" Width="168" HorizontalTextAlignment="Center" TextTrimming="CharacterEllipsis"
+                   FontStretch="Condensed" FontSize="11" Padding="2" FontWeight="Bold" Canvas.Top="446" Canvas.Left="424"/>
+        <TextBlock Text="{x:Bind PermanentProvince}" Width="168" HorizontalTextAlignment="Center" TextTrimming="CharacterEllipsis"
+                   FontStretch="Condensed" FontSize="11" Padding="2" FontWeight="Bold" Canvas.Top="446" Canvas.Left="600"/>
+        <TextBlock Text="{x:Bind PermanentZipCode}" FontSize="12" Padding="2" FontWeight="Bold" Canvas.Top="476" Canvas.Left="424"/>
+
+        <TextBlock Text="{x:Bind TelephoneNumber}" FontSize="12" Padding="2" FontWeight="Bold" Canvas.Top="502" Canvas.Left="424"/>
+        <TextBlock Text="{x:Bind MobileNumber}" FontSize="12" Padding="2" FontWeight="Bold" Canvas.Top="528" Canvas.Left="424"/>
+        <TextBlock Text="{x:Bind EmailAddress}" FontSize="12" Padding="2" FontWeight="Bold" Canvas.Top="554" Canvas.Left="424"/>
+
+
+        <TextBlock FontFamily="Segoe MDL2 Assets" FontSize="12" Padding="4" Canvas.Top="200" Canvas.Left="492" Text=""/>
+        <TextBlock FontSize="10" FontStretch="ExtraCondensed" Padding="4" Canvas.Top="200" Canvas.Left="508" Text="Filipino"/>
+        <TextBlock Text="{x:Bind DualCitizenship}" FontFamily="Segoe MDL2 Assets" FontSize="12" Padding="4" Canvas.Top="200" Canvas.Left="576"/>
+        <TextBlock FontSize="10" FontStretch="ExtraCondensed" Padding="4" Canvas.Top="200" Canvas.Left="592" Text="Dual Citizenship"/>
+        <TextBlock Text="{x:Bind DualCitizenshipByBirth}" FontFamily="Segoe MDL2 Assets" FontSize="12" Padding="4" Canvas.Top="222" Canvas.Left="592"/>
+        <TextBlock FontSize="10" FontStretch="ExtraCondensed" Padding="4" Canvas.Top="222" Canvas.Left="608" Text="by birth"/>
+        <TextBlock Text="{x:Bind DualCitizenshipByNaturalization}" FontFamily="Segoe MDL2 Assets" FontSize="12" Padding="4" Canvas.Top="222" Canvas.Left="652"/>
+        
+        -->
+        <TextBlock FontSize="10" FontStretch="ExtraCondensed" Padding="4" Canvas.Top="222" Canvas.Left="668" Text="by naturalization"/>
+        <TextBlock FontSize="10" FontStretch="ExtraCondensed" Padding="4" Canvas.Top="244" Canvas.Left="592" Text="Please indicate country."/>
+
+        <TextBlock FontSize="8" FontStretch="ExtraCondensed" FontStyle="Italic" Canvas.Top="306" Canvas.Left="480" Text="House/Block/Lot No." Foreground="Gray"/>
+        <TextBlock FontSize="8" FontStretch="ExtraCondensed" FontStyle="Italic" Canvas.Top="306" Canvas.Left="676" Text="Street" Foreground="Gray"/>
+        <TextBlock FontSize="8" FontStretch="ExtraCondensed" FontStyle="Italic" Canvas.Top="332" Canvas.Left="482" Text="Subdivision/Village" Foreground="Gray"/>
+        <TextBlock FontSize="8" FontStretch="ExtraCondensed" FontStyle="Italic" Canvas.Top="332" Canvas.Left="672" Text="Barangay" Foreground="Gray"/>
+        <TextBlock FontSize="8" FontStretch="ExtraCondensed" FontStyle="Italic" Canvas.Top="358" Canvas.Left="484" Text="City/Municipality" Foreground="Gray"/>
+        <TextBlock FontSize="8" FontStretch="ExtraCondensed" FontStyle="Italic" Canvas.Top="358" Canvas.Left="672" Text="Province" Foreground="Gray"/>
+        <TextBlock FontSize="8" FontStretch="ExtraCondensed" FontStyle="Italic" Canvas.Top="410" Canvas.Left="480" Text="House/Block/Lot No." Foreground="Gray"/>
+        <TextBlock FontSize="8" FontStretch="ExtraCondensed" FontStyle="Italic" Canvas.Top="410" Canvas.Left="676" Text="Street" Foreground="Gray"/>
+        <TextBlock FontSize="8" FontStretch="ExtraCondensed" FontStyle="Italic" Canvas.Top="436" Canvas.Left="482" Text="Subdivision/Village" Foreground="Gray"/>
+        <TextBlock FontSize="8" FontStretch="ExtraCondensed" FontStyle="Italic" Canvas.Top="436" Canvas.Left="672" Text="Barangay" Foreground="Gray"/>
+        <TextBlock FontSize="8" FontStretch="ExtraCondensed" FontStyle="Italic" Canvas.Top="462" Canvas.Left="484" Text="City/Municipality" Foreground="Gray"/>
+        <TextBlock FontSize="8" FontStretch="ExtraCondensed" FontStyle="Italic" Canvas.Top="462" Canvas.Left="672" Text="Province" Foreground="Gray"/>
+
+        <!-- vertical lines -->
+        <Line Stroke="Black" StrokeThickness="1" X1="312" X2="312" Y1="194" Y2="576"/>
+        <Line Stroke="Black" StrokeThickness="1" X1="312" X2="312" Y1="638" Y2="660"/>
+        <Line Stroke="Black" StrokeThickness="1" X1="312" X2="312" Y1="792" Y2="814"/>
+        <Line Stroke="Black" StrokeThickness="1" X1="420" X2="420" Y1="290" Y2="902"/>
+        <Line Stroke="Black" StrokeThickness="1" X1="480" X2="480" Y1="194" Y2="290"/>
+        <Line Stroke="Black" StrokeThickness="1" X1="528" X2="528" Y1="960" Y2="1162"/>
+        <Line Stroke="Black" StrokeThickness="1" X1="576" X2="576" Y1="146" Y2="170"/>
+        <Line Stroke="Black" StrokeThickness="1" X1="576" X2="576" Y1="920" Y2="1200"/>
+        <Line Stroke="Black" StrokeThickness="1" X1="630" X2="630" Y1="594" Y2="880"/>
+        <Line Stroke="Black" StrokeThickness="1" X1="630" X2="630" Y1="920" Y2="1162"/>
+        <Line Stroke="Black" StrokeThickness="1" X1="682" X2="682" Y1="920" Y2="1162"/>
+        <Line Stroke="Black" StrokeThickness="1" X1="312" X2="312" Y1="920" Y2="1162"/>
+        <Line Stroke="Black" StrokeThickness="1" X1="480" X2="480" Y1="920" Y2="1200"/>
+
+        <!-- family background section -->
+        <Border Width="768" Height="18" BorderBrush="Black" BorderThickness="1" Canvas.Top="576" Background="#FF969696" Padding="2">
+            <TextBlock HorizontalAlignment="Left" VerticalAlignment="Center" Foreground="White" FontStretch="ExtraCondensed" FontSize="11" FontStyle="Italic"
+                       Text="II.  FAMILY BACKGROUND" FontWeight="Bold"/>
+        </Border>
+        <Line Stroke="Black" StrokeThickness="1" X1="114" X2="768" Y1="616" Y2="616"/>
+        <Line Stroke="Black" StrokeThickness="1" X1="114" X2="768" Y1="638" Y2="638"/>
+        <Line Stroke="Black" StrokeThickness="1" X1="0" X2="768" Y1="660" Y2="660"/>
+        <Line Stroke="Black" StrokeThickness="1" X1="0" X2="768" Y1="682" Y2="682"/>
+        <Line Stroke="Black" StrokeThickness="1" X1="0" X2="768" Y1="704" Y2="704"/>
+        <Line Stroke="Black" StrokeThickness="1" X1="0" X2="768" Y1="726" Y2="726"/>
+        <Line Stroke="Black" StrokeThickness="1" X1="0" X2="768" Y1="748" Y2="748"/>
+        <Line Stroke="Black" StrokeThickness="1" X1="114" X2="768" Y1="770" Y2="770"/>
+        <Line Stroke="Black" StrokeThickness="1" X1="114" X2="768" Y1="792" Y2="792"/>
+        <Line Stroke="Black" StrokeThickness="1" X1="0" X2="768" Y1="814" Y2="814"/>
+        <Line Stroke="Black" StrokeThickness="1" X1="114" X2="768" Y1="836" Y2="836"/>
+        <Line Stroke="Black" StrokeThickness="1" X1="114" X2="768" Y1="858" Y2="858"/>
+        <Line Stroke="Black" StrokeThickness="1" X1="114" X2="768" Y1="880" Y2="880"/>
+
+        <TextBlock FontSize="8" FontStretch="ExtraCondensed" Padding="4" Canvas.Top="598" Text="22. SPOUSE'S SURNAME"/>
+        <TextBlock FontSize="8" FontStretch="ExtraCondensed" Padding="4" Canvas.Top="598" Text="23. NAME of CHILDREN  (Write full name and list all)" Canvas.Left="420"/>
+        <TextBlock FontSize="8" FontStretch="ExtraCondensed" Padding="4" Canvas.Top="598" Text="DATE OF BIRTH (mm/dd/yyyy)" Canvas.Left="630"/>
+        <TextBlock FontSize="8" FontStretch="ExtraCondensed" Padding="4" Canvas.Top="620" Text="FIRST NAME" Canvas.Left="8"/>
+        <TextBlock FontSize="8" FontStretch="ExtraCondensed" Padding="4" Canvas.Top="642" Text="MIDDLE NAME" Canvas.Left="8"/>
+        <TextBlock FontSize="7" FontStretch="ExtraCondensed" Padding="4" Canvas.Top="638" Text="NAME EXTENSION (JR., SR.)" Canvas.Left="312"/>
+        <TextBlock FontSize="8" FontStretch="ExtraCondensed" Padding="4" Canvas.Top="664" Text="OCCUPATION" Canvas.Left="8"/>
+        <TextBlock FontSize="8" FontStretch="ExtraCondensed" Padding="4" Canvas.Top="686" Text="EMPLOYER/BUSINESS NAME" Canvas.Left="8"/>
+        <TextBlock FontSize="8" FontStretch="ExtraCondensed" Padding="4" Canvas.Top="708" Text="BUSINESS ADDRESS" Canvas.Left="8"/>
+        <TextBlock FontSize="8" FontStretch="ExtraCondensed" Padding="4" Canvas.Top="730" Text="TELEPHONE NO." Canvas.Left="8"/>
+        <TextBlock FontSize="8" FontStretch="ExtraCondensed" Padding="4" Canvas.Top="752" Text="24. FATHER'S SURNAME"/>
+        <TextBlock FontSize="8" FontStretch="ExtraCondensed" Padding="4" Canvas.Top="774" Text="FIRST NAME" Canvas.Left="8"/>
+        <TextBlock FontSize="8" FontStretch="ExtraCondensed" Padding="4" Canvas.Top="796" Text="MIDDLE NAME" Canvas.Left="8"/>
+        <TextBlock FontSize="7" FontStretch="ExtraCondensed" Padding="4" Canvas.Top="792" Text="NAME EXTENSION (JR., SR.)" Canvas.Left="312"/>
+        <TextBlock FontSize="8" FontStretch="ExtraCondensed" Padding="4" Canvas.Top="818" Text="25. MOTHER'S MAIDEN NAME"/>
+        <TextBlock FontSize="8" FontStretch="ExtraCondensed" Padding="4" Canvas.Top="840" Text="SURNAME" Canvas.Left="8"/>
+        <TextBlock FontSize="8" FontStretch="ExtraCondensed" Padding="4" Canvas.Top="862" Text="FIRST NAME" Canvas.Left="8"/>
+        <TextBlock FontSize="8" FontStretch="ExtraCondensed" Padding="4" Canvas.Top="884" Text="MIDDLE NAME" Canvas.Left="8"/>
+        <TextBlock FontSize="8" FontStretch="ExtraCondensed" Padding="4" Canvas.Top="884" Canvas.Left="516" FontStyle="Italic" FontWeight="Bold"
+                   Text="(Continue on separate sheet if necessary)" Foreground="Red"/>
+
+        <!--
+        
+        <TextBlock Text="{x:Bind SpouseLastName}" FontSize="12" Padding="2" FontWeight="Bold" Canvas.Top="596" Canvas.Left="118"/>
+        <TextBlock Text="{x:Bind SpouseFirstName}" FontSize="12" Padding="2" FontWeight="Bold" Canvas.Top="620" Canvas.Left="118"/>
+        <TextBlock Text="{x:Bind SpouseMiddleName}" FontSize="12" Padding="2" FontWeight="Bold" Canvas.Top="642" Canvas.Left="118"/>
+        <TextBlock Text="{x:Bind SpouseNameExtension}" FontSize="12" Padding="2" FontWeight="Bold" Canvas.Top="642" Canvas.Left="392"/>
+        <TextBlock Text="{x:Bind SpouseOccupation}" FontSize="12" Padding="2" FontWeight="Bold" Canvas.Top="664" Canvas.Left="118"/>
+        <TextBlock Text="{x:Bind SpouseEmployerOrBusinessName}" FontSize="12" Padding="2" FontWeight="Bold" Canvas.Top="686" Canvas.Left="118"/>
+        <TextBlock FontSize="12" Padding="2" FontWeight="Bold" Canvas.Top="710" Canvas.Left="118" TextTrimming="CharacterEllipsis"
+                   Text="{x:Bind SpouseBusinessAddress}" Height="22" Width="300" VerticalAlignment="Center"/>
+        <TextBlock Text="{x:Bind SpouseTelephoneNumber}" FontSize="12" Padding="2" FontWeight="Bold" Canvas.Top="730" Canvas.Left="118"/>
+        <TextBlock Text="{x:Bind FatherLastName}" FontSize="12" Padding="2" FontWeight="Bold" Canvas.Top="752" Canvas.Left="118"/>
+        <TextBlock Text="{x:Bind FatherFirstName}" FontSize="12" Padding="2" FontWeight="Bold" Canvas.Top="774" Canvas.Left="118"/>
+        <TextBlock Text="{x:Bind FatherMiddleName}" FontSize="12" Padding="2" FontWeight="Bold" Canvas.Top="796" Canvas.Left="118"/>
+        <TextBlock Text="{x:Bind FatherNameExtension}" FontSize="12" Padding="2" FontWeight="Bold" Canvas.Top="796" Canvas.Left="392"/>
+        <TextBlock Text="{x:Bind MotherLastName}" FontSize="12" Padding="2" FontWeight="Bold" Canvas.Top="840" Canvas.Left="118"/>
+        <TextBlock Text="{x:Bind MotherFirstName}" FontSize="12" Padding="2" FontWeight="Bold" Canvas.Top="862" Canvas.Left="118"/>
+        <TextBlock Text="{x:Bind MotherMiddleName}" FontSize="12" Padding="2" FontWeight="Bold" Canvas.Top="884" Canvas.Left="118"/>
+        
+        -->
+
+
+        <!-- employee's children list -->
+
+        <!--
+        
+        <ListView Canvas.Top="616" Canvas.Left="420" Width="348" ItemsSource="{x:Bind Children}">
+            <ListView.ItemContainerStyle>
+                <Style TargetType="ListViewItem">
+                    <Setter Property="MinHeight" Value="0"/>
+                    <Setter Property="MinWidth" Value="0"/>
+                    <Setter Property="Padding" Value="4,0,0,0"/>
+                </Style>
+            </ListView.ItemContainerStyle>
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <Grid Height="22">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="210"/>
+                            <ColumnDefinition/>
+                        </Grid.ColumnDefinitions>
+                        <TextBlock FontStretch="Condensed" FontWeight="Bold" FontSize="10" VerticalAlignment="Center" TextWrapping="Wrap"
+                                   Text="{Binding Converter={StaticResource PersonToFullNameConverter}}" Foreground="Black"/>
+                        <TextBlock Text="{Binding Birthdate, Converter={StaticResource DateTimeOffsetToStringConverter}, ConverterParameter=mm/dd/yyyy}" 
+                                   Foreground="Black" Grid.Column="1" FontSize="10" FontStretch="Condensed" FontWeight="Bold" Padding="2"/>
+                    </Grid>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
+        
+        -->
+
+
+        <!-- educational background section -->
+        <Border Width="768" Height="18" BorderBrush="Black" BorderThickness="1" Canvas.Top="902" Background="#FF969696" Padding="2">
+            <TextBlock HorizontalAlignment="Left" VerticalAlignment="Center" Foreground="White" FontStretch="ExtraCondensed" FontSize="11" FontStyle="Italic"
+                       Text="II.  EDUCATIONAL BACKGROUND" FontWeight="Bold"/>
+        </Border>
+        <Line Stroke="Black" StrokeThickness="0.5" X1="480" X2="576" Y1="960" Y2="960"/>
+        <Line Stroke="Black" StrokeThickness="1" X1="0" X2="768" Y1="978" Y2="978"/>
+        <Line Stroke="Black" StrokeThickness="1" X1="0" X2="768" Y1="1004" Y2="1004"/>
+        <Line Stroke="Black" StrokeThickness="1" X1="0" X2="768" Y1="1030" Y2="1030"/>
+        <Line Stroke="Black" StrokeThickness="1" X1="0" X2="768" Y1="1056" Y2="1056"/>
+        <Line Stroke="Black" StrokeThickness="1" X1="0" X2="768" Y1="1082" Y2="1082"/>
+        <Line Stroke="Black" StrokeThickness="1" X1="0" X2="768" Y1="1108" Y2="1108"/>
+        <Line Stroke="Black" StrokeThickness="1" X1="0" X2="768" Y1="1134" Y2="1134"/>
+
+        <TextBlock FontSize="8" FontStretch="ExtraCondensed" Padding="4" Canvas.Top="938" Text="26. LEVEL"/>
+        <TextBlock FontSize="8" FontStretch="ExtraCondensed" Padding="4" Canvas.Top="933" Text="NAME OF SCHOOL" Canvas.Left="192"/>
+        <TextBlock FontSize="8" FontStretch="ExtraCondensed" Padding="4" Canvas.Top="943" Text="(Write in full)" Canvas.Left="204"/>
+        <TextBlock FontSize="8" FontStretch="ExtraCondensed" Padding="4" Canvas.Top="933" Text="BASIC EDUCATION/DEGREE/COURSE" Canvas.Left="336"/>
+        <TextBlock FontSize="8" FontStretch="ExtraCondensed" Padding="4" Canvas.Top="943" Text="(Write in full)" Canvas.Left="378"/>
+        <TextBlock FontSize="8" FontStretch="ExtraCondensed" Padding="4" Canvas.Top="933" Text="PERIOD OF ATTENDANCE" Canvas.Left="483"/>
+        <TextBlock FontSize="8" FontStretch="ExtraCondensed" Padding="4" Canvas.Top="960" Text="From" Canvas.Left="490"/>
+        <TextBlock FontSize="8" FontStretch="ExtraCondensed" Padding="4" Canvas.Top="960" Text="To" Canvas.Left="542"/>
+        <TextBlock FontSize="8" FontStretch="ExtraCondensed" Canvas.Top="928" TextWrapping="Wrap" Canvas.Left="576" Width="54"
+                   Text="HIGHEST LEVEL / UNITS EARNED 
+                   (if not graduated)" HorizontalTextAlignment="Center"/>
+        <TextBlock FontSize="8" FontStretch="ExtraCondensed" Canvas.Top="937" TextWrapping="Wrap" Canvas.Left="630" Width="50"
+                   Text="YEAR GRADUATED" HorizontalTextAlignment="Center"/>
+        <TextBlock FontSize="8" FontStretch="ExtraCondensed" Canvas.Top="937" TextWrapping="Wrap" Canvas.Left="682" Width="86"
+                   Text="SCHOLARSHIP / ACADEMIC HONORS RECEIVED" HorizontalTextAlignment="Center"/>
+
+        <!-- employee's educational background list -->
+        <!--
+        
+        <ListView Canvas.Top="978" Width="768" ItemsSource="{x:Bind EducationalBackgrounds}">
+            <ListView.ItemContainerStyle>
+                <Style TargetType="ListViewItem">
+                    <Setter Property="MinHeight" Value="0"/>
+                    <Setter Property="MinWidth" Value="0"/>
+                    <Setter Property="Padding" Value="2,0,2,0"/>
+                </Style>
+            </ListView.ItemContainerStyle>
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <Grid Height="26">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="114"/>
+                            <ColumnDefinition Width="198"/>
+                            <ColumnDefinition Width="168"/>
+                            <ColumnDefinition Width="48"/>
+                            <ColumnDefinition Width="48"/>
+                            <ColumnDefinition Width="54"/>
+                            <ColumnDefinition Width="52"/>
+                            <ColumnDefinition Width="86"/>
+                        </Grid.ColumnDefinitions>
+                        <TextBlock FontSize="8" FontStretch="ExtraCondensed" Padding="8,0,0,0" VerticalAlignment="Center" TextWrapping="Wrap"
+                                   Text="{Binding EducationalLevel}" Foreground="Black"/>
+                        <TextBlock FontStretch="ExtraCondensed" FontWeight="Bold" FontSize="9" VerticalAlignment="Center" TextWrapping="Wrap" Grid.Column="1"
+                                   Text="{Binding SchoolName}" Foreground="Black"/>
+                        <TextBlock FontSize="9" FontStretch="ExtraCondensed" FontWeight="Bold" VerticalAlignment="Center" TextWrapping="Wrap" Grid.Column="2"
+                                   Text="{Binding DegreeCourse}" Foreground="Black"/>
+                        <TextBlock FontSize="9" FontStretch="ExtraCondensed" FontWeight="Bold" VerticalAlignment="Center" Grid.Column="3" Foreground="Black"
+                                   Text="{Binding StartDate, Converter={StaticResource DateTimeOffsetToStringConverter}, ConverterParameter=mm/dd/yy}"/>
+                        <TextBlock FontSize="9" FontStretch="ExtraCondensed" FontWeight="Bold" VerticalAlignment="Center" Grid.Column="4" Foreground="Black"
+                                   Text="{Binding EndDate, Converter={StaticResource DateTimeOffsetToStringConverter}, ConverterParameter=mm/dd/yy}"/>
+                        <TextBlock FontSize="8" FontStretch="ExtraCondensed" FontWeight="Bold" VerticalAlignment="Center" TextWrapping="Wrap" Grid.Column="5"
+                                   Text="{Binding IfNotGraduatedHighestLevelOrUnitsEarned}" Foreground="Black"/>
+                        <TextBlock FontSize="9" FontStretch="ExtraCondensed" FontWeight="Bold" VerticalAlignment="Center" TextWrapping="Wrap" Grid.Column="6"
+                                   Text="{Binding IfGraduatedYearGraduated}" Foreground="Black"/>
+                        <TextBlock FontSize="8" FontStretch="ExtraCondensed" FontWeight="Bold" VerticalAlignment="Center" TextWrapping="Wrap" Grid.Column="7"
+                                   Text="{Binding ScholarshipOrHonorsReceived}" Foreground="Black"/>
+                    </Grid>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
+        
+        -->
+
+        <!-- page footer -->
+        <Rectangle Fill="LightGray" Width="768" Height="12" Canvas.Top="1162"/>
+        <Line Stroke="Black" StrokeThickness="1" X1="0" X2="768" Y1="1162" Y2="1162"/>
+        <Line Stroke="Black" StrokeThickness="1" X1="0" X2="768" Y1="1174" Y2="1174"/>
+        <TextBlock FontSize="8" FontStretch="ExtraCondensed" Canvas.Top="1162" Canvas.Left="304" FontStyle="Italic" FontWeight="Bold"
+                   Text="(Continue on separate sheet if necessary)" Foreground="Red"/>
+        <TextBlock FontSize="11" FontStretch="ExtraCondensed" Canvas.Top="1180" Text="SIGNATURE" Canvas.Left="36" FontWeight="Bold" FontStyle="Italic"/>
+        <TextBlock FontSize="11" FontStretch="ExtraCondensed" Canvas.Top="1180" Text="DATE" Canvas.Left="512" FontWeight="Bold" FontStyle="Italic"/>
+
+        <!-- page border -->
+        <Rectangle Stroke="Black" StrokeThickness="1" Canvas.Left="0" Canvas.Top="0" Height="1200" Width="768"/>
+
+        <TextBlock FontSize="7" FontStretch="ExtraCondensed" FontStyle="Italic" Canvas.Top="1200" Canvas.Left="648" Width="120"
+                   Text="CS Form No. 212 (Revised 2017), Page 1 of 4" HorizontalTextAlignment="Right" HorizontalAlignment="Right"/>
+
+    </Canvas>
 </Page>

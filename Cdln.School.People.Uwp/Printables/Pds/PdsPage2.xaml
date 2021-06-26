@@ -6,9 +6,233 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d"
-    Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+    Background="White" Width="816" Height="1248">
 
-    <Grid>
+    <Canvas x:Name="RootCanvas" Margin="24" RequestedTheme="Light">
 
-    </Grid>
+        <!-- civil service eligibilities & work experiences column header backgrounds -->
+        <Rectangle Fill="LightGray" Width="768" Height="58" Canvas.Top="18"/>
+        <Rectangle Fill="LightGray" Width="768" Height="58" Canvas.Top="328"/>
+        <!-- footer signature & date backgrounds -->
+        <Rectangle Fill="LightGray" Width="96" Height="26" Canvas.Top="1174"/>
+        <Rectangle Fill="LightGray" Width="120" Height="26" Canvas.Top="1174" Canvas.Left="408"/>
+
+        <!-- vertical lines -->
+        <Line Stroke="Black" StrokeThickness="1" X1="48" X2="48" Y1="370" Y2="1162"/>
+        <Line Stroke="Black" StrokeThickness="1" X1="96" X2="96" Y1="328" Y2="1200"/>
+        <Line Stroke="Black" StrokeThickness="1" X1="336" X2="336" Y1="0" Y2="1162"/>
+        <Line Stroke="Black" StrokeThickness="1" X1="408" X2="408" Y1="0" Y2="284"/>
+        <Line Stroke="Black" StrokeThickness="1" X1="480" X2="480" Y1="0" Y2="284"/>
+        <Line Stroke="Black" StrokeThickness="1" X1="408" X2="408" Y1="1174" Y2="1200"/>
+        <Line Stroke="Black" StrokeThickness="1" X1="528" X2="528" Y1="328" Y2="1200"/>
+        <Line Stroke="Black" StrokeThickness="1" X1="588" X2="588" Y1="328" Y2="1162"/>
+        <Line Stroke="Black" StrokeThickness="1" X1="648" X2="648" Y1="0" Y2="1162"/>
+        <Line Stroke="Black" StrokeThickness="1" X1="720" X2="720" Y1="46" Y2="1162"/>
+
+        <!-- civil service eligibility section header -->
+        <Border Width="768" Height="18" BorderBrush="Black" BorderThickness="1" Background="#FF969696" Padding="2">
+            <TextBlock HorizontalAlignment="Left" VerticalAlignment="Center" Foreground="White" FontStretch="ExtraCondensed" FontSize="11" FontStyle="Italic"
+                       Text="IV.  CIVIL SERVICE ELIGIBILITY" FontWeight="Bold"/>
+        </Border>
+
+        <Line Stroke="Black" StrokeThickness="0.5" X1="648" X2="768" Y1="46" Y2="46"/>
+
+        <!-- column labels -->
+        <TextBlock FontSize="8" FontStretch="ExtraCondensed" Padding="4" Canvas.Top="26" Width="336" TextWrapping="Wrap" HorizontalTextAlignment="Center"
+                   Text="27. CAREER SERVICE/ RA 1080 (BOARD/ BAR) UNDER SPECIAL LAWS/ CES/ CSEE BARANGAY ELIGIBILITY / DRIVER'S LICENSE"/>
+        <TextBlock FontSize="8" FontStretch="ExtraCondensed" Padding="4" Canvas.Top="26" Canvas.Left="336" TextWrapping="Wrap" 
+                   Text="RATING&#x0a;(If Applicable)" HorizontalTextAlignment="Center" Width="72"/>
+        <TextBlock FontSize="8" FontStretch="ExtraCondensed" Padding="4" Canvas.Top="26" Text="DATE OF EXAMINATION / CONFERMENT" 
+                   Canvas.Left="408" HorizontalTextAlignment="Center" Width="72" TextWrapping="Wrap"/>
+        <TextBlock FontSize="8" FontStretch="ExtraCondensed" Padding="4" Canvas.Top="34" Text="PLACE OF EXAMINATION / CONFERMENT" 
+                   Canvas.Left="480" Width="168" HorizontalTextAlignment="Center" TextWrapping="Wrap"/>
+        <TextBlock FontSize="8" FontStretch="ExtraCondensed" Padding="4" Canvas.Top="26" Text="LICENSE (if applicable)" 
+                   Canvas.Left="648" Width="120" HorizontalTextAlignment="Center"/>
+        <TextBlock FontSize="8" FontStretch="ExtraCondensed" Padding="4" Canvas.Top="52" Text="NUMBER" Canvas.Left="648"
+                   Width="72" HorizontalTextAlignment="Center"/>
+        <TextBlock FontSize="8" FontStretch="ExtraCondensed" Padding="4" Canvas.Top="46" Text="Date of Validity" 
+                   Canvas.Left="720" Width="48" HorizontalTextAlignment="Center" TextWrapping="Wrap"/>
+
+        <!-- horizontal lines -->
+        <Line Stroke="Black" StrokeThickness="1" X1="0" X2="768" Y1="76" Y2="76"/>
+        <Line Stroke="Black" StrokeThickness="1" X1="0" X2="768" Y1="102" Y2="102"/>
+        <Line Stroke="Black" StrokeThickness="1" X1="0" X2="768" Y1="128" Y2="128"/>
+        <Line Stroke="Black" StrokeThickness="1" X1="0" X2="768" Y1="154" Y2="154"/>
+        <Line Stroke="Black" StrokeThickness="1" X1="0" X2="768" Y1="180" Y2="180"/>
+        <Line Stroke="Black" StrokeThickness="1" X1="0" X2="768" Y1="206" Y2="206"/>
+        <Line Stroke="Black" StrokeThickness="1" X1="0" X2="768" Y1="232" Y2="232"/>
+        <Line Stroke="Black" StrokeThickness="1" X1="0" X2="768" Y1="258" Y2="258"/>
+
+        <!-- civil service eligibility section footer -->
+        <Rectangle Fill="LightGray" Width="768" Height="12" Canvas.Top="284"/>
+        <Line Stroke="Black" StrokeThickness="1" X1="0" X2="768" Y1="284" Y2="284"/>
+        <TextBlock FontSize="8" FontStretch="ExtraCondensed" Canvas.Top="284" Canvas.Left="304" FontStyle="Italic" FontWeight="Bold"
+                   Text="(Continue on separate sheet if necessary)" Foreground="Red"/>
+
+        <!-- work experiences section header -->
+        <Border Width="768" Height="32" BorderBrush="Black" BorderThickness="1" Background="#FF969696" Padding="2" Canvas.Top="296">
+            <StackPanel>
+                <TextBlock HorizontalAlignment="Left" VerticalAlignment="Center" Foreground="White" FontStretch="ExtraCondensed" FontSize="11" FontStyle="Italic"
+                       Text="V.  WORK EXPERIENCE" FontWeight="Bold"/>
+                <TextBlock HorizontalAlignment="Left" VerticalAlignment="Center" Foreground="White" FontStretch="ExtraCondensed" FontSize="10" FontStyle="Italic"
+                           FontWeight="Bold" Text="(Include private employment.  Start from your recent work) Description of duties should be indicated in the attached Work Experience sheet."/>
+            </StackPanel>
+        </Border>
+
+        <Line Stroke="Black" StrokeThickness="0.5" X1="0" X2="96" Y1="370" Y2="370"/>
+
+        <!-- colum headers -->
+        <TextBlock FontSize="8" FontStretch="ExtraCondensed" Padding="4" Canvas.Top="334" Text="28. INCLUSIVE DATES&#x0a;(mm/dd/yyyy)" Width="96" TextWrapping="Wrap" HorizontalTextAlignment="Center"/>
+        <TextBlock FontSize="8" FontStretch="ExtraCondensed" Padding="4" Canvas.Top="370" Text="From" Width="48" HorizontalTextAlignment="Center"/>
+        <TextBlock FontSize="8" FontStretch="ExtraCondensed" Padding="4" Canvas.Top="370" Text="To" Canvas.Left="48" Width="48" HorizontalTextAlignment="Center"/>
+        <TextBlock FontSize="8" FontStretch="ExtraCondensed" Padding="4" Canvas.Top="334" Text="POSITION TITLE&#x0a;(Write in full / Do not abbreviate)" 
+                   Canvas.Left="96" HorizontalTextAlignment="Center" Width="240"/>
+        <TextBlock FontSize="8" FontStretch="ExtraCondensed" Padding="4" Canvas.Top="334" Text="DEPARTMENT / AGENCY / OFFICE / COMPANY&#x0a;(Write in full / Do not abbreviate)" 
+                   Canvas.Left="336" HorizontalTextAlignment="Center" Width="192"/>
+        <TextBlock FontSize="8" FontStretch="ExtraCondensed" Padding="4" Canvas.Top="334" Text="MONTHLY&#x0a;SALARY" Canvas.Left="528" Width="60" HorizontalTextAlignment="Center"/>
+        <TextBlock FontSize="7" FontStretch="ExtraCondensed" Padding="4" Canvas.Top="330" TextWrapping="Wrap" Canvas.Left="588" Width="60"
+                   Text="SALARY/ JOB/ PAY GRADE (if applicable) &amp; STEP  (Format &quot;00-0&quot;)/ INCREMENT" HorizontalTextAlignment="Center"/>
+        <TextBlock FontSize="8" FontStretch="ExtraCondensed" Padding="4" Canvas.Top="334" TextWrapping="Wrap" Canvas.Left="648" Width="72"
+                   Text="STATUS OF APPOINTMENT" HorizontalTextAlignment="Center"/>
+        <TextBlock FontSize="8" FontStretch="ExtraCondensed" Padding="4" Canvas.Top="334" TextWrapping="Wrap" Canvas.Left="720" Width="48"
+                   Text="GOV'T SERVICE&#x0a;(Y/ N)" HorizontalTextAlignment="Center"/>
+
+        <!-- horizontal lines -->
+        <Line Stroke="Black" StrokeThickness="1" X1="0" X2="768" Y1="386" Y2="386"/>
+        <Line Stroke="Black" StrokeThickness="1" X1="0" X2="768" Y1="412" Y2="412"/>
+        <Line Stroke="Black" StrokeThickness="1" X1="0" X2="768" Y1="438" Y2="438"/>
+        <Line Stroke="Black" StrokeThickness="1" X1="0" X2="768" Y1="464" Y2="464"/>
+        <Line Stroke="Black" StrokeThickness="1" X1="0" X2="768" Y1="490" Y2="490"/>
+        <Line Stroke="Black" StrokeThickness="1" X1="0" X2="768" Y1="516" Y2="516"/>
+        <Line Stroke="Black" StrokeThickness="1" X1="0" X2="768" Y1="542" Y2="542"/>
+        <Line Stroke="Black" StrokeThickness="1" X1="0" X2="768" Y1="568" Y2="568"/>
+        <Line Stroke="Black" StrokeThickness="1" X1="0" X2="768" Y1="594" Y2="594"/>
+        <Line Stroke="Black" StrokeThickness="1" X1="0" X2="768" Y1="620" Y2="620"/>
+        <Line Stroke="Black" StrokeThickness="1" X1="0" X2="768" Y1="646" Y2="646"/>
+        <Line Stroke="Black" StrokeThickness="1" X1="0" X2="768" Y1="672" Y2="672"/>
+        <Line Stroke="Black" StrokeThickness="1" X1="0" X2="768" Y1="698" Y2="698"/>
+        <Line Stroke="Black" StrokeThickness="1" X1="0" X2="768" Y1="724" Y2="724"/>
+        <Line Stroke="Black" StrokeThickness="1" X1="0" X2="768" Y1="750" Y2="750"/>
+        <Line Stroke="Black" StrokeThickness="1" X1="0" X2="768" Y1="776" Y2="776"/>
+        <Line Stroke="Black" StrokeThickness="1" X1="0" X2="768" Y1="802" Y2="802"/>
+        <Line Stroke="Black" StrokeThickness="1" X1="0" X2="768" Y1="828" Y2="828"/>
+        <Line Stroke="Black" StrokeThickness="1" X1="0" X2="768" Y1="854" Y2="854"/>
+        <Line Stroke="Black" StrokeThickness="1" X1="0" X2="768" Y1="880" Y2="880"/>
+        <Line Stroke="Black" StrokeThickness="1" X1="0" X2="768" Y1="906" Y2="906"/>
+        <Line Stroke="Black" StrokeThickness="1" X1="0" X2="768" Y1="932" Y2="932"/>
+        <Line Stroke="Black" StrokeThickness="1" X1="0" X2="768" Y1="958" Y2="958"/>
+        <Line Stroke="Black" StrokeThickness="1" X1="0" X2="768" Y1="984" Y2="984"/>
+        <Line Stroke="Black" StrokeThickness="1" X1="0" X2="768" Y1="1010" Y2="1010"/>
+        <Line Stroke="Black" StrokeThickness="1" X1="0" X2="768" Y1="1036" Y2="1036"/>
+        <Line Stroke="Black" StrokeThickness="1" X1="0" X2="768" Y1="1062" Y2="1062"/>
+        <Line Stroke="Black" StrokeThickness="1" X1="0" X2="768" Y1="1088" Y2="1088"/>
+        <Line Stroke="Black" StrokeThickness="1" X1="0" X2="768" Y1="1114" Y2="1114"/>
+        <Line Stroke="Black" StrokeThickness="1" X1="0" X2="768" Y1="1140" Y2="1140"/>
+
+        <!-- page footer -->
+        <Rectangle Fill="LightGray" Width="768" Height="12" Canvas.Top="1162"/>
+        <Line Stroke="Black" StrokeThickness="1" X1="0" X2="768" Y1="1162" Y2="1162"/>
+        <Line Stroke="Black" StrokeThickness="1" X1="0" X2="768" Y1="1174" Y2="1174"/>
+        <TextBlock FontSize="8" FontStretch="ExtraCondensed" Canvas.Top="1162" Canvas.Left="304" FontStyle="Italic" FontWeight="Bold"
+                   Text="(Continue on separate sheet if necessary)" Foreground="Red"/>
+        <TextBlock FontSize="11" FontStretch="ExtraCondensed" Canvas.Top="1180" Text="SIGNATURE" HorizontalTextAlignment="Center" 
+                   Width="96" FontWeight="Bold" FontStyle="Italic"/>
+        <TextBlock FontSize="11" FontStretch="ExtraCondensed" Canvas.Top="1180" Text="DATE" HorizontalTextAlignment="Center" 
+                   FontWeight="Bold" FontStyle="Italic" Width="120" Canvas.Left="408"/>
+
+        <!-- page border -->
+        <Rectangle Stroke="Black" StrokeThickness="1" Canvas.Left="0" Canvas.Top="0" Height="1200" Width="768"/>
+
+        <TextBlock FontSize="7" FontStretch="ExtraCondensed" FontStyle="Italic" Canvas.Top="1200" Canvas.Left="648" Width="120"
+                   Text="CS Form No. 212 (Revised 2017), Page 2 of 4" HorizontalTextAlignment="Right" HorizontalAlignment="Right"/>
+
+        <!-- PAGE DATA -->
+
+        <!-- civil service eligibility list -->
+
+        <!--
+        <ListView ItemsSource="{x:Bind Eligibilities}" Canvas.Top="76" Width="768">
+            <ListView.ItemContainerStyle>
+                <Style TargetType="ListViewItem">
+                    <Setter Property="MinHeight" Value="0"/>
+                    <Setter Property="MinWidth" Value="0"/>
+                    <Setter Property="Padding" Value="2,0,2,0"/>
+                </Style>
+            </ListView.ItemContainerStyle>
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <Grid Height="26">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="336"/>
+                            <ColumnDefinition Width="72"/>
+                            <ColumnDefinition Width="72"/>
+                            <ColumnDefinition Width="168"/>
+                            <ColumnDefinition Width="72"/>
+                            <ColumnDefinition Width="48"/>
+                        </Grid.ColumnDefinitions>
+                        <TextBlock FontSize="9" FontStretch="ExtraCondensed" Padding="8,0,0,0" VerticalAlignment="Center" TextWrapping="Wrap"
+                                   Text="{Binding Eligibility, Converter={StaticResource StringToUppercase}}"/>
+                        <TextBlock FontStretch="ExtraCondensed" FontWeight="Bold" FontSize="9" VerticalAlignment="Center" TextWrapping="Wrap" Grid.Column="1"
+                                   Text="{Binding Rating, Converter={StaticResource ZeroToNull}}"/>
+                        <TextBlock FontSize="9" FontStretch="ExtraCondensed" FontWeight="Bold" VerticalAlignment="Center" Grid.Column="2"
+                                   Text="{Binding ExamOrConferredDate, Converter={StaticResource DateToString}, ConverterParameter=mm dd yy, ConverterLanguage=en-PH}"/>
+                        <TextBlock FontSize="9" FontStretch="ExtraCondensed" FontWeight="Bold" VerticalAlignment="Center" TextWrapping="Wrap" Grid.Column="3"
+                                   Text="{Binding ExamOrConferredAt, Converter={StaticResource GuidToAddress}}"/>
+                        <TextBlock FontSize="9" FontStretch="ExtraCondensed" FontWeight="Bold" VerticalAlignment="Center" TextWrapping="Wrap" Grid.Column="4"
+                                   Text="{Binding LicenseNumber, Converter={StaticResource StringToUppercase}}"/>
+                        <TextBlock FontSize="9" FontStretch="ExtraCondensed" FontWeight="Bold" VerticalAlignment="Center" Grid.Column="5"
+                                   Text="{Binding LicenseValidDate, Converter={StaticResource DateToString}, ConverterParameter=mm dd yy, ConverterLanguage=en-PH}"/>
+                    </Grid>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
+        -->
+
+        <!-- work experiences list -->
+
+        <!--
+        <ListView ItemsSource="{x:Bind WorkExperiences}" Canvas.Top="386" Width="768">
+            <ListView.ItemContainerStyle>
+                <Style TargetType="ListViewItem">
+                    <Setter Property="MinHeight" Value="0"/>
+                    <Setter Property="MinWidth" Value="0"/>
+                    <Setter Property="Padding" Value="2,0,2,0"/>
+                </Style>
+            </ListView.ItemContainerStyle>
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <Grid Height="26">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="48"/>
+                            <ColumnDefinition Width="48"/>
+                            <ColumnDefinition Width="240"/>
+                            <ColumnDefinition Width="192"/>
+                            <ColumnDefinition Width="60"/>
+                            <ColumnDefinition Width="60"/>
+                            <ColumnDefinition Width="72"/>
+                            <ColumnDefinition Width="48"/>
+                        </Grid.ColumnDefinitions>
+                        <TextBlock FontSize="9" FontStretch="ExtraCondensed" FontWeight="Bold" VerticalAlignment="Center"
+                                   Text="{Binding StartDate, Converter={StaticResource DateToString}, ConverterParameter=mm dd yy, ConverterLanguage=en-PH}"/>
+                        <TextBlock FontSize="9" FontStretch="ExtraCondensed" FontWeight="Bold" VerticalAlignment="Center" Grid.Column="1"
+                                   Text="{Binding EndDate, Converter={StaticResource DateToString}, ConverterParameter=mm dd yy, ConverterLanguage=en-PH}"/>
+                        <TextBlock FontSize="9" FontStretch="ExtraCondensed" Padding="8,0,0,0" VerticalAlignment="Center" TextWrapping="Wrap" Grid.Column="2"
+                                   Text="{Binding PositionTitle, Converter={StaticResource StringToUppercase}}"/>
+                        <TextBlock FontSize="9" FontStretch="ExtraCondensed" Padding="8,0,0,0" VerticalAlignment="Center" TextWrapping="Wrap" Grid.Column="3"
+                                   Text="{Binding AgencyOrCompany, Converter={StaticResource StringToUppercase}}"/>
+                        <TextBlock FontStretch="ExtraCondensed" FontWeight="Bold" FontSize="9" VerticalAlignment="Center" TextWrapping="Wrap" Grid.Column="4"
+                                   Text="{Binding MonthlySalary, Converter={StaticResource ZeroToNull}}"/>
+                        <TextBlock FontSize="9" FontStretch="ExtraCondensed" Padding="8,0,0,0" VerticalAlignment="Center" TextWrapping="Wrap" Grid.Column="5"
+                                   Text="{Binding SalaryGradeAndStepIncrement, Converter={StaticResource StringToUppercase}}"/>
+                        <TextBlock FontSize="9" FontStretch="ExtraCondensed" Padding="8,0,0,0" VerticalAlignment="Center" TextWrapping="Wrap" Grid.Column="6"
+                                   Text="{Binding AppointmentStatus, Converter={StaticResource StringToUppercase}}"/>
+                        <TextBlock FontSize="9" FontStretch="ExtraCondensed" FontWeight="Bold" VerticalAlignment="Center" TextWrapping="Wrap" Grid.Column="7"
+                                   Text="{Binding GovtService, Converter={StaticResource StringToUppercase}}"/>
+                    </Grid>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
+        -->
+
+    </Canvas>
 </Page>

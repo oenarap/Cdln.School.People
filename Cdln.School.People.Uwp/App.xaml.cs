@@ -1,23 +1,23 @@
 ﻿using System;
 using Autofac;
+using Windows.System;
 using Windows.UI.Xaml;
+using School.People.Core;
 using Windows.ApplicationModel;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Navigation;
 using Windows.ApplicationModel.Activation;
+using Windows.ApplicationModel.Core;
+using Windows.UI.ViewManagement;
+using Windows.UI;
 
 namespace Cdln.School.People.Uwp
 {
-    /// <summary>
-    /// Provides application-specific behavior to supplement the default Application class.
-    /// </summary>
     sealed partial class App : Application
     {
         public static IContainer Container;
-        /// <summary>
-        /// Initializes the singleton application object.  This is the first line of authored code
-        /// executed, and as such is the logical equivalent of main() or WinMain().
-        /// </summary>
+        public UserCredentials Credentials { get; private set; }
+        
         public App()
         {
             this.InitializeComponent();
@@ -26,14 +26,9 @@ namespace Cdln.School.People.Uwp
             Container = Ioc.BuildContainer();
         }
 
-        /// <summary>
-        /// Invoked when the application is launched normally by the end user.  Other entry points
-        /// will be used such as when the application is launched to open a specific file.
-        /// </summary>
-        /// <param name="e">Details about the launch request and process.</param>
         protected override void OnLaunched(LaunchActivatedEventArgs e)
         {
-            Frame rootFrame = Window.Current.Content as Frame;
+            var rootFrame = Window.Current.Content as Frame;
 
             // Do not repeat app initialization when the Window already has content,
             // just ensure that the window is active
@@ -52,6 +47,13 @@ namespace Cdln.School.People.Uwp
                 // Place the frame in the current Window
                 Window.Current.Content = rootFrame;
             }
+
+            // extent the title bar
+            var coreTitleBar = CoreApplication.GetCurrentView().TitleBar;
+            coreTitleBar.ExtendViewIntoTitleBar = true;
+            ApplicationViewTitleBar titleBar = ApplicationView.GetForCurrentView().TitleBar;
+            titleBar.ButtonBackgroundColor = Colors.Transparent;
+            titleBar.ButtonInactiveBackgroundColor = Colors.Transparent;
 
             if (e.PrelaunchActivated == false)
             {
@@ -88,6 +90,10 @@ namespace Cdln.School.People.Uwp
         {
             var deferral = e.SuspendingOperation.GetDeferral();
             //TODO: Save application state and stop any background activity
+
+            IIndexLogger indexLogger = Container.Resolve<IIndexLogger>();
+            if (indexLogger != null) { indexLogger.SaveLogs(); }
+
             deferral.Complete();
         }
     }

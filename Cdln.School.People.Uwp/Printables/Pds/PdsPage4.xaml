@@ -6,9 +6,449 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d"
-    Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+    Background="White" Width="816" Height="1240">
 
-    <Grid>
+    <Page.Resources>
 
-    </Grid>
+        <Style x:Key="FaqCheckboxGlyph" TargetType="TextBlock">
+            <Setter Property="FontFamily" Value="Segoe MDL2 Assets"/>
+            <Setter Property="FontSize" Value="11"/>
+            <Setter Property="Padding" Value="4"/>
+            <Setter Property="VerticalAlignment" Value="Top"/>
+        </Style>
+
+        <Style x:Key="FaqDetailText" TargetType="TextBlock">
+            <Setter Property="FontFamily" Value="Arial"/>
+            <Setter Property="FontSize" Value="10"/>
+            <Setter Property="Padding" Value="4"/>
+            <Setter Property="VerticalAlignment" Value="Center"/>
+            <Setter Property="HorizontalTextAlignment" Value="Left"/>
+            <Setter Property="FontWeight" Value="Bold"/>
+            <Setter Property="TextDecorations" Value="Underline"/>
+            <Setter Property="FontStretch" Value="ExtraCondensed"/>
+            <Setter Property="TextWrapping" Value="Wrap"/>
+        </Style>
+
+        <Style x:Key="CharRefEntry" TargetType="TextBlock">
+            <Setter Property="FontFamily" Value="Arial"/>
+            <Setter Property="FontSize" Value="10"/>
+            <Setter Property="Padding" Value="2"/>
+            <Setter Property="VerticalAlignment" Value="Center"/>
+            <Setter Property="HorizontalTextAlignment" Value="Left"/>
+            <Setter Property="FontWeight" Value="Bold"/>
+            <Setter Property="FontStretch" Value="Condensed"/>
+            <Setter Property="TextWrapping" Value="Wrap"/>
+        </Style>
+
+        <Style x:Key="CharRefFormText" TargetType="TextBlock">
+            <Setter Property="FontFamily" Value="Arial"/>
+            <Setter Property="FontSize" Value="9"/>
+            <Setter Property="Padding" Value="4"/>
+            <Setter Property="VerticalAlignment" Value="Center"/>
+            <Setter Property="HorizontalTextAlignment" Value="Center"/>
+            <Setter Property="FontStretch" Value="ExtraCondensed"/>
+        </Style>
+
+        <Style x:Key="FormText" TargetType="TextBlock">
+            <Setter Property="FontFamily" Value="Arial"/>
+            <Setter Property="FontSize" Value="10"/>
+            <Setter Property="Padding" Value="4"/>
+            <Setter Property="VerticalAlignment" Value="Top"/>
+            <Setter Property="HorizontalTextAlignment" Value="Left"/>
+            <Setter Property="FontStretch" Value="ExtraCondensed"/>
+            <Setter Property="TextWrapping" Value="Wrap"/>
+        </Style>
+
+        <x:String x:Key="IfYesText">If YES, give details:</x:String>
+        <x:String x:Key="YesText">YES</x:String>
+        <x:String x:Key="NoText">NO</x:String>
+
+        <Style x:Key="DetailLine" TargetType="Line">
+            <Setter Property="Grid.Column" Value="2"/>
+            <Setter Property="Grid.ColumnSpan" Value="4"/>
+            <Setter Property="X1" Value="0"/>
+            <Setter Property="X2" Value="300"/>
+            <Setter Property="Stroke" Value="Gray"/>
+            <Setter Property="VerticalAlignment" Value="Bottom"/>
+            <Setter Property="StrokeThickness" Value="1"/>
+        </Style>
+
+        <Style x:Key="FormLine" TargetType="Line">
+            <Setter Property="Stroke" Value="Black"/>
+            <Setter Property="StrokeThickness" Value="1"/>
+        </Style>
+
+    </Page.Resources>
+
+    <Canvas x:Name="RootCanvas" Margin="24" RequestedTheme="Light">
+        <!-- faqs backgrounds -->
+        <Rectangle Height="684" Width="468" Fill="LightGray"/>
+        <!-- refs backgrounds -->
+        <Rectangle Height="48" Width="564" Fill="LightGray" Canvas.Top="684"/>
+        <!-- oath backgrounds -->
+        <Rectangle Height="90" Width="564" Fill="LightGray" Canvas.Top="822"/>
+        <Rectangle Height="32" Width="270" Fill="LightGray" Canvas.Top="924" Canvas.Left="12"/>
+        <Rectangle Height="12" Width="270" Fill="LightGray" Canvas.Top="994" Canvas.Left="294"/>
+        <Rectangle Height="12" Width="270" Fill="LightGray" Canvas.Top="1018" Canvas.Left="294"/>
+        <Rectangle Height="12" Width="180" Fill="LightGray" Canvas.Top="1018" Canvas.Left="576"/>
+        <Rectangle Height="12" Width="294" Fill="LightGray" Canvas.Top="1176" Canvas.Left="282"/>
+
+        <Grid Width="768" Height="684">
+
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="18"/>
+                <ColumnDefinition Width="16"/>
+                <ColumnDefinition Width="434"/>
+                <ColumnDefinition Width="18"/>
+                <ColumnDefinition Width="78"/>
+                <ColumnDefinition Width="18"/>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="38"/>
+                <RowDefinition Height="20"/>
+                <RowDefinition Height="20"/>
+                <RowDefinition Height="18"/>
+                <RowDefinition Height="30"/>
+                <RowDefinition Height="18"/>
+                <RowDefinition Height="18"/>
+                <RowDefinition Height="28"/>
+                <RowDefinition Height="20"/>
+                <RowDefinition Height="20"/>
+                <RowDefinition Height="20"/>
+                <RowDefinition Height="20"/>
+                <RowDefinition Height="20"/>
+                <RowDefinition Height="20"/>
+                <RowDefinition Height="26"/>
+                <RowDefinition Height="18"/>
+                <RowDefinition Height="18"/>
+                <RowDefinition Height="18"/>
+                <RowDefinition Height="21"/>
+                <RowDefinition Height="21"/>
+                <RowDefinition Height="21"/>
+                <RowDefinition Height="21"/>
+                <RowDefinition Height="20"/>
+                <RowDefinition Height="20"/>
+                <RowDefinition Height="20"/>
+                <RowDefinition Height="27"/>
+                <RowDefinition Height="20"/>
+                <RowDefinition Height="20"/>
+                <RowDefinition Height="20"/>
+                <RowDefinition Height="20"/>
+                <RowDefinition Height="20"/>
+                <RowDefinition/>
+            </Grid.RowDefinitions>
+
+            <TextBlock Style="{StaticResource FormText}" Text="34."/>
+            <TextBlock Style="{StaticResource FormText}" Grid.Column="1" Grid.ColumnSpan="2"
+                       Text="{StaticResource Faq1A}"/>
+            <TextBlock Style="{StaticResource FormText}" Grid.Column="1" Grid.Row="1" Text="a."/>
+            <TextBlock Style="{StaticResource FormText}" Grid.Column="2" Grid.Row="1" Text="{StaticResource Faq1B}"/>
+            <TextBlock Style="{StaticResource FormText}" Grid.Column="1" Grid.Row="2" Text="b."/>
+            <TextBlock Style="{StaticResource FormText}" Grid.Column="2" Grid.Row="2" Text="{StaticResource Faq1C}"/>
+
+            <TextBlock Style="{StaticResource FormText}" Grid.Row="5" Text="35."/>
+            <TextBlock Style="{StaticResource FormText}" Grid.Column="1" Grid.Row="5" Text="a."/>
+            <TextBlock Style="{StaticResource FormText}" Grid.Column="2" Grid.Row="5" Text="{StaticResource Faq2A}"/>
+            <TextBlock Style="{StaticResource FormText}" Grid.Column="1" Grid.Row="8" Text="b."/>
+            <TextBlock Style="{StaticResource FormText}" Grid.Column="2" Grid.Row="8" Text="{StaticResource Faq2B}"/>
+
+            <TextBlock Style="{StaticResource FormText}" Text="36." Grid.Row="12"/>
+            <TextBlock Style="{StaticResource FormText}" Grid.Column="1" Grid.ColumnSpan="2" Grid.Row="12" Grid.RowSpan="3" Text="{StaticResource Faq3}"/>
+
+            <TextBlock Style="{StaticResource FormText}" Grid.Row="15" Text="37."/>
+            <TextBlock Style="{StaticResource FormText}" Grid.Column="1" Grid.ColumnSpan="2" Grid.Row="15" Grid.RowSpan="3" Text="{StaticResource Faq4}"/>
+
+            <TextBlock Style="{StaticResource FormText}" Grid.Row="18" Text="38."/>
+            <TextBlock Style="{StaticResource FormText}" Grid.Column="1" Grid.Row="18" Grid.RowSpan="2" Text="a."/>
+            <TextBlock Style="{StaticResource FormText}" Grid.Column="2" Grid.Row="18" Grid.RowSpan="2" Text="{StaticResource Faq5A}"/>
+            <TextBlock Style="{StaticResource FormText}" Grid.Column="1" Grid.Row="20" Grid.RowSpan="2" Text="b."/>
+            <TextBlock Style="{StaticResource FormText}" Grid.Column="2" Grid.Row="20" Grid.RowSpan="2" Text="{StaticResource Faq5B}"/>
+
+            <TextBlock Style="{StaticResource FormText}" Grid.Row="22" Text="39."/>
+            <TextBlock Style="{StaticResource FormText}" Grid.Column="1" Grid.ColumnSpan="2" Grid.Row="22" Grid.RowSpan="3" Text="{StaticResource Faq6}"/>
+
+            <TextBlock Style="{StaticResource FormText}" Grid.Row="25" Text="40."/>
+            <TextBlock Style="{StaticResource FormText}" Grid.Column="1" Grid.ColumnSpan="2" Grid.Row="25" Grid.RowSpan="2" Text="{StaticResource Faq7A}"/>
+            <TextBlock Style="{StaticResource FormText}" Grid.Column="1" Grid.Row="26" Text="a."/>
+            <TextBlock Style="{StaticResource FormText}" Grid.Column="2" Grid.Row="26" Grid.RowSpan="2" Text="{StaticResource Faq7B}"/>
+            <TextBlock Style="{StaticResource FormText}" Grid.Column="1" Grid.Row="28" Text="b."/>
+            <TextBlock Style="{StaticResource FormText}" Grid.Column="2" Grid.Row="28" Grid.RowSpan="2" Text="{StaticResource Faq7C}"/>
+            <TextBlock Style="{StaticResource FormText}" Grid.Column="1" Grid.Row="30" Text="c."/>
+            <TextBlock Style="{StaticResource FormText}" Grid.Column="2" Grid.Row="30" Grid.RowSpan="2" Text="{StaticResource Faq7D}"/>
+
+            <TextBlock Style="{StaticResource FormText}" Grid.Column="4" Grid.Row="1" Text="{StaticResource YesText}"/>
+            <TextBlock Style="{StaticResource FormText}" Grid.Column="6" Grid.Row="1" Text="{StaticResource NoText}"/>
+            <TextBlock Style="{StaticResource FormText}" Grid.Column="4" Grid.Row="2" Text="{StaticResource YesText}"/>
+            <TextBlock Style="{StaticResource FormText}" Grid.Column="6" Grid.Row="2" Text="{StaticResource NoText}"/>
+            <TextBlock Style="{StaticResource FormText}" Grid.Column="4" Grid.Row="3" Grid.ColumnSpan="3" Text="{StaticResource IfYesText}"/>
+            <TextBlock Style="{StaticResource FormText}" Grid.Column="4" Grid.Row="5" Text="{StaticResource YesText}"/>
+            <TextBlock Style="{StaticResource FormText}" Grid.Column="6" Grid.Row="5" Text="{StaticResource NoText}"/>
+            <TextBlock Style="{StaticResource FormText}" Grid.Column="4" Grid.Row="6" Grid.ColumnSpan="3" Text="{StaticResource IfYesText}"/>
+
+            <Line Grid.Column="2" Grid.Row="7" Style="{StaticResource DetailLine}"/>
+
+            <TextBlock Style="{StaticResource FormText}" Grid.Column="4" Grid.Row="8" Text="{StaticResource YesText}"/>
+            <TextBlock Style="{StaticResource FormText}" Grid.Column="6" Grid.Row="8" Text="{StaticResource NoText}"/>
+            <TextBlock Style="{StaticResource FormText}" Grid.Column="4" Grid.Row="9" Grid.ColumnSpan="3" Text="{StaticResource IfYesText}"/>
+            <TextBlock Style="{StaticResource FormText}" Grid.Column="4" Grid.Row="10" Text="Date Filed:"/>
+
+            <Line Style="{StaticResource DetailLine}" Grid.Row="10"/>
+
+            <TextBlock Style="{StaticResource FormText}" Grid.Column="4" Grid.Row="11" Text="Status of Case/s:"/>
+            <TextBlock Style="{StaticResource FormText}" Grid.Column="4" Grid.Row="12" Text="{StaticResource YesText}"/>
+            <TextBlock Style="{StaticResource FormText}" Grid.Column="6" Grid.Row="12" Text="{StaticResource NoText}"/>
+            <TextBlock Style="{StaticResource FormText}" Grid.Column="4" Grid.Row="13" Grid.ColumnSpan="3" Text="{StaticResource IfYesText}"/>
+            <TextBlock Style="{StaticResource FormText}" Grid.Column="4" Grid.Row="15" Text="{StaticResource YesText}"/>
+            <TextBlock Style="{StaticResource FormText}" Grid.Column="6" Grid.Row="15" Text="{StaticResource NoText}"/>
+            <TextBlock Style="{StaticResource FormText}" Grid.Column="4" Grid.Row="16" Grid.ColumnSpan="3" Text="{StaticResource IfYesText}"/>
+            <TextBlock Style="{StaticResource FormText}" Grid.Column="4" Grid.Row="18" Text="{StaticResource YesText}"/>
+            <TextBlock Style="{StaticResource FormText}" Grid.Column="6" Grid.Row="18" Text="{StaticResource NoText}"/>
+            <TextBlock Style="{StaticResource FormText}" Grid.Column="4" Grid.Row="19" Grid.ColumnSpan="3" Text="{StaticResource IfYesText}"/>
+
+            <Line Style="{StaticResource DetailLine}" Grid.Row="19"/>
+
+            <TextBlock Style="{StaticResource FormText}" Grid.Column="4" Grid.Row="20" Text="{StaticResource YesText}"/>
+            <TextBlock Style="{StaticResource FormText}" Grid.Column="6" Grid.Row="20" Text="{StaticResource NoText}"/>
+            <TextBlock Style="{StaticResource FormText}" Grid.Column="4" Grid.Row="21" Grid.ColumnSpan="3" Text="{StaticResource IfYesText}"/>
+            <TextBlock Style="{StaticResource FormText}" Grid.Column="4" Grid.Row="22" Text="{StaticResource YesText}"/>
+            <TextBlock Style="{StaticResource FormText}" Grid.Column="6" Grid.Row="22" Text="{StaticResource NoText}"/>
+            <TextBlock Style="{StaticResource FormText}" Grid.Column="4" Grid.Row="23" Grid.ColumnSpan="3" Text="If YES, give details (country):"/>
+            <TextBlock Style="{StaticResource FormText}" Grid.Column="4" Grid.Row="26" Text="{StaticResource YesText}"/>
+            <TextBlock Style="{StaticResource FormText}" Grid.Column="6" Grid.Row="26" Text="{StaticResource NoText}"/>
+            <TextBlock Style="{StaticResource FormText}" Grid.Column="4" Grid.Row="27" Grid.ColumnSpan="3" Text="{StaticResource IfYesText}"/>
+
+            <Line Style="{StaticResource DetailLine}" Grid.Row="27"/>
+
+            <TextBlock Style="{StaticResource FormText}" Grid.Column="4" Grid.Row="28" Text="{StaticResource YesText}"/>
+            <TextBlock Style="{StaticResource FormText}" Grid.Column="6" Grid.Row="28" Text="{StaticResource NoText}"/>
+            <TextBlock Style="{StaticResource FormText}" Grid.Column="4" Grid.Row="29" Grid.ColumnSpan="3" Text="If YES, please specify ID No:"/>
+
+            <Line Style="{StaticResource DetailLine}" Grid.Row="29"/>
+
+            <TextBlock Style="{StaticResource FormText}" Grid.Column="4" Grid.Row="30" Text="{StaticResource YesText}"/>
+            <TextBlock Style="{StaticResource FormText}" Grid.Column="6" Grid.Row="30" Text="{StaticResource NoText}"/>
+            <TextBlock Style="{StaticResource FormText}" Grid.Column="4" Grid.Row="31" Grid.ColumnSpan="3" Text="If YES, please specify ID No:"/>
+
+            <!-- FAQs data -->
+            <!--
+            <TextBlock Style="{StaticResource FaqCheckboxGlyph}" Grid.Column="2" Grid.Row="1"
+                       Text="{x:Bind FAQs.IsRelatedToAuthorityThirdDegree, Converter={StaticResource StringOrBooleanToCheckboxGlyph}, FallbackValue=}"/>
+            <TextBlock Style="{StaticResource FaqCheckboxGlyph}" Grid.Column="4" Grid.Row="1"
+                       Text="{x:Bind FAQs.IsRelatedToAuthorityThirdDegree, Converter={StaticResource StringOrBooleanToCheckboxGlyph},ConverterParameter=reverse, FallbackValue=}"/>
+            <TextBlock Style="{StaticResource FaqCheckboxGlyph}" Grid.Column="2" Grid.Row="2"
+                       Text="{x:Bind FAQs.IsRelatedToAuthorityFourthDegree, Converter={StaticResource StringOrBooleanToCheckboxGlyph}, FallbackValue=}"/>
+            <TextBlock Style="{StaticResource FaqCheckboxGlyph}" Grid.Column="4" Grid.Row="2"
+                       Text="{x:Bind FAQs.IsRelatedToAuthorityFourthDegree, Converter={StaticResource StringOrBooleanToCheckboxGlyph},ConverterParameter=reverse, FallbackValue=}"/>
+            <TextBlock Style="{StaticResource FaqDetailText}" Grid.Row="4" Grid.Column="3" Grid.ColumnSpan="4" 
+                       Text="{x:Bind FAQs.IsRelatedToAuthorityDetails, Converter={StaticResource StringToUppercase}}"/>
+
+            <TextBlock Style="{StaticResource FaqCheckboxGlyph}" Grid.Column="2" Grid.Row="5"
+                       Text="{x:Bind FAQs.IsAdministrativeOffenseGuilty, Converter={StaticResource StringOrBooleanToCheckboxGlyph}, FallbackValue=}"/>
+            <TextBlock Style="{StaticResource FaqCheckboxGlyph}" Grid.Column="4" Grid.Row="5"
+                       Text="{x:Bind FAQs.IsAdministrativeOffenseGuilty, Converter={StaticResource StringOrBooleanToCheckboxGlyph},ConverterParameter=reverse, FallbackValue=}"/>
+            <TextBlock Style="{StaticResource FaqDetailText}" Grid.Row="7" Grid.Column="3" Grid.ColumnSpan="4" 
+                       Text="{x:Bind FAQs.IsAdministrativeOffenseGuiltyDetails, Converter={StaticResource StringToUppercase}}"/>
+
+            <TextBlock Style="{StaticResource FaqCheckboxGlyph}" Grid.Column="2" Grid.Row="8"
+                       Text="{x:Bind FAQs.IsCriminallyCharged, Converter={StaticResource StringOrBooleanToCheckboxGlyph}, FallbackValue=}"/>
+            <TextBlock Style="{StaticResource FaqCheckboxGlyph}" Grid.Column="4" Grid.Row="8"
+                       Text="{x:Bind FAQs.IsCriminallyCharged, Converter={StaticResource StringOrBooleanToCheckboxGlyph},ConverterParameter=reverse, FallbackValue=}"/>
+
+            <TextBlock Style="{StaticResource FaqCheckboxGlyph}" Grid.Column="2" Grid.Row="12"
+                       Text="{x:Bind FAQs.IsConvicted, Converter={StaticResource StringOrBooleanToCheckboxGlyph}, FallbackValue=}"/>
+            <TextBlock Style="{StaticResource FaqCheckboxGlyph}" Grid.Column="4" Grid.Row="12"
+                       Text="{x:Bind FAQs.IsConvicted, Converter={StaticResource StringOrBooleanToCheckboxGlyph},ConverterParameter=reverse, FallbackValue=}"/>
+            <TextBlock Style="{StaticResource FaqDetailText}" Grid.Row="14" Grid.Column="3" Grid.ColumnSpan="4" 
+                       Text="{x:Bind FAQs.IsConvictedDetails, Converter={StaticResource StringToUppercase}}"/>
+
+            <TextBlock Style="{StaticResource FaqCheckboxGlyph}" Grid.Column="2" Grid.Row="15"
+                       Text="{x:Bind FAQs.IsSeparatedFromService, Converter={StaticResource StringOrBooleanToCheckboxGlyph}, FallbackValue=}"/>
+            <TextBlock Style="{StaticResource FaqCheckboxGlyph}" Grid.Column="4" Grid.Row="15"
+                       Text="{x:Bind FAQs.IsSeparatedFromService, Converter={StaticResource StringOrBooleanToCheckboxGlyph},ConverterParameter=reverse, FallbackValue=}"/>
+            <TextBlock Style="{StaticResource FaqDetailText}" Grid.Row="17" Grid.Column="3" Grid.ColumnSpan="4" 
+                       Text="{x:Bind FAQs.IsSeparatedFromServiceDetails, Converter={StaticResource StringToUppercase}}"/>
+
+            <TextBlock Style="{StaticResource FaqCheckboxGlyph}" Grid.Column="2" Grid.Row="18"
+                       Text="{x:Bind FAQs.IsElectionCandidate, Converter={StaticResource StringOrBooleanToCheckboxGlyph}, FallbackValue=}"/>
+            <TextBlock Style="{StaticResource FaqCheckboxGlyph}" Grid.Column="4" Grid.Row="18"
+                       Text="{x:Bind FAQs.IsElectionCandidate, Converter={StaticResource StringOrBooleanToCheckboxGlyph},ConverterParameter=reverse, FallbackValue=}"/>
+            <TextBlock Style="{StaticResource FaqDetailText}" Grid.Row="19" Grid.Column="5"
+                       Text="{x:Bind FAQs.IsElectionCandidateDetails, Converter={StaticResource StringToUppercase}}"/>
+            -->
+
+            <!--  TEMP 
+            <TextBlock Style="{StaticResource FaqCheckboxGlyph}" Grid.Column="2" Grid.Row="20"
+                       Text="{x:Bind FAQs.IsElectionCandidate, Converter={StaticResource StringOrBooleanToCheckboxGlyph}, FallbackValue=}"/>
+            <TextBlock Style="{StaticResource FaqCheckboxGlyph}" Grid.Column="4" Grid.Row="20"
+                       Text="{x:Bind FAQs.IsElectionCandidate, Converter={StaticResource StringOrBooleanToCheckboxGlyph},ConverterParameter=reverse, FallbackValue=}"/>
+            -->
+
+            <!--  TEMP 
+            <TextBlock Style="{StaticResource FaqCheckboxGlyph}" Grid.Column="2" Grid.Row="22"
+                       Text="{x:Bind FAQs.IsElectionCandidate, Converter={StaticResource StringOrBooleanToCheckboxGlyph},ConverterParameter=Male, FallbackValue=}"/>
+            <TextBlock Style="{StaticResource FaqCheckboxGlyph}" Grid.Column="4" Grid.Row="22" 
+                       Text="{x:Bind FAQs.IsElectionCandidate, Converter={StaticResource StringOrBooleanToCheckboxGlyph},ConverterParameter=reverse, FallbackValue=}"/>
+            -->
+
+
+            <!--
+            <TextBlock Style="{StaticResource FaqCheckboxGlyph}" Grid.Column="2" Grid.Row="26"
+                       Text="{x:Bind FAQs.IsIndigenousGroupMember, Converter={StaticResource StringOrBooleanToCheckboxGlyph}, FallbackValue=}"/>
+            <TextBlock Style="{StaticResource FaqCheckboxGlyph}" Grid.Column="4" Grid.Row="26"
+                       Text="{x:Bind FAQs.IsIndigenousGroupMember, Converter={StaticResource StringOrBooleanToCheckboxGlyph},ConverterParameter=reverse, FallbackValue=}"/>
+            <TextBlock Style="{StaticResource FaqDetailText}" Grid.Row="27" Grid.Column="5"
+                       Text="{x:Bind FAQs.IsIndigenousGroupMemberDetails, Converter={StaticResource StringToUppercase}}"/>
+
+            <TextBlock Style="{StaticResource FaqCheckboxGlyph}" Grid.Column="2" Grid.Row="28"
+                       Text="{x:Bind FAQs.IsDifferentlyAbled, Converter={StaticResource StringOrBooleanToCheckboxGlyph}, FallbackValue=}"/>
+            <TextBlock Style="{StaticResource FaqCheckboxGlyph}" Grid.Column="4" Grid.Row="28"
+                       Text="{x:Bind FAQs.IsDifferentlyAbled, Converter={StaticResource StringOrBooleanToCheckboxGlyph},ConverterParameter=reverse, FallbackValue=}"/>
+            <TextBlock Style="{StaticResource FaqDetailText}" Grid.Row="29" Grid.Column="5" Margin="20,0,0,0"
+                       Text="{x:Bind FAQs.IsDifferentlyAbledIdNumber, Converter={StaticResource StringToUppercase}}"/>
+
+            <TextBlock Style="{StaticResource FaqCheckboxGlyph}" Grid.Column="2" Grid.Row="30"
+                       Text="{x:Bind FAQs.IsSoloParent, Converter={StaticResource StringOrBooleanToCheckboxGlyph}, FallbackValue=}"/>
+            <TextBlock Style="{StaticResource FaqCheckboxGlyph}" Grid.Column="4" Grid.Row="30"
+                       Text="{x:Bind FAQs.IsSoloParent, Converter={StaticResource StringOrBooleanToCheckboxGlyph},ConverterParameter=reverse, FallbackValue=}"/>
+            <TextBlock Style="{StaticResource FaqDetailText}" Grid.Row="31" Grid.Column="5" Margin="20,0,0,0"
+                       Text="{x:Bind FAQs.IsSoloParentIdNumber, Converter={StaticResource StringToUppercase}}"/>
+            -->
+
+        </Grid>
+
+        <!-- vertical lines -->
+        <Line Style="{StaticResource FormLine}" X1="288" X2="288" Y1="710" Y2="822"/>
+        <Line Style="{StaticResource FormLine}" X1="468" X2="468" Y1="0" Y2="684"/>
+        <Line Style="{StaticResource FormLine}" X1="468" X2="468" Y1="710" Y2="822"/>
+        <Line Stroke="Black" StrokeThickness="1.5" X1="564" X2="564" Y1="684" Y2="912"/>
+
+        <!-- rectangles -->
+        <Rectangle Height="144" Width="120" Stroke="Black" StrokeThickness="1" Canvas.Top="710" Canvas.Left="606"/>
+        <Rectangle Height="108" Width="270" Stroke="Black" StrokeThickness="1.5" Canvas.Top="924" Canvas.Left="12"/>
+        <Rectangle Height="108" Width="270" Stroke="Black" StrokeThickness="1.5" Canvas.Top="924" Canvas.Left="294"/>
+        <Rectangle Height="144" Width="180" Stroke="Black" StrokeThickness="1.5" Canvas.Top="888" Canvas.Left="576"/>
+        <Rectangle Height="96" Width="294" Stroke="Black" StrokeThickness="1.5" Canvas.Top="1092" Canvas.Left="282"/>
+
+        <!-- photo -->
+        <TextBlock FontSize="7" TextWrapping="Wrap" Canvas.Left="606" Canvas.Top="728" Height="104" Width="120" HorizontalTextAlignment="Center"
+                   Text="ID picture taken within&#x0a;the last  6 months&#x0a;3.5 cm. X 4.5 cm&#x0a;(passport size)&#x0a;&#x0a;With full and handwritten&#x0a;name tag and signature over&#x0a;printed name&#x0a;&#x0a;Computer generated&#x0a;or photocopied picture&#x0a;is not acceptable"/>
+        <TextBlock FontSize="7" TextWrapping="Wrap" Canvas.Left="606" Canvas.Top="866" Width="120" HorizontalTextAlignment="Center"
+                   Text="PHOTO" Foreground="Gray"/>
+        <Image Height="144" Width="120" Canvas.Top="710" Canvas.Left="606"/>
+
+        <!-- horizontal lines -->
+        <Line Style="{StaticResource FormLine}" X1="0" X2="768" Y1="126" Y2="126"/>
+        <Line Style="{StaticResource FormLine}" X1="0" X2="768" Y1="270" Y2="270"/>
+        <Line Style="{StaticResource FormLine}" X1="0" X2="768" Y1="336" Y2="336"/>
+        <Line Style="{StaticResource FormLine}" X1="0" X2="768" Y1="390" Y2="390"/>
+        <Line Style="{StaticResource FormLine}" X1="0" X2="768" Y1="474" Y2="474"/>
+        <Line Style="{StaticResource FormLine}" X1="0" X2="768" Y1="534" Y2="534"/>
+        <Line Stroke="Black" StrokeThickness="1.5" X1="0" X2="768" Y1="684" Y2="684"/>
+        <Line Stroke="Black" StrokeThickness="1.5" X1="0" X2="564" Y1="710" Y2="710"/>
+
+        <Line Style="{StaticResource FormLine}" X1="0" X2="564" Y1="732" Y2="732"/>
+        <Line Style="{StaticResource FormLine}" X1="0" X2="564" Y1="762" Y2="762"/>
+        <Line Style="{StaticResource FormLine}" X1="0" X2="564" Y1="792" Y2="792"/>
+        <Line Style="{StaticResource FormLine}" X1="0" X2="564" Y1="822" Y2="822"/>
+
+        <Line Stroke="Black" StrokeThickness="1.5" X1="0" X2="564" Y1="912" Y2="912"/>
+        <Line Stroke="Black" StrokeThickness="1.5" X1="0" X2="768" Y1="1044" Y2="1044"/>
+
+        <Line Style="{StaticResource FormLine}" X1="12" X2="282" Y1="956" Y2="956"/>
+        <Line Style="{StaticResource FormLine}" X1="12" X2="282" Y1="981" Y2="981"/>
+        <Line Style="{StaticResource FormLine}" X1="12" X2="282" Y1="1006" Y2="1006"/>
+
+        <Line Stroke="Black" StrokeThickness="0.5" X1="294" X2="564" Y1="994" Y2="994"/>
+        <Line Stroke="Black" StrokeThickness="0.5" X1="294" X2="564" Y1="1006" Y2="1006"/>
+        <Line Stroke="Black" StrokeThickness="0.5" X1="294" X2="564" Y1="1018" Y2="1018"/>
+
+        <Line Stroke="Black" StrokeThickness="0.5" X1="576" X2="756" Y1="1018" Y2="1018"/>
+
+        <Line Stroke="Black" StrokeThickness="0.5" X1="282" X2="576" Y1="1176" Y2="1176"/>
+
+        <Grid Height="48" Width="564" Canvas.Top="684">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="26"/>
+                <RowDefinition/>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="18"/>
+                <ColumnDefinition Width="60"/>
+                <ColumnDefinition Width="210"/>
+                <ColumnDefinition Width="180"/>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+            <TextBlock Style="{StaticResource CharRefFormText}" Text="41."/>
+            <TextBlock Style="{StaticResource CharRefFormText}" Grid.Column="1" Text="REFERENCES"/>
+            <TextBlock Style="{StaticResource CharRefFormText}" Foreground="Red" Grid.ColumnSpan="4"
+                       Text="(Person not related by consanguinity or affinity to applicant/appointee)"/>
+            <TextBlock Style="{StaticResource CharRefFormText}" Grid.Row="1" Grid.ColumnSpan="3" Text="NAME"/>
+            <TextBlock Style="{StaticResource CharRefFormText}" Grid.Row="1" Grid.Column="3" Text="ADDRESS"/>
+            <TextBlock Style="{StaticResource CharRefFormText}" Grid.Row="1" Grid.Column="4" Text="TEL. NO."/>
+        </Grid>
+
+        <!-- character references list -->
+        <!--
+        <ListView ItemsSource="{x:Bind CharacterRefs}" Canvas.Top="732" Width="564">
+            <ListView.ItemContainerStyle>
+                <Style TargetType="ListViewItem">
+                    <Setter Property="MinHeight" Value="0"/>
+                    <Setter Property="MinWidth" Value="0"/>
+                    <Setter Property="Padding" Value="4,0,0,0"/>
+                </Style>
+            </ListView.ItemContainerStyle>
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <Grid Height="30">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="288"/>
+                            <ColumnDefinition Width="180"/>
+                            <ColumnDefinition/>
+                        </Grid.ColumnDefinitions>
+                        <TextBlock Style="{StaticResource CharRefEntry}" Grid.Column="0" Text="{Binding FullName, Converter={StaticResource StringToUppercase}}"/>
+                        <TextBlock Style="{StaticResource CharRefEntry}" Grid.Column="1" Text="{Binding Address, Converter={StaticResource GuidToAddress}, ConverterParameter=uppercase}"/>
+                        <TextBlock Style="{StaticResource CharRefEntry}" Grid.Column="2" Text="{Binding ContactNumber, Converter={StaticResource StringToUppercase}}"/>
+                    </Grid>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
+        -->
+
+
+        <Grid Height="90" Width="564" Canvas.Top="822">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="18"/>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+            <TextBlock FontSize="10" FontStretch="ExtraCondensed" Padding="4" Text="42." VerticalAlignment="Top" HorizontalTextAlignment="Center"/>
+            <TextBlock FontSize="10" FontStretch="Normal" Padding="4" VerticalAlignment="Top" HorizontalTextAlignment="Left" TextWrapping="Wrap"
+                       Text="I declare under oath that I have personally accomplished this Personal Data Sheet which is a true, correct and complete statement pursuant to the provisions of pertinent laws, rules and regulations of the Republic of the Philippines. I authorize the agency head/authorized representative to verify/validate the contents stated herein.&#x0a;&#x0a;I agree that any misrepresentation made in this document and its attachments shall cause the filing of administrative/criminal case/s against me." Grid.Column="1"/>
+        </Grid>
+
+        <TextBlock Style="{StaticResource CharRefFormText}" Canvas.Left="12" Canvas.Top="924" Width="270"
+                   Text="Government Issued ID (i.e.Passport, GSIS, SSS, PRC, Driver's License, etc.)&#x0a;PLEASE INDICATE ID Number and Date of Issuance"/>
+        <TextBlock FontSize="9" FontStretch="ExtraCondensed" Padding="4" VerticalAlignment="Center" HorizontalTextAlignment="Left" Canvas.Left="12" Canvas.Top="958" Width="84"
+                   Text="Government Issued ID:"/>
+        <TextBlock FontSize="9" FontStretch="ExtraCondensed" Padding="4" VerticalAlignment="Center" HorizontalTextAlignment="Left" Canvas.Left="12" Canvas.Top="983" Width="84"
+                   Text="ID/License/Passport No.:"/>
+        <TextBlock FontSize="9" FontStretch="ExtraCondensed" Padding="4" VerticalAlignment="Center" HorizontalTextAlignment="Left" Canvas.Left="12" Canvas.Top="1008" Width="84"
+                   Text="Date/Place of Issuance:"/>
+
+        <TextBlock Style="{StaticResource CharRefFormText}" Canvas.Left="294" Canvas.Top="990" Width="270" Text="Signature (Sign inside the box)"/>
+        <TextBlock Style="{StaticResource CharRefFormText}" Canvas.Left="294" Canvas.Top="1015" Width="270" Text="Date Accomplished"/>
+
+        <TextBlock FontSize="10" FontStretch="Condensed" Padding="4" VerticalAlignment="Center" HorizontalTextAlignment="Center" Canvas.Top="1062" Width="768"
+                   Text="SUBSCRIBED AND SWORN to before me this _____________________________________________________, affiant exhibiting his/her validly issued government ID as indicated above."/>
+
+        <TextBlock Style="{StaticResource CharRefFormText}" Canvas.Left="576" Canvas.Top="1015" Width="180" Text="Right Thumbmark"/>
+
+        <TextBlock Style="{StaticResource CharRefFormText}" Canvas.Left="294" Canvas.Top="1172" Width="270" Text="Person Administering Oath"/>
+
+        <!-- page border & form info -->
+        <Rectangle Stroke="Black" StrokeThickness="1" Canvas.Left="0" Canvas.Top="0" Height="1200" Width="768"/>
+        <TextBlock FontSize="7" FontStretch="ExtraCondensed" FontStyle="Italic" Canvas.Top="1200" Canvas.Left="648" Width="120"
+                   Text="CS Form No. 212 (Revised 2017), Page 4 of 4" HorizontalTextAlignment="Right" HorizontalAlignment="Right"/>
+
+    </Canvas>
 </Page>
