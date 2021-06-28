@@ -1,37 +1,15 @@
 ﻿using Windows.UI.Xaml;
-using School.People.Core;
-using System.Threading.Tasks;
-using Apps.Communication.Core;
-using Cdln.School.People.Uwp.Messages;
-using Cdln.School.People.Uwp.ViewModels;
+using Cdln.School.People.Uwp;
+using Cdln.School.People.Uwp.Views.Auxiliaries;
 
-namespace Cdln.School.People.Uwp
+namespace Cdln.School.Content.Uwp
 {
-    public abstract class AuxiliaryViewModel : DependencyObject, IHandle<CurrentPersonChangedEvent>, IHandle<NoCurrentPersonEvent>
+    public class AuxiliaryViewModel : DependencyObject, IContentHost
     {
-        public async Task Handle(CurrentPersonChangedEvent message)
-        {
-            if (message.Data is IPerson p)
-            {
-                SaveChanges().FireAndForget(false);
-                await RequestData(p);
-            }
-            else { await ResetData(); }
-        }
+        private static readonly DependencyProperty ContentProperty = DependencyProperty.Register(nameof(Content), typeof(object), typeof(AuxiliaryViewModel), new PropertyMetadata(null));
 
-        public async Task Handle(NoCurrentPersonEvent message)
-        {
-            await SaveChanges();
-            await ResetData();
-        }
+        public object Content => GetValue(ContentProperty);
 
-        protected abstract Task RequestData(IPerson person);
-        protected abstract Task SaveChanges();
-        protected abstract Task ResetData();
-
-        protected AuxiliaryViewModel(PeopleListViewModel peopleListViewModel)
-        {
-            if (peopleListViewModel.View?.CurrentItem is IPerson p) { RequestData(p); }
-        }
+        public AuxiliaryViewModel(CommentsView comments) => SetValue(ContentProperty, comments);
     }
 }

@@ -120,8 +120,9 @@
   <ItemGroup>
     <Compile Include="Abstracts\IAddNewItem.cs" />
     <Compile Include="Abstracts\IApiClient.cs" />
+    <Compile Include="Abstracts\IContentHost.cs" />
     <Compile Include="Abstracts\INavigationContext.cs" />
-    <Compile Include="Abstracts\IPeopleContextsListViewModel.cs" />
+    <Compile Include="Abstracts\IContextProvider.cs" />
     <Compile Include="Abstracts\IUserCredentials.cs" />
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
@@ -129,11 +130,12 @@
     <Compile Include="Bases\AttributeViewModel.cs" />
     <Compile Include="Bases\AuxiliaryViewModel.cs" />
     <Compile Include="Bases\ContextDescriptor.cs" />
+    <Compile Include="Abstracts\IContextDescriptor.cs" />
     <Compile Include="Bases\IndexedModel.cs" />
     <Compile Include="Bases\Message.cs" />
     <Compile Include="Bases\MessageCommand.cs" />
+    <Compile Include="Bases\MessagingModel.cs" />
     <Compile Include="Bases\Model.cs" />
-    <Compile Include="Bases\Saga.cs" />
     <Compile Include="Command.cs" />
     <Compile Include="Enums\SericeStatusEnums.cs" />
     <Compile Include="Handles.cs" />
@@ -141,6 +143,10 @@
     <Compile Include="Data\ApiClient.cs" />
     <Compile Include="Data\UserCredentials.cs" />
     <Compile Include="Enums\ContextEnums.cs" />
+    <Compile Include="Lists\AttributeContextsProvider.cs" />
+    <Compile Include="Lists\PeopleContextsProvider.cs" />
+    <Compile Include="Lists\PeopleListProvider.cs" />
+    <Compile Include="Lists\PeopleListProvider.Messaging.cs" />
     <Compile Include="Messages\ApiClientEvents.cs" />
     <Compile Include="Messages\AttributesCommands.cs" />
     <Compile Include="Messages\ContextEvents.cs" />
@@ -150,12 +156,9 @@
     <Compile Include="Abstracts\INavigationService.cs" />
     <Compile Include="Abstracts\IMessageHub.cs" />
     <Compile Include="Ioc.cs" />
-    <Compile Include="Lists\PeopleContextDescriptors.cs" />
-    <Compile Include="Lists\PersonnelAttributesContextDescriptors.cs" />
     <Compile Include="Lists\PhilippineCitiesAndMunicipalitiesList.cs" />
     <Compile Include="Lists\PhilippineProvincesList.cs" />
     <Compile Include="Lists\PhilippineRegionsList.cs" />
-    <Compile Include="Lists\StudentsAttributesContextDescriptors.cs" />
     <Compile Include="MainPage.xaml.cs">
       <DependentUpon>MainPage.xaml</DependentUpon>
     </Compile>
@@ -168,7 +171,6 @@
     <Compile Include="Models\Addresses\RootAddress.cs" />
     <Compile Include="Models\Addresses\TrunkAddress.cs" />
     <Compile Include="Models\AgencyMemberDetails.cs" />
-    <Compile Include="Models\AttributeContextDescriptor.cs" />
     <Compile Include="Models\Citizenship.cs" />
     <Compile Include="Models\Comments.cs" />
     <Compile Include="Models\ContactDetails.cs" />
@@ -176,7 +178,7 @@
     <Compile Include="Models\Education.cs" />
     <Compile Include="Models\Eligibility.cs" />
     <Compile Include="Models\Faqs.cs" />
-    <Compile Include="Models\PeopleContextDescriptor.cs" />
+    <Compile Include="Models\ContextDescriptors.cs" />
     <Compile Include="Models\Person.cs" />
     <Compile Include="Models\PersonDetails.cs" />
     <Compile Include="Models\RelatedPerson.cs" />
@@ -202,19 +204,16 @@
       <DependentUpon>RegistrationCertificate.xaml</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Sagas\PeopleSaga.cs" />
     <Compile Include="Sagas\StudentsSaga.cs" />
     <Compile Include="Utils\BirthdateValidator.cs" />
     <Compile Include="Utils\Converters.cs" />
     <Compile Include="Utils\IndexLogger.cs" />
     <Compile Include="Utils\PersonValidator.cs" />
-    <Compile Include="ViewModels\AttributeContextsListViewModel.cs" />
     <Compile Include="ViewModels\AttributePaneViewModel.cs" />
     <Compile Include="ViewModels\Attributes\FamilyBackgroundViewModel.cs" />
     <Compile Include="ViewModels\Auxiliaries\CommentsViewModel.cs" />
     <Compile Include="ViewModels\ConspectusViewModel.cs" />
-    <Compile Include="ViewModels\PeopleContextsListViewModel.cs" />
-    <Compile Include="ViewModels\PeopleListViewModel.cs" />
-    <Compile Include="ViewModels\PeopleListViewModel.EventHandlers.cs" />
     <Compile Include="Views\ActivePeopleView.xaml.cs">
       <DependentUpon>ActivePeopleView.xaml</DependentUpon>
     </Compile>

@@ -1,5 +1,6 @@
 ﻿using System;
 using Windows.UI.Xaml;
+using Cdln.School.People.Uwp.Lists;
 using Cdln.School.People.Uwp.Models;
 using Cdln.School.People.Uwp.Messages;
 using Cdln.School.People.Uwp.Views.Auxiliaries;
@@ -25,7 +26,7 @@ namespace Cdln.School.People.Uwp.ViewModels.Auxiliaries
 
         protected override void ResetValues() => SetValue(CommentsProperty, default);
 
-        public CommentsViewModel(IMessageHub hub, PeopleListViewModel people)
+        public CommentsViewModel(IMessageHub hub, PeopleListProvider people)
             : base(hub, people, typeof(CommentsView)) { }
     }
 }

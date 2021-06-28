@@ -21,7 +21,8 @@
                         CompactPaneLength="48" 
                         AlwaysShowHeader="False" 
                         IsSettingsVisible="True"
-                        MenuItemsSource="{Binding Contexts.View, ElementName=mainpage}">
+                        ItemInvoked="OnAppNavigationViewItemInvoked"
+                        MenuItemsSource="{Binding ContextsProvider.Contexts, ElementName=mainpage}">
             <NavigationView.PaneHeader>
                 <Grid>
                     <Grid.ColumnDefinitions>
@@ -33,7 +34,7 @@
                                Margin="16,0,0,0"
                                VerticalAlignment="Center"
                                FontWeight="Bold"
-                               Text="Temp"/>
+                               Text="C"/>
                 </Grid>
             </NavigationView.PaneHeader>
             <NavigationView.MenuItemTemplate>

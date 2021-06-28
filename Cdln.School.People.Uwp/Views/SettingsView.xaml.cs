@@ -1,30 +1,22 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Runtime.InteropServices.WindowsRuntime;
-using Windows.Foundation;
-using Windows.Foundation.Collections;
-using Windows.UI.Xaml;
+using System.Reflection;
 using Windows.UI.Xaml.Controls;
-using Windows.UI.Xaml.Controls.Primitives;
-using Windows.UI.Xaml.Data;
-using Windows.UI.Xaml.Input;
-using Windows.UI.Xaml.Media;
-using Windows.UI.Xaml.Navigation;
-
-// The Blank Page item template is documented at https://go.microsoft.com/fwlink/?LinkId=234238
 
 namespace Cdln.School.People.Uwp.Views
 {
-    /// <summary>
-    /// An empty page that can be used on its own or navigated to within a Frame.
-    /// </summary>
     public sealed partial class SettingsView : Page
     {
+        public string AppInfo { get; }
+
         public SettingsView()
         {
             this.InitializeComponent();
+
+            Assembly assembly = Assembly.GetExecutingAssembly();
+            string version = assembly.GetName().Version.ToString();
+            string copyright = assembly.GetCustomAttribute<AssemblyCopyrightAttribute>().Copyright;
+            string company = assembly.GetCustomAttribute<AssemblyCompanyAttribute>().Company;
+            AppInfo = $"Version { version }\n{ copyright } { company }. All rights reserved.";
         }
     }
 }

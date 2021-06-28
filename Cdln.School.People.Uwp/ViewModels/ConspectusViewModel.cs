@@ -4,6 +4,7 @@ using School.People.Core;
 using System.Threading.Tasks;
 using Apps.Communication.Core;
 using System.Collections.Generic;
+using Cdln.School.People.Uwp.Lists;
 using Cdln.School.People.Uwp.Models;
 using Windows.ApplicationModel.Calls;
 using Windows.ApplicationModel.Email;
@@ -20,9 +21,9 @@ namespace Cdln.School.People.Uwp.ViewModels
         private static readonly DependencyProperty ImageUriProperty = DependencyProperty.Register(nameof(ImageUri), typeof(Uri), typeof(ConspectusViewModel), new PropertyMetadata(null));
         private static readonly DependencyProperty AttributesListProperty = DependencyProperty.Register(nameof(AttributesList), typeof(List<AttributeContextDescriptor>), typeof(ConspectusViewModel), new PropertyMetadata(null));
 
-        public ConspectusViewModel(IMessageHub messageHub, PeopleListViewModel peopleListViewModel)
+        public ConspectusViewModel(IMessageHub messageHub, PeopleListProvider peopleListViewModel)
         {
-            SetValue(PersonProperty, peopleListViewModel.View?.CurrentItem as IPerson);
+            SetValue(PersonProperty, peopleListViewModel.People?.CurrentItem as IPerson);
             messageHub?.RegisterHandler<ConspectusViewModel, CurrentPersonChangedEvent>(this);
             messageHub?.RegisterHandler<ConspectusViewModel, PersonUpdatedEvent>(this);
             messageHub?.RegisterHandler<ConspectusViewModel, NoCurrentPersonEvent>(this);

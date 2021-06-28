@@ -4,6 +4,7 @@ using Windows.UI.Core;
 using System.Threading.Tasks;
 using Apps.Communication.Core;
 using System.Collections.Generic;
+using Cdln.School.People.Uwp.Lists;
 using Cdln.School.People.Uwp.Models;
 using System.Collections.ObjectModel;
 using Cdln.School.People.Uwp.Messages;
@@ -64,7 +65,7 @@ namespace Cdln.School.People.Uwp.ViewModels.Attributes
         }
 
 
-        public FamilyBackgroundViewModel(IMessageHub hub, PeopleListViewModel people, AttributeContextsListViewModel attributeContexts)
-            : base(hub, people, (attributeContexts.View?.CurrentItem as AttributeContextDescriptor)?.AssociatedViewType) { }
+        public FamilyBackgroundViewModel(IMessageHub hub, PeopleListProvider people, AttributeContextsProvider attributeContexts)
+            : base(hub, people, (attributeContexts.Contexts?.CurrentItem as AttributeContextDescriptor)?.AssociatedViewType) { }
     }
 }

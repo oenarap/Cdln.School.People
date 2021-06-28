@@ -2,6 +2,152 @@
     x:Class="Cdln.School.People.Uwp.App"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:utils="using:Cdln.School.People.Uwp.Utils"
     xmlns:local="using:Cdln.School.People.Uwp">
 
+    <Application.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.ThemeDictionaries>
+                <ResourceDictionary x:Key="Dark">
+                    <SolidColorBrush x:Key="ViewShaderBrush" Color="Black" Opacity="0.7"/>
+                    <AcrylicBrush x:Key="NavigationViewDefaultPaneBackground" 
+                                  TintColor="{ThemeResource SystemAccentColorDark3}"
+                                  FallbackColor="{ThemeResource SystemAccentColorDark3}"
+                                  TintOpacity="0.5"
+                                  BackgroundSource="HostBackdrop"/>
+                    <SolidColorBrush x:Key="CommandBarForeground" Color="DimGray"/>
+                    <SolidColorBrush x:Key="AppBarButtonForeground" Color="Gray"/>
+                </ResourceDictionary>
+                <ResourceDictionary x:Key="Light">
+                    <SolidColorBrush x:Key="ViewShaderBrush" Color="White" Opacity="0.7"/>
+                    <AcrylicBrush x:Key="NavigationViewDefaultPaneBackground" 
+                                  TintColor="{ThemeResource SystemAccentColorLight3}"
+                                  FallbackColor="{ThemeResource SystemAccentColorLight3}"
+                                  TintOpacity="0.7"
+                                  BackgroundSource="HostBackdrop"/>
+                    <SolidColorBrush x:Key="CommandBarForeground" Color="Gray"/>
+                    <SolidColorBrush x:Key="AppBarButtonForeground" Color="DimGray"/>
+                </ResourceDictionary>
+            </ResourceDictionary.ThemeDictionaries>
+
+            <!-- CONVERTERS -->
+            <utils:PersonToInitialsConverter x:Key="PersonToInitialsConverter"/>
+            <utils:PersonToFullNameConverter x:Key="PersonToFullNameConverter"/>
+            <utils:PersonToBannerNameConverter x:Key="PersonToBannerNameConverter"/>
+            <utils:StringToVisibilityConverter x:Key="StringToVisibilityConverter"/>
+            <utils:TextLenghtToRemainingCharactersConverter x:Key="TextLenghtToRemainingCharactersConverter"/>
+
+            <!-- MARGIN -->
+            <Thickness x:Key="ViewContentMargin">4,24,4,4</Thickness>
+
+            <!-- FAQs TEXTS -->
+            <x:String x:Key="Faq1A">Are you related by consanguinity or affinity to the appointing or recommending authority, or to the chief of bureau or office or to the person who has immediate supervision over you in the Office, Bureau or Department where you will be apppointed,</x:String>
+            <x:String x:Key="Faq1B">within the third degree?</x:String>
+            <x:String x:Key="Faq1C">within the fourth degree (for Local Government Unit - Career Employees)?</x:String>
+            <x:String x:Key="Faq2A">Have you ever been found guilty of any administrative offense?</x:String>
+            <x:String x:Key="Faq2B">Have you been criminally charged before any court?</x:String>
+            <x:String x:Key="Faq3">Have you ever been convicted of any crime or violation of any law, decree, ordinance or regulation by any court or tribunal?</x:String>
+            <x:String x:Key="Faq4">Have you ever been separated from the service in any of the following modes: resignation, retirement, dropped from the rolls, dismissal, termination, end of term, finished contract or phased out (abolition) in the public or private sector?</x:String>
+            <x:String x:Key="Faq5A">Have you ever been a candidate in a national or local election held within the last year (except Barangay election)?</x:String>
+            <x:String x:Key="Faq5B">Have you resigned from the government service during the three (3)-month period before the last election to promote/actively campaign for a national or local candidate?</x:String>
+            <x:String x:Key="Faq6">Have you acquired the status of an immigrant or permanent resident of another country?</x:String>
+            <x:String x:Key="Faq7A">Pursuant to: (a) Indigenous ActivePeopleView's Act (RA 8371); (b) Magna Carta for Disabled Persons (RA 7277); and (c) Solo Parents Welfare Act of 2000 (RA 8972), please answer the following items:</x:String>
+            <x:String x:Key="Faq7B">Are you a member of any indigenous group?</x:String>
+            <x:String x:Key="Faq7C">Are you a person with disability?</x:String>
+            <x:String x:Key="Faq7D">Are you a solo parent?</x:String>
+
+            <!-- VERIFICATION DETAILS TEXTS -->
+            <x:String x:Key="VerificationTextA">
+                I declare under oath that this Personal Data Sheet has been accomplished by me, and is a true, 
+                correct and complete statement pursuant to the provisions of pertinent laws, 
+                rules and regulations of the Republic of the Philippines.
+            </x:String>
+            <x:String x:Key="VerificationTextB">
+                I also authorize the agency head / authorized representative to verify / validate the contents stated herein. 
+                I trust that this information shall remain confidential.
+            </x:String>
+
+            <Thickness x:Key="CustomHeaderMargin">0,0,0,8</Thickness>
+
+            <MenuFlyout x:Key="CrudMenuFlyout">
+                <MenuFlyoutItem Text="Edit" Icon="Edit"/>
+                <MenuFlyoutItem Text="Delete" Icon="Delete"/>
+                <MenuFlyoutSeparator />
+                <MenuFlyoutItem Text="Copy" Icon="Copy"/>
+                <MenuFlyoutItem Text="Paste" Icon="Paste"/>
+            </MenuFlyout>
+
+            <DataTemplate x:Key="InputControlsHeaderTemplate">
+                <ContentPresenter Content="{Binding}"
+                                  Margin="0,0,0,8"
+                                  FontWeight="Normal"
+                                  Foreground="{ThemeResource SystemControlForegroundBaseMediumBrush}"/>
+            </DataTemplate>
+
+            <Style x:Key="InputControlsStyle" TargetType="Control">
+                <Setter Property="Margin" Value="0,8,24,8"/>
+                <Setter Property="BorderThickness" Value="1"/>
+                <Setter Property="BorderBrush" Value="{ThemeResource SystemControlBackgroundBaseLowBrush}"/>
+                <Setter Property="Background" Value="{ThemeResource SystemControlBackgroundAltHighBrush}"/>
+                <Setter Property="FontWeight" Value="SemiBold"/>
+            </Style>
+
+            <Style TargetType="ComboBox" BasedOn="{StaticResource InputControlsStyle}">
+                <Setter Property="HeaderTemplate" Value="{StaticResource InputControlsHeaderTemplate}"/>
+            </Style>
+
+            <Style TargetType="CalendarDatePicker" BasedOn="{StaticResource InputControlsStyle}">
+                <Setter Property="HeaderTemplate" Value="{StaticResource InputControlsHeaderTemplate}"/>
+            </Style>
+
+            <!--<Style TargetType="controls:ActiveTextBox" BasedOn="{StaticResource InputControlsStyle}">
+                <Setter Property="HeaderTemplate" Value="{StaticResource InputControlsHeaderTemplate}"/>
+            </Style>-->
+
+            <Style TargetType="TextBox" BasedOn="{StaticResource InputControlsStyle}">
+                <Setter Property="HeaderTemplate" Value="{StaticResource InputControlsHeaderTemplate}"/>
+            </Style>
+
+            <!--
+            <Style TargetType="controls:ExpandableControl" BasedOn="{StaticResource InputControlsStyle}">
+                <Setter Property="HeaderTemplate" Value="{StaticResource InputControlsHeaderTemplate}"/>
+            </Style>
+            -->
+
+            <Style x:Key="PaneHeaderButtonStyle" TargetType="Button">
+                <Setter Property="IsTabStop" Value="False"/>
+                <Setter Property="Background" Value="{ThemeResource SystemControlBackgroundBaseLowBrush}"/>
+                <Setter Property="BorderThickness" Value="1"/>
+                <Setter Property="BorderBrush" Value="{ThemeResource SystemControlForegroundBaseMediumBrush}"/>
+                <Setter Property="Foreground" Value="{ThemeResource SystemControlForegroundBaseMediumBrush}"/>
+                <Setter Property="Template">
+                    <Setter.Value>
+                        <ControlTemplate TargetType="Button">
+                            <Border Height="24" Width="24" 
+                                    Margin="0,2,8,0"
+                                    BorderThickness="{TemplateBinding BorderThickness}"
+                                    BorderBrush="{TemplateBinding BorderBrush}"
+                                    Background="{TemplateBinding Background}" 
+                                    VerticalAlignment="Center">
+                                <FontIcon Glyph="{TemplateBinding Content}" 
+                                          Margin="{TemplateBinding BorderThickness}"
+                                          Foreground="{TemplateBinding Foreground}" 
+                                          FontFamily="Segoe MDL2 Assets"
+                                          FontSize="16"/>
+                            </Border>
+                        </ControlTemplate>
+                    </Setter.Value>
+                </Setter>
+            </Style>
+
+            <Style x:Key="SelectorItemStyle" TargetType="SelectorItem">
+                <Style.Setters>
+                    <Setter Property="Padding" Value="8,16,8,8"/>
+                    <Setter Property="Background" Value="{ThemeResource SystemControlAltLowAcrylicElementBrush}"/>
+                    <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
+                </Style.Setters>
+            </Style>
+
+        </ResourceDictionary>
+    </Application.Resources>
 </Application>

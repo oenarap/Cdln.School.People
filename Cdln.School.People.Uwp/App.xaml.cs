@@ -1,15 +1,14 @@
 ﻿using System;
 using Autofac;
-using Windows.System;
+using Windows.UI;
 using Windows.UI.Xaml;
 using School.People.Core;
 using Windows.ApplicationModel;
 using Windows.UI.Xaml.Controls;
-using Windows.UI.Xaml.Navigation;
-using Windows.ApplicationModel.Activation;
-using Windows.ApplicationModel.Core;
 using Windows.UI.ViewManagement;
-using Windows.UI;
+using Windows.UI.Xaml.Navigation;
+using Windows.ApplicationModel.Core;
+using Windows.ApplicationModel.Activation;
 
 namespace Cdln.School.People.Uwp
 {

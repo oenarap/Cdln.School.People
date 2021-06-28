@@ -11,8 +11,9 @@ namespace Cdln.School.People.Uwp.Messages
 
     public class GetResponseReceivedEvent : Message<HttpResponseMessage>
     {
-        public GetResponseReceivedEvent(Guid id, HttpResponseMessage data)
-            : base(id, data) { }
+        public Guid RequestorId { get; }
+        public GetResponseReceivedEvent(Guid requestId, Guid requestorId, HttpResponseMessage data)
+            : base(requestId, data) { RequestorId = requestorId; }
     }
 
     public class RequestErrorEvent : Message<string>

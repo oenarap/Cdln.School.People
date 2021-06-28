@@ -1,26 +1,26 @@
 ﻿using System;
 using Autofac;
-using Windows.UI;
 using Windows.UI.Xaml;
+using Windows.UI.Core;
 using System.Threading.Tasks;
 using Apps.Communication.Core;
 using Windows.UI.Xaml.Controls;
-using Windows.UI.ViewManagement;
-using Windows.ApplicationModel.Core;
+using Cdln.School.People.Uwp.Lists;
+using Cdln.School.People.Uwp.Views;
 using Cdln.School.People.Uwp.Messages;
 
 namespace Cdln.School.People.Uwp
 {
     public sealed partial class MainPage : Page, IHandle<PeopleContextChangedEvent>, IHandle<SericeStatusChangedEvent>
     {
-        public static readonly DependencyProperty ContextsProperty = DependencyProperty.Register(nameof(Contexts), typeof(IPeopleContextsListViewModel), typeof(MainPage), new PropertyMetadata(null));
+        public static readonly DependencyProperty ContextsProviderProperty = DependencyProperty.Register(nameof(ContextsProvider), typeof(IContextProvider), typeof(MainPage), new PropertyMetadata(null));
         private static readonly DependencyProperty UsernameProperty = DependencyProperty.Register(nameof(Username), typeof(string), typeof(MainPage), new PropertyMetadata(null));
         private static readonly DependencyProperty ServiceStatusTextProperty = DependencyProperty.Register(nameof(ServiceStatusText), typeof(string), typeof(MainPage), new PropertyMetadata(null));
 
         private readonly NavigationService NavigationService;
         private readonly NavigationContext NavigationContext;
 
-        public IPeopleContextsListViewModel Contexts => (IPeopleContextsListViewModel)GetValue(ContextsProperty);
+        public IContextProvider ContextsProvider => (IContextProvider)GetValue(ContextsProviderProperty);
         public string Username => (string)GetValue(UsernameProperty);
         public string ServiceStatusText => (string)GetValue(ServiceStatusTextProperty);
 
@@ -28,40 +28,46 @@ namespace Cdln.School.People.Uwp
         {
             this.InitializeComponent();
 
-            this.Loaded += OnMainPageLoaded;
-            this.appNavigationView.BackRequested += (sender, args) => OnBackRequested();
+            this.appNavigationView.BackRequested += (sender, args) => NavigationService.GoBack();
 
             NavigationService = new NavigationService(this.contentFrame);
             NavigationContext = new NavigationContext();
+
+            var hub = App.Container.Resolve<IMessageHub>();
+            
+            hub.RegisterHandler<MainPage, PeopleContextChangedEvent>(this);
+            hub.RegisterHandler<MainPage, SericeStatusChangedEvent>(this);
+
+            SetValue(ContextsProviderProperty, App.Container.Resolve<PeopleContextsProvider>());
         }
 
         public async Task Handle(SericeStatusChangedEvent message)
         {
-            await Dispatcher.RunAsync(Windows.UI.Core.CoreDispatcherPriority.Normal, () =>
+            await Dispatcher.RunAsync(CoreDispatcherPriority.Normal, () =>
             {
                 if (message.Data == ServiceStatus.Online) { VisualStateManager.GoToState(this, "Online", true); }
                 else { VisualStateManager.GoToState(this, "Offline", true); }
             });
         }
 
-        private void OnMainPageLoaded(object sender, RoutedEventArgs e)
+        public async Task Handle(PeopleContextChangedEvent message)
         {
-            var hub = App.Container.Resolve<IMessageHub>();
-            hub.RegisterHandler<MainPage, PeopleContextChangedEvent>(this);
-            hub.RegisterHandler<MainPage, SericeStatusChangedEvent>(this);
-        }
-
-        public Task Handle(PeopleContextChangedEvent message)
-        {
-            return new Task(() =>
+            await Dispatcher.RunAsync(CoreDispatcherPriority.Normal, () =>
             {
-                if (message.Data?.AssociatedViewType is Type associatedType)
-                {
-                    NavigationService.Navigate(associatedType, NavigationContext);
-                }
+                NavigationService.Navigate(message.Data?.AssociatedViewType ?? typeof(ErrorPage), NavigationContext);
             });
         }
 
-        private void OnBackRequested() => NavigationService.GoBack();
+        private void OnAppNavigationViewItemInvoked(NavigationView sender, NavigationViewItemInvokedEventArgs args)
+        {
+            if (args.IsSettingsInvoked == false) 
+            {
+                var context = args.InvokedItem as IContextDescriptor ?? 
+                    args.InvokedItemContainer.DataContext as IContextDescriptor;
+                ContextsProvider.Contexts.MoveCurrentTo(context);
+                return;
+            }
+            NavigationService.Navigate(typeof(SettingsView), NavigationContext);
+        }
     }
 }

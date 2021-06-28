@@ -5,9 +5,8 @@ using School.People.Core;
 using System.Threading.Tasks;
 using Apps.Communication.Core;
 using Windows.UI.Xaml.Controls;
-using Cdln.School.People.Uwp.Models;
+using Cdln.School.People.Uwp.Lists;
 using Cdln.School.People.Uwp.Messages;
-using Cdln.School.People.Uwp.ViewModels;
 
 namespace Cdln.School.People.Uwp
 {
@@ -31,7 +30,7 @@ namespace Cdln.School.People.Uwp
             if ((bool)e.OldValue) { viewModel.SetValue(IdProperty, Guid.Empty); }
             if ((bool)e.NewValue) 
             {
-                if (viewModel.People.View?.CurrentItem is IPerson person)
+                if (viewModel.PeopleListProvider.People.CurrentItem is IPerson person)
                 { 
                     if (viewModel.Id != person.Id) { viewModel.SetValue(IdProperty, person.Id); }
                     else { viewModel.RequestData(person.Id); } // fail-safe
@@ -107,10 +106,10 @@ namespace Cdln.School.People.Uwp
         /// </summary>
         protected abstract void ResetValues();
 
-        public AttributeViewModel(IMessageHub hub, PeopleListViewModel people, Type currentType = null)
+        public AttributeViewModel(IMessageHub hub, PeopleListProvider people, Type currentType = null)
         {
             Hub = hub;
-            People = people;
+            PeopleListProvider = people;
             RegisterHandledMessages(Hub);
 
             SetValue(IsCurrentProperty, currentType == typeof(TView));
@@ -119,7 +118,7 @@ namespace Cdln.School.People.Uwp
         protected bool IsCurrent => (bool)GetValue(IsCurrentProperty);
         protected Guid Id => (Guid)GetValue(IdProperty);
 
-        protected readonly PeopleListViewModel People;
+        protected readonly PeopleListProvider PeopleListProvider;
         protected readonly IMessageHub Hub;
 
 

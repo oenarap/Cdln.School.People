@@ -3,7 +3,6 @@ using System.Net.Http;
 using Newtonsoft.Json;
 using System.Threading;
 using System.Threading.Tasks;
-using System.Collections.Generic;
 using Cdln.School.People.Uwp.Messages;
 
 namespace Cdln.School.People.Uwp.Data
@@ -27,14 +26,14 @@ namespace Cdln.School.People.Uwp.Data
         // GET requests must be filtered so that API call(s) will be ignored, except the last one.
         // In theory, this filtering could keep the app UI nimble even in
         // a slow low-bandwidth network connection.
-        public void Get(Guid requestId, Uri requestUri, Guid? tokenId = null, object content = null)
+        public void Get(Guid requestId, Guid requestorId, Uri requestUri, object content = null)
         {
             SignalToCopy.WaitOne();
             SignalToCopy.Reset();
 
+            RequestorId = requestorId;
             RequestId = requestId;
             RequestUri = requestUri;
-            TokenId = tokenId;
             Content = content;
 
             SignalToCopy.Set();
@@ -45,7 +44,7 @@ namespace Cdln.School.People.Uwp.Data
         {
             Guid requestId;
             Uri requestUri;
-            Guid? tokenId;
+            Guid requestorId;
             object content;
 
             while (!disposing)
@@ -60,13 +59,13 @@ namespace Cdln.School.People.Uwp.Data
 
                     requestId = RequestId;
                     requestUri = RequestUri;
-                    tokenId = TokenId;
+                    requestorId = RequestorId;
                     content = Content;
 
                     SignalToCopy.Set();
 
-                    var response = await GetResponseAsync(HttpMethod.Get, RequestUri, TokenId, Content);
-                    Hub.Dispatch(new GetResponseReceivedEvent(requestId, response));
+                    var response = await GetResponseAsync(HttpMethod.Get, requestUri, content);
+                    Hub.Dispatch(new GetResponseReceivedEvent(requestId, requestorId, response));
                 }
                 catch (Exception ex)
                 {
@@ -75,67 +74,57 @@ namespace Cdln.School.People.Uwp.Data
             }
         }
 
-        public async Task<HttpResponseMessage> Delete(Guid tokenId, Uri requestUri, object content = null)
+        public async Task<HttpResponseMessage> Delete(Uri requestUri, object content = null)
         {
-            var response = await GetResponseAsync(HttpMethod.Delete, requestUri, tokenId, content).ConfigureAwait(false);
+            var response = await GetResponseAsync(HttpMethod.Delete, requestUri, content).ConfigureAwait(false);
             return response;
         }
 
-        public async Task<HttpResponseMessage> Put(Guid tokenId, Uri requestUri, object content = null)
+        public async Task<HttpResponseMessage> Put(Uri requestUri, object content = null)
         {
-            var response = await GetResponseAsync(HttpMethod.Put, requestUri, tokenId, content).ConfigureAwait(false);
+            var response = await GetResponseAsync(HttpMethod.Put, requestUri, content).ConfigureAwait(false);
             return response;
         }
 
-        public async Task<HttpResponseMessage> Post(Guid tokenId, Uri requestUri, object content = null)
+        public async Task<HttpResponseMessage> Post(Guid id, Uri requestUri, object content = null)
         {
-            var response = await GetResponseAsync(HttpMethod.Post, requestUri, tokenId, content).ConfigureAwait(false);
+            var response = await GetResponseAsync(HttpMethod.Post, requestUri, content).ConfigureAwait(false);
             return response;
         }
 
-        public async void GetTokenId(Guid requestId, Uri requestUri, UserCredentials credentials)
+        private async Task<string> GetToken(Uri requestUri, UserCredentials credentials)
         {
             try
             {
-                Guid? tokenId = null;
                 var content = JsonConvert.SerializeObject(credentials);
-                var message = new HttpRequestMessage(HttpMethod.Post, requestUri)
+                var message = new HttpRequestMessage()
                 {
+                    Method = HttpMethod.Post,
+                    RequestUri = requestUri,
                     Content = new StringContent(content, System.Text.Encoding.UTF8, "application/json")
                 };
                 var response = await Client.SendAsync(message);
-                if (response.IsSuccessStatusCode)
-                {
-                    if (await response.Content.ReadAsStringAsync() is string token)
-                    {
-                        var newId = Guid.NewGuid();
-                        Tokens.Add(newId, token);
-                        tokenId = newId;
-                    }
-                }
-                Hub.Dispatch(new TokenAcquiredEvent(requestId, tokenId));
+                if (response.IsSuccessStatusCode) { return await response.Content.ReadAsStringAsync(); }
+                return null;
             }
-            catch (Exception ex)
-            {
-                Hub.Dispatch(new RequestErrorEvent(requestId, ex.Message));
-            }
+            catch { return null; }
         }
 
-        private async Task<HttpResponseMessage> GetResponseAsync(HttpMethod method, Uri requestUri, Guid? tokenId = null, object content = null)
+        private async Task<HttpResponseMessage> GetResponseAsync(HttpMethod method, Uri requestUri, object content = null)
         {
             try
             {
                 var request = new HttpRequestMessage(method, requestUri);
+
                 if (content != null)
                 {
                     var json = JsonConvert.SerializeObject(content);
                     request.Content = new StringContent(json, System.Text.Encoding.UTF8, "application/json");
                 }
-                if (tokenId is Guid id)
-                {
-                    Tokens.TryGetValue(id, out string token);
-                    request.Headers.Add("Authorization", token);
-                }
+
+                if (token == null) { token = await GetToken(new Uri("https://localhost:44397/token"), Credentials); }
+
+                request.Headers.Add("Authorization", token);
                 return await Client.SendAsync(request).ConfigureAwait(false);
             }
             catch (Exception ex)
@@ -144,17 +133,17 @@ namespace Cdln.School.People.Uwp.Data
             }
         }
 
-        public ApiClient(IMessageHub messageHub)
+        public ApiClient(IMessageHub hub, UserCredentials credentials)
         {
-            Tokens = new Dictionary<Guid, string>();
+            Credentials = credentials;
+            Hub = hub;
+
             SignalToCopy = new ManualResetEvent(true);
             SignalToProcess = new ManualResetEvent(true);
             Client = new HttpClient();
-            Hub = messageHub;
-
             GetRequestThread = new Thread(ProcessGetRequests)
             {
-                Name = "InboundDataAgentThread",
+                Name = $"THREAD_{ nameof(ApiClient) }",
                 Priority = ThreadPriority.BelowNormal
             };
             GetRequestThread.Start();
@@ -168,18 +157,20 @@ namespace Cdln.School.People.Uwp.Data
             Client.Dispose();
         }
 
-        [ThreadStatic] private Guid? TokenId;
+        [ThreadStatic] private object Content;
+        [ThreadStatic] private Guid RequestorId;
         [ThreadStatic] private Guid RequestId;
         [ThreadStatic] private Uri RequestUri;
-        [ThreadStatic] private object Content;
 
         private readonly Thread GetRequestThread;
 
-        private readonly Dictionary<Guid, string> Tokens;
+        private readonly UserCredentials Credentials;
         private readonly ManualResetEvent SignalToCopy;
         private readonly ManualResetEvent SignalToProcess;
         private readonly HttpClient Client;
         private readonly IMessageHub Hub;
+
+        private string token;
         private bool disposing;
         private ServiceStatus serviceStatus;
     }

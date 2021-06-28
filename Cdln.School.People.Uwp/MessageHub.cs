@@ -41,7 +41,7 @@ namespace Cdln.School.People.Uwp
             SignalToHandlers.Set();
         }
 
-        public void Dispatch<TMessage>(TMessage command) where TMessage : IMessage
+        public void Dispatch<TMessage>(TMessage message) where TMessage : IMessage
         {
             Type key = typeof(TMessage);
 
@@ -54,7 +54,7 @@ namespace Cdln.School.People.Uwp
                 {
                     if (item is IHandle<TMessage> handler)
                     {
-                        handler.Handle(command).FireAndForget(false);
+                        handler.Handle(message).FireAndForget(false);
                     }
                 }
             }

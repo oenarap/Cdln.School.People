@@ -3,6 +3,7 @@ using School.People.Core;
 using Cdln.School.People.Uwp.Data;
 using Cdln.School.People.Uwp.Utils;
 using Cdln.School.People.Uwp.Views;
+using Cdln.School.People.Uwp.Lists;
 using School.People.Core.Repositories;
 using Cdln.School.People.Uwp.ViewModels;
 using Cdln.School.People.Uwp.Views.Panes;
@@ -22,9 +23,9 @@ namespace Cdln.School.People.Uwp
 
             // view models
             builder.RegisterType<FamilyBackgroundViewModel>().SingleInstance();
-            builder.RegisterType<PeopleListViewModel>().SingleInstance();
-            builder.RegisterType<PeopleContextsListViewModel>().As<IPeopleContextsListViewModel>().SingleInstance();
-            builder.RegisterType<AttributeContextsListViewModel>().SingleInstance();
+            builder.RegisterType<PeopleListProvider>().SingleInstance();
+            builder.RegisterType<PeopleContextsProvider>().SingleInstance();
+            builder.RegisterType<AttributeContextsProvider>().SingleInstance();
             builder.RegisterType<AttributePaneViewModel>().SingleInstance();
             builder.RegisterType<ConspectusViewModel>().SingleInstance();
             builder.RegisterType<CommentsViewModel>().SingleInstance();

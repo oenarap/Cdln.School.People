@@ -3,8 +3,8 @@ using Windows.UI.Xaml.Data;
 
 namespace Cdln.School.People.Uwp
 {
-    public interface IPeopleContextsListViewModel
+    public interface IContextProvider
     {
-        ICollectionView View { get; }
+        ICollectionView Contexts { get; }
     }
 }

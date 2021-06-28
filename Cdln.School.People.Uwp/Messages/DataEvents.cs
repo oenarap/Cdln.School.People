@@ -93,8 +93,10 @@ namespace Cdln.School.People.Uwp.Messages
 
     public class PeopleAcquiredEvent : Message<IEnumerable<Person>>
     {
-        public PeopleAcquiredEvent(Guid id, IEnumerable<Person> data)
-            : base(id, data) { }
+        public PeopleContext Context { get; }
+
+        public PeopleAcquiredEvent(Guid id, PeopleContext context, IEnumerable<Person> data)
+            : base(id, data) { Context = context; }
     }
 
     public class OtherPersonAcquiredEvent : Message<Person>

@@ -44,4 +44,10 @@ namespace Cdln.School.People.Uwp.Messages
         public GetPersonById(Guid id, Guid data)
             : base(id, data) { }
     }
+
+    public sealed class GetPeopleQuery<T> : Message<T>
+    {
+        public GetPeopleQuery(Guid id, T data)
+            : base(id, data) { }
+    }
 }

@@ -3,19 +3,22 @@ using Windows.UI.Xaml.Input;
 
 namespace Cdln.School.People.Uwp
 {
-    public abstract class ContextDescriptor<T>
+    public abstract class ContextDescriptor<T> : IContextDescriptor
     {
-        protected ContextDescriptor(string glyph, T description, KeyboardAccelerator keyboardAccelerator, Type associatedViewType)
+        protected ContextDescriptor(T type, string description, string glyph = null, Type associatedViewType = null,
+            KeyboardAccelerator keyboardAccelerator = null)
         {
-            Glyph = glyph.Substring(0, 1);
+            Type = type;
             Description = description;
-            KeyboardAccelerator = keyboardAccelerator;
             AssociatedViewType = associatedViewType;
+            Glyph = glyph?.Substring(0, 1);
+            KeyboardAccelerator = keyboardAccelerator;
         }
 
+        public T Type { get; }
+        public string Description { get; }
         public string Glyph { get; }
-        public T Description { get; }
-        public KeyboardAccelerator KeyboardAccelerator { get; }
+        public KeyboardAccelerator KeyboardAccelerator { get; set; }
         public Type AssociatedViewType { get; }
     }
 }
