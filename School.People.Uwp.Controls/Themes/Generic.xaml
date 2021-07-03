@@ -4,6 +4,8 @@
     xmlns:local="using:School.People.Uwp.Controls">
 
     <ResourceDictionary.MergedDictionaries>
-        
+        <ResourceDictionary Source="ms-appx:///School.People.Uwp.Controls/AdaptiveBladeView/AdaptiveBladeView.xaml"/>
+        <ResourceDictionary Source="ms-appx:///School.People.Uwp.Controls/AdaptiveBladeView/Blade.xaml"/>
     </ResourceDictionary.MergedDictionaries>
+    
 </ResourceDictionary>

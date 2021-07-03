@@ -1,4 +1,8 @@
-﻿using System;
+﻿using Autofac;
+using Cdln.School.People.Uwp.Models;
+using Cdln.School.People.Uwp.Views.Panes;
+using School.People.Uwp.Controls;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -22,9 +26,38 @@ namespace Cdln.School.People.Uwp.Views
     /// </summary>
     public sealed partial class ActivePeopleView : Page
     {
+        public readonly List<Person> People;
+        public readonly List<Page> Panes;
+
         public ActivePeopleView()
         {
             this.InitializeComponent();
+
+            People = new List<Person>()
+            {
+                new Person(Guid.NewGuid(), "Potter", "Harry James", "Bond"),
+                new Person(Guid.NewGuid(), "Wesley", "Ronald Bilius", "Snipes"),
+                new Person(Guid.NewGuid(), "Granger", "Hermione Jean", "Grey"),
+                new Person(Guid.NewGuid(), "Wesley", "Ginny Babe", "Snipes"),
+                new Person(Guid.NewGuid(), "Dumbledore", "Albus Wulfric Brian", "Adams"),
+                new Person(Guid.NewGuid(), "Malfoy", "Draco", "Bachtin"),
+                new Person(Guid.NewGuid(), "Longbottom", "Neville", "Aaron")
+            };
+
+            var people = App.Container.Resolve<PeopleList>();
+            var conspectus = App.Container.Resolve<Conspectus>();
+            var attributes = App.Container.Resolve<AttributePane>();
+            var auxiliary = App.Container.Resolve<Auxiliary>();
+
+            Panes = new List<Page>()
+            {
+                people,
+                conspectus,
+                attributes,
+                auxiliary
+            };
+
+            AdaptiveBladeView.SetProminence(Panes[2], BladeProminence.Prominent);
         }
     }
 }

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Cdln.School.People.Uwp.Models;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -22,9 +23,13 @@ namespace Cdln.School.People.Uwp.Views
     /// </summary>
     public sealed partial class InactivePeopleView : Page
     {
+        public readonly Person Person;
+
         public InactivePeopleView()
         {
             this.InitializeComponent();
+
+            Person = new Person(Guid.NewGuid(), "Potter", "Harry James", "Bond");
         }
     }
 }

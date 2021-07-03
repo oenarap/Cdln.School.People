@@ -2,13 +2,53 @@
     x:Class="Cdln.School.People.Uwp.Views.ActivePeopleView"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-    xmlns:local="using:Cdln.School.People.Uwp.Views"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:controls="using:School.People.Uwp.Controls"
     mc:Ignorable="d"
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
 
     <Grid>
-        <TextBlock FontSize="24" VerticalAlignment="Center" HorizontalAlignment="Center" Text="Active People Page"/>
+
+        <controls:AdaptiveBladeView 
+            Orientation="Horizontal"
+            DesiredBladeLength="280" 
+            ItemsSource="{x:Bind Panes}"/>
+
+        <!--<ItemsControl ItemsSource="{x:Bind People}">
+            <ItemsControl.ItemTemplate>
+                <DataTemplate>
+                    <Grid Background="ForestGreen">
+                        <Grid.RowDefinitions>
+                            <RowDefinition/>
+                            <RowDefinition/>
+                            <RowDefinition/>
+                        </Grid.RowDefinitions>
+                        <TextBlock Text="{Binding LastName}" FontSize="32" 
+                                   VerticalAlignment="Center"
+                                   HorizontalAlignment="Center"/>
+                        <TextBlock Text="{Binding FirstName}" FontSize="24" Grid.Row="1" 
+                                   VerticalAlignment="Center"
+                                   HorizontalAlignment="Center"/>
+                        <TextBlock Text="{Binding MiddleName}" FontSize="16" Grid.Row="2" 
+                                   VerticalAlignment="Center"
+                                   HorizontalAlignment="Center"/>
+                    </Grid>
+                </DataTemplate>
+            </ItemsControl.ItemTemplate>
+        </ItemsControl>-->
+        
+        <!--<controls:AdaptiveBladePanel DesiredStackLength="280">
+            <controls:Blade Background="DeepSkyBlue" Width="200" Height="500">
+                <controls:Blade.Content>
+                    <TextBlock Text="Blade 1" FontSize="32" Foreground="White"/>
+                </controls:Blade.Content>
+            </controls:Blade>
+            <controls:Blade Background="DeepPink">
+                <controls:Blade.Content>
+                    <TextBlock Text="Blade 2" FontSize="32" Foreground="White"/>
+                </controls:Blade.Content>
+            </controls:Blade>
+        </controls:AdaptiveBladePanel>-->
     </Grid>
 </Page>

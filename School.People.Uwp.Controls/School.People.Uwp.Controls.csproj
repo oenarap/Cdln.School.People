@@ -120,7 +120,12 @@
     <RestoreProjectStyle>PackageReference</RestoreProjectStyle>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="AdaptiveBladeView\AdaptiveBladeView.cs" />
+    <Compile Include="AdaptiveBladeView\AdaptiveBladeView.Helpers.cs" />
+    <Compile Include="AdaptiveBladeView\AdaptiveBladeView.Properties.cs" />
+    <Compile Include="AdaptiveBladeView\Blade.cs" />
     <Compile Include="Converters.cs" />
+    <Compile Include="Enums\BladeProminenceEnum.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="Properties\School.People.Uwp.Controls.rd.xml" />
   </ItemGroup>
@@ -131,6 +136,14 @@
   </ItemGroup>
   <ItemGroup>
     <Page Include="ActiveGrid\ActiveGrid.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="AdaptiveBladeView\AdaptiveBladeView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="AdaptiveBladeView\Blade.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

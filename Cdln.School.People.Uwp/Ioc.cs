@@ -42,6 +42,7 @@ namespace Cdln.School.People.Uwp
             // local data repos
             builder.RegisterType<CommentsRepository>().As<ICommentsRepository>().SingleInstance();
 
+
             return builder.Build();
         }
     }

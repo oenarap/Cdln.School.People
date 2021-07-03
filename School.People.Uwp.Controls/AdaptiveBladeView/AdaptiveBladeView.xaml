@@ -1,0 +1,19 @@
+﻿<ResourceDictionary
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" 
+    xmlns:controls="using:School.People.Uwp.Controls"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+
+    <Style TargetType="controls:AdaptiveBladeView">
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="controls:AdaptiveBladeView">
+                    <Grid x:Name="PART_RootGrid"/>
+                    <!--<controls:AdaptiveBladePanel x:Name="PART_Panel"
+                                                 Orientation="{TemplateBinding Orientation}"
+                                                 DesiredBladeLength="{TemplateBinding DesiredBladeLength}"/>-->
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+</ResourceDictionary>
