@@ -1,7 +1,7 @@
-﻿using Windows.UI.Xaml;
+﻿using System;
+using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using System.Collections.Generic;
-
 
 namespace School.People.Uwp.Controls
 {
@@ -11,6 +11,18 @@ namespace School.People.Uwp.Controls
 
         private void SetCurrentIndex(Blade blade) => currentIndex = GetIndexOf(blade);
 
+        private static int CalculateVisibleBladeCount(double availableLength, int desiredBladeLength, int minBladeLength)
+        {
+            try
+            {
+                var maxBlades = Math.DivRem((int)availableLength, desiredBladeLength, out int remainder);
+                return maxBlades + (remainder / minBladeLength);
+            }
+            catch 
+            { 
+                return 0; 
+            }
+        }
 
         private int GetIndexOf(Blade blade)
         {
@@ -30,13 +42,14 @@ namespace School.People.Uwp.Controls
             foreach (var index in indexes)
             {
                 var blade = this[index];
+                var weight = weights[index];
 
                 Grid.SetColumn(blade, pos);
                 Grid.SetRow(blade, pos);
-                Grid.SetColumnSpan(blade, weights[index]);
-                Grid.SetRowSpan(blade, weights[index]);
+                Grid.SetColumnSpan(blade, weight);
+                Grid.SetRowSpan(blade, weight);
 
-                pos += weights[index];
+                pos += weight;
                 rootGrid.Children.Add(blade);
             }
         }
@@ -77,50 +90,54 @@ namespace School.People.Uwp.Controls
             return indexes.ToArray();
         }
 
-        private bool RemoveColumns(int count)
+        private void UpdateColumns(int count)
         {
-            var lastIndex = rootGrid.ColumnDefinitions.Count - 1;
+            var diff = count - rootGrid.ColumnDefinitions.Count;
 
-            for (int i = lastIndex; i > lastIndex - count; i--)
+            if (diff > 0)
             {
-                rootGrid.ColumnDefinitions.RemoveAt(i);
+                var startingIndex = rootGrid.ColumnDefinitions.Count;
+
+                for (int i = startingIndex; i < startingIndex + diff; i++)
+                {
+                    var coldef = new ColumnDefinition() { Width = length };
+                    rootGrid.ColumnDefinitions.Add(coldef);
+                }
             }
-            return true;
+            else if (diff < 0)
+            {
+                var lastIndex = rootGrid.ColumnDefinitions.Count - 1;
+
+                for (int i = lastIndex; i > lastIndex + diff; i--)
+                {
+                    rootGrid.ColumnDefinitions.RemoveAt(i);
+                }
+            }
         }
 
-        private bool RemoveRows(int count)
+        private void UpdateRows(int count)
         {
-            var lastIndex = rootGrid.RowDefinitions.Count - 1;
+            var diff = count - rootGrid.RowDefinitions.Count;
 
-            for (int i = lastIndex; i > lastIndex - count; i--)
+            if (diff > 0)
             {
-                rootGrid.RowDefinitions.RemoveAt(i);
+                var startingIndex = rootGrid.RowDefinitions.Count;
+
+                for (int i = startingIndex; i < startingIndex + diff; i++)
+                {
+                    var rowDef = new RowDefinition() { Height = length };
+                    rootGrid.RowDefinitions.Add(rowDef);
+                }
             }
-            return true;
-        }
-
-        private bool AppendColumns(int count)
-        {
-            var startingIndex = rootGrid.ColumnDefinitions.Count;
-
-            for (int i = startingIndex; i < startingIndex + count; i++)
+            else if (diff < 0)
             {
-                var coldef = new ColumnDefinition() { Width = length };
-                rootGrid.ColumnDefinitions.Add(coldef);
-            }
-            return true;
-        }
+                var lastIndex = rootGrid.RowDefinitions.Count - 1;
 
-        private bool AppendRows(int count)
-        {
-            var startingIndex = rootGrid.RowDefinitions.Count;
-
-            for (int i = startingIndex; i < startingIndex + count; i++)
-            {
-                var rowDef = new RowDefinition() { Height = length };
-                rootGrid.RowDefinitions.Add(rowDef);
+                for (int i = lastIndex; i > lastIndex + diff; i--)
+                {
+                    rootGrid.RowDefinitions.RemoveAt(i);
+                }
             }
-            return true;
         }
     }
 }

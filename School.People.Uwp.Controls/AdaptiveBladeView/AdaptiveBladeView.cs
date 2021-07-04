@@ -65,12 +65,20 @@ namespace School.People.Uwp.Controls
         private static void OnOrientationPropertyChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
         {
             var view = (AdaptiveBladeView)d;
-            var isHorizontal = (Orientation)e.NewValue == Orientation.Horizontal;
+            int visibleBladeCount;
 
-            if (isHorizontal) { view.rootGrid.RowDefinitions.Clear(); }
-            else { view.rootGrid.ColumnDefinitions.Clear(); }
+            if ((Orientation)e.NewValue == Orientation.Horizontal) 
+            {
+                view.rootGrid?.RowDefinitions.Clear();
+                visibleBladeCount = CalculateVisibleBladeCount(view.ActualWidth, view.DesiredBladeLength, view.minBladeLength);
+            }
+            else 
+            {
+                view.rootGrid?.ColumnDefinitions.Clear();
+                visibleBladeCount = CalculateVisibleBladeCount(view.ActualHeight, view.DesiredBladeLength, view.minBladeLength);
+            }
 
-            view.SetVisibleBladeCount(isHorizontal ? view.rootGrid.ActualWidth : view.rootGrid.ActualHeight);
+            view.SetValue(MaxBladeCountProperty, visibleBladeCount);
         }
 
         private static void OnDesiredBladeLengthPropertyChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
@@ -85,11 +93,15 @@ namespace School.People.Uwp.Controls
         {
             var view = (AdaptiveBladeView)d;
             var maxBladeCount = (int)e.NewValue;
-            var diff = maxBladeCount - (int)e.OldValue;
-            var isHorizontal = view.Orientation == Orientation.Horizontal;
 
-            if (diff < 0) { _ = isHorizontal ? view.RemoveColumns(Math.Abs(diff)) : view.RemoveRows(Math.Abs(diff)); }
-            else { _ = isHorizontal ? view.AppendColumns(diff) : view.AppendRows(diff); }
+            if (view.Orientation == Orientation.Horizontal)
+            {
+                view.UpdateColumns(maxBladeCount);
+            }
+            else
+            {
+                view.UpdateRows(maxBladeCount);
+            }
 
             var items = view.GetDisplayableItemsIndices(maxBladeCount, view.currentIndex);
             view.PrepareBladesForItems(items);
@@ -110,17 +122,9 @@ namespace School.People.Uwp.Controls
         {
             var isHorizontal = Orientation == Orientation.Horizontal;
             var length = isHorizontal ? e.NewSize.Width : e.NewSize.Height;
+            var maxBladeCount = CalculateVisibleBladeCount(length, DesiredBladeLength, minBladeLength);
 
-            SetVisibleBladeCount(length);
-        }
-
-        private void SetVisibleBladeCount(double length)
-        {
-            if (double.IsNaN(length)) { return; }
-
-            var maxBlades = Math.DivRem((int)length, DesiredBladeLength, out int remainder);
-
-            SetValue(MaxBladeCountProperty, maxBlades + (remainder / minBladeLength));
+            SetValue(MaxBladeCountProperty, maxBladeCount);
         }
 
         public AdaptiveBladeView() => this.DefaultStyleKey = typeof(AdaptiveBladeView);

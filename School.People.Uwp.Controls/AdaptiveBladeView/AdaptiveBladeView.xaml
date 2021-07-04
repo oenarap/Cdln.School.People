@@ -8,9 +8,6 @@
             <Setter.Value>
                 <ControlTemplate TargetType="controls:AdaptiveBladeView">
                     <Grid x:Name="PART_RootGrid"/>
-                    <!--<controls:AdaptiveBladePanel x:Name="PART_Panel"
-                                                 Orientation="{TemplateBinding Orientation}"
-                                                 DesiredBladeLength="{TemplateBinding DesiredBladeLength}"/>-->
                 </ControlTemplate>
             </Setter.Value>
         </Setter>
