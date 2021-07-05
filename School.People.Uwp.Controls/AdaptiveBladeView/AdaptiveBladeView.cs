@@ -111,7 +111,6 @@ namespace School.People.Uwp.Controls
                         {
                             nextBlade.Visibility = Visibility.Collapsed;
                         }
-
                     }
                 }
             }
@@ -122,12 +121,20 @@ namespace School.People.Uwp.Controls
         {
             var view = (AdaptiveBladeView)d;
             var length = (double)e.NewValue;
+            var availableLength = view.rootGrid.ActualWidth;
+            var lastIndex = view.ActiveBlades.Count - 1;
 
-            foreach (var blade in view.ActiveBlades)
+            for (int i = 0; i < lastIndex; i++)
             {
+                var blade = view.ActiveBlades[i];
                 var prominence = (int)GetProminence(blade);
-                blade.SetValue(WidthProperty, length * prominence);
+                var bladeWidth = length * prominence;
+
+                availableLength -= bladeWidth;
+                blade.SetValue(WidthProperty, bladeWidth);
             }
+
+            view.ActiveBlades[lastIndex].SetValue(WidthProperty, availableLength);
         }
 
 

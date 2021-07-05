@@ -15,8 +15,8 @@
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="controls:AdaptiveBladeView">
-                    <Grid x:Name="PART_RootGrid">
-                        <ItemsPresenter Padding="{TemplateBinding Padding}"/>
+                    <Grid x:Name="PART_RootGrid" Padding="{TemplateBinding Padding}">
+                        <ItemsPresenter/>
                     </Grid>
                 </ControlTemplate>
             </Setter.Value>
