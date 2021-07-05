@@ -1,7 +1,9 @@
 ﻿using System;
 using Windows.UI.Xaml;
+using Windows.UI.Xaml.Data;
 using Windows.UI.Xaml.Controls;
 using System.Collections.Generic;
+using Windows.UI.Xaml.Input;
 
 namespace School.People.Uwp.Controls
 {
@@ -9,76 +11,21 @@ namespace School.People.Uwp.Controls
     /// A BladeView-style layout that adapts to the
     /// available size of its host.
     /// </summary>
-    public sealed partial class AdaptiveBladeView : Control
+    public sealed partial class AdaptiveBladeView : ItemsControl
     {
         private Grid rootGrid;
         private int minBladeLength = 0;
-        private object[] items;
-        private int[] weights;
-        private Blade[] blades;
         private int currentIndex = 0;
+        private readonly IList<Blade> ActiveBlades = new List<Blade>();
+
 
         private Blade this[int index]
         {
             get
             {
-                if (blades[index] != null) { return blades[index]; }
-                
-                blades[index] = new Blade() { Content = items[index] };
-                blades[index].IsTabStop = true;
-                blades[index].GotFocus += (sender, e) => SetCurrentIndex(sender as Blade);
-                blades[index].Tapped += (sender, e) => SetCurrentIndex(sender as Blade);
-
-                return blades[index];
+                if (Items[index] is Blade blade) { return blade; }
+                return (Blade)ContainerFromIndex(index);
             }
-        }
-
-        private static void OnItemsSourcePropertyChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
-        {
-            var view = (AdaptiveBladeView)d;
-            
-            if (e.NewValue is IEnumerable<object> objects)
-            {
-                var items = new List<object>();
-                var weights = new List<int>();
-
-                foreach (var obj in objects)
-                {
-                    var item = obj as DependencyObject;
-                    var weight = item != null ? (int)GetProminence(item) : 1;
-
-                    items.Add(item);
-                    weights.Add(weight);
-                }
-
-                view.items = items.ToArray();
-                view.weights = weights.ToArray();
-                view.blades = new Blade[items.Count];
-                return;
-            }
-
-            view.items = new object[1] { e.NewValue };
-            view.weights = new int[1] { 1 };
-            view.blades = new Blade[1];
-        }
-
-        private static void OnOrientationPropertyChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
-        {
-            var view = (AdaptiveBladeView)d;
-            int visibleBladeCount;
-
-            if ((Orientation)e.NewValue == Orientation.Horizontal) 
-            {
-                view.rootGrid?.RowDefinitions.Clear();
-                visibleBladeCount = CalculateVisibleBladeCount(view.ActualWidth, view.DesiredBladeLength, view.minBladeLength);
-            }
-            else 
-            {
-                view.rootGrid?.ColumnDefinitions.Clear();
-                visibleBladeCount = CalculateVisibleBladeCount(view.ActualHeight, view.DesiredBladeLength, view.minBladeLength);
-            }
-
-            view.SetValue(MaxBladeCountProperty, visibleBladeCount);
         }
 
         private static void OnDesiredBladeLengthPropertyChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
@@ -89,23 +36,7 @@ namespace School.People.Uwp.Controls
             view.minBladeLength = (int)(desiredLength * 0.625);
         }
 
-        private static void OnMaxBladeCountPropertyChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
-        {
-            var view = (AdaptiveBladeView)d;
-            var maxBladeCount = (int)e.NewValue;
 
-            if (view.Orientation == Orientation.Horizontal)
-            {
-                view.UpdateColumns(maxBladeCount);
-            }
-            else
-            {
-                view.UpdateRows(maxBladeCount);
-            }
-
-            var items = view.GetDisplayableItemsIndices(maxBladeCount, view.currentIndex);
-            view.PrepareBladesForItems(items);
-        }
 
         protected override void OnApplyTemplate()
         {
@@ -118,15 +49,143 @@ namespace School.People.Uwp.Controls
             }
         }
 
+        // 1. RESIZE TRIGGERED
         private void OnRootGridSizeChanged(object sender, SizeChangedEventArgs e)
         {
-            var isHorizontal = Orientation == Orientation.Horizontal;
-            var length = isHorizontal ? e.NewSize.Width : e.NewSize.Height;
-            var maxBladeCount = CalculateVisibleBladeCount(length, DesiredBladeLength, minBladeLength);
+            var width = e.NewSize.Width;
 
-            SetValue(MaxBladeCountProperty, maxBladeCount);
+            if (width == e.PreviousSize.Width || double.IsNaN(width)) { return; }
+
+            var maxBlades = Math.DivRem((int)width, DesiredBladeLength, out int remainder);
+            maxBlades += remainder / minBladeLength;
+
+            SetValue(MaxBladeCountProperty, maxBlades); // step 2
+            SetValue(ActualBladeLengthProperty, width / maxBlades); // step 3
         }
 
-        public AdaptiveBladeView() => this.DefaultStyleKey = typeof(AdaptiveBladeView);
+        // 2. SELECT BLADE(S) THAT CAN BE DISPLAYED
+        private static void OnMaxBladeCountPropertyChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
+        {
+            var view = (AdaptiveBladeView)d;
+
+            if (view[view.currentIndex] is Blade currentBlade)
+            {
+                var maxBladeCount = (int)e.NewValue;
+                var nextIndex = view.currentIndex;
+                var prevIndex = view.currentIndex;
+
+                view.ActiveBlades.Clear();
+                view.ActiveBlades.Add(currentBlade);
+
+                var prominenceTotal = (int)GetProminence(currentBlade);
+
+                for (var i = 0; i < view.Items.Count; i++)
+                {
+                    prevIndex -= 1;
+
+                    if (prevIndex >= 0 && view[prevIndex] is Blade previousBlade)
+                    {
+                        if (prominenceTotal < maxBladeCount)
+                        {
+                            previousBlade.Visibility = Visibility.Visible;
+                            view.ActiveBlades.Insert(0, previousBlade);
+                            prominenceTotal += (int)GetProminence(previousBlade);
+                        }
+                        else
+                        {
+                            previousBlade.Visibility = Visibility.Collapsed;
+                        }
+                    }
+
+                    nextIndex += 1;
+
+                    if (nextIndex < view.Items.Count && view[nextIndex] is Blade nextBlade)
+                    {
+                        if (prominenceTotal < maxBladeCount)
+                        {
+                            nextBlade.Visibility = Visibility.Visible;
+                            view.ActiveBlades.Add(nextBlade);
+                            prominenceTotal += (int)GetProminence(nextBlade);
+                        }
+                        else
+                        {
+                            nextBlade.Visibility = Visibility.Collapsed;
+                        }
+                    }
+                }
+            }
+        }
+
+        // STEP 3: ADJUST BLADES' WIDTHS
+        private static void OnActualBladeLengthPropertyChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
+        {
+            var view = (AdaptiveBladeView)d;
+            var length = (double)e.NewValue;
+            var availableLength = view.rootGrid.ActualWidth;
+            var lastIndex = view.ActiveBlades.Count - 1;
+
+            for (int i = 0; i < lastIndex; i++)
+            {
+                var blade = view.ActiveBlades[i];
+                var prominence = (int)GetProminence(blade);
+                var bladeWidth = length * prominence;
+
+                availableLength -= bladeWidth;
+                blade.SetValue(WidthProperty, bladeWidth);
+            }
+
+            view.ActiveBlades[lastIndex].SetValue(WidthProperty, availableLength);
+        }
+
+
+
+        public AdaptiveBladeView()
+        {
+            this.DefaultStyleKey = typeof(AdaptiveBladeView);
+        }
+
+        /// <inheritdoc/>
+        protected override DependencyObject GetContainerForItemOverride()
+        {
+            var container = new Blade();
+            container.Tapped += SetCurrentIndex;
+            container.GotFocus += SetCurrentIndex;
+
+            container.SetBinding(HeightProperty, new Binding()
+            {
+                Source = this,
+                Path = new PropertyPath("Height"),
+                Mode = BindingMode.OneWay
+            });
+
+            return container;
+        }
+
+        private void SetCurrentIndex(object sender, RoutedEventArgs e)
+        {
+            if (sender is Blade blade)
+            { currentIndex = Items.IndexOf(ItemFromContainer(blade)); }
+        }
+
+        /// <inheritdoc/>
+        protected override bool IsItemItsOwnContainerOverride(object item)
+        {
+            return item is Blade;
+        }
+
+        /// <inheritdoc/>
+        protected override void PrepareContainerForItemOverride(DependencyObject element, object item)
+        {
+            if (item is DependencyObject dObject)
+            {
+                SetProminence(element, GetProminence(dObject));
+            }
+            else
+            {
+                SetProminence(element, BladeProminence.Normal);
+            }
+
+            base.PrepareContainerForItemOverride(element, item);
+        }
     }
 }

@@ -4,10 +4,20 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
 
     <Style TargetType="controls:AdaptiveBladeView">
+        <Setter Property="Padding" Value="8"/>
+        <Setter Property="ItemsPanel">
+            <Setter.Value>
+                <ItemsPanelTemplate>
+                    <ItemsStackPanel Orientation="Horizontal"/>
+                </ItemsPanelTemplate>
+            </Setter.Value>
+        </Setter>
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="controls:AdaptiveBladeView">
-                    <Grid x:Name="PART_RootGrid"/>
+                    <Grid x:Name="PART_RootGrid" Padding="{TemplateBinding Padding}">
+                        <ItemsPresenter/>
+                    </Grid>
                 </ControlTemplate>
             </Setter.Value>
         </Setter>

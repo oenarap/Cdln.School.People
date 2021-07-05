@@ -1,25 +1,14 @@
 ﻿using System;
 using Windows.UI.Xaml;
-using Windows.UI.Xaml.Controls;
 
 namespace School.People.Uwp.Controls
 {
+    /// <summary>
+    /// A BladeView-style layout that adapts to the
+    /// available size of its host.
+    /// </summary>
     public partial class AdaptiveBladeView
     {
-        /// <summary>
-        /// Identifies the <see cref="ItemsSource"/> property.
-        /// </summary>
-        private static readonly DependencyProperty ItemsSourceProperty = DependencyProperty.Register(nameof(ItemsSource), typeof(object), typeof(AdaptiveBladeView), new PropertyMetadata(null, OnItemsSourcePropertyChanged));
-
-        /// <summary>
-        /// Gets/sets the items source of the view.
-        /// </summary>
-        public object ItemsSource
-        {
-            get { return GetValue(ItemsSourceProperty); }
-            set { SetValue(ItemsSourceProperty, value); }
-        }
-
         /// <summary>
         /// Identifies the <see cref="Prominence"/> attached property.
         /// </summary>
@@ -56,6 +45,16 @@ namespace School.People.Uwp.Controls
         }
 
         /// <summary>
+        /// Identifies the <see cref="ActualBladeLength"/> property.
+        /// </summary>
+        private static readonly DependencyProperty ActualBladeLengthProperty = DependencyProperty.Register(nameof(ActualBladeLength), typeof(double), typeof(AdaptiveBladeView), new PropertyMetadata(0, OnActualBladeLengthPropertyChanged));
+
+        /// <summary>
+        /// Gets/sets the actual blades' length.
+        /// </summary>
+        public double ActualBladeLength => (double)GetValue(ActualBladeLengthProperty);
+
+        /// <summary>
         /// Identifies the <see cref="MaxBladeCount"/> property.
         /// </summary>
         private static readonly DependencyProperty MaxBladeCountProperty = DependencyProperty.Register(nameof(MaxBladeCount), typeof(int), typeof(AdaptiveBladeView), new PropertyMetadata(0, OnMaxBladeCountPropertyChanged));
@@ -64,19 +63,5 @@ namespace School.People.Uwp.Controls
         /// Gets the current blade count.
         /// </summary>
         public int MaxBladeCount => (int)GetValue(MaxBladeCountProperty);
-
-        /// <summary>
-        /// Identifies the <see cref="Orientation"/> property.
-        /// </summary>
-        public static readonly DependencyProperty OrientationProperty = DependencyProperty.Register(nameof(Orientation), typeof(Orientation), typeof(AdaptiveBladeView), new PropertyMetadata(Orientation.Horizontal, OnOrientationPropertyChanged));
-
-        /// <summary>
-        /// Gets/sets the <see cref="AdaptiveBladeView"/>'s orientation.
-        /// </summary>
-        public Orientation Orientation
-        {
-            get { return (Orientation)GetValue(OrientationProperty); }
-            set { SetValue(OrientationProperty, value); }
-        }
     }
 }
