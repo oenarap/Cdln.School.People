@@ -44,6 +44,8 @@ namespace Cdln.School.People.Uwp.Views
                 new Person(Guid.NewGuid(), "Longbottom", "Neville", "Aaron")
             };
 
+            AdaptiveBladeView.SetProminence(People[2], BladeProminence.Prominent);
+
             var people = App.Container.Resolve<PeopleList>();
             var conspectus = App.Container.Resolve<Conspectus>();
             var attributes = App.Container.Resolve<AttributePane>();

@@ -1,5 +1,6 @@
 ﻿using System;
 using Windows.UI.Xaml;
+using Windows.UI.Xaml.Data;
 using Windows.UI.Xaml.Controls;
 using System.Collections.Generic;
 
@@ -7,135 +8,53 @@ namespace School.People.Uwp.Controls
 {
     public partial class AdaptiveBladeView
     {
-        private static readonly GridLength length = new GridLength(1, GridUnitType.Star);
+        private int maxActiveBladesCount;
 
-        private void SetCurrentIndex(Blade blade) => currentIndex = GetIndexOf(blade);
-
-        private static int CalculateVisibleBladeCount(double availableLength, int desiredBladeLength, int minBladeLength)
+        private void SelectActiveBlades(int maxBladeCount)
         {
-            try
+            if (this[currentIndex] is Blade currentBlade)
             {
-                var maxBlades = Math.DivRem((int)availableLength, desiredBladeLength, out int remainder);
-                return maxBlades + (remainder / minBladeLength);
-            }
-            catch 
-            { 
-                return 0; 
-            }
-        }
+                var nextIndex = currentIndex;
+                var prevIndex = currentIndex;
 
-        private int GetIndexOf(Blade blade)
-        {
-            for (var i = 0; i < blades.Length; i++)
-            {
-                if (blades[i] == blade) { return i; }
-            }
-            return 0;
-        }
+                ActiveBlades.Clear();
+                ActiveBlades.Add(currentBlade);
 
-        private void PrepareBladesForItems(int[] indexes)
-        {
-            rootGrid.Children.Clear();
+                var prominenceTotal = (int)GetProminence(currentBlade);
 
-            var pos = 0;
-
-            foreach (var index in indexes)
-            {
-                var blade = this[index];
-                var weight = weights[index];
-
-                Grid.SetColumn(blade, pos);
-                Grid.SetRow(blade, pos);
-                Grid.SetColumnSpan(blade, weight);
-                Grid.SetRowSpan(blade, weight);
-
-                pos += weight;
-                rootGrid.Children.Add(blade);
-            }
-        }
-
-        private int[] GetDisplayableItemsIndices(int bladeCount, int currentIndex)
-        {
-            var weightTotal = weights[currentIndex];
-
-            if (weightTotal >= bladeCount || items.Length == 1) { return new int[1] { currentIndex }; }
-
-            var indexes = new List<int>() { currentIndex };
-            var nextIndex = currentIndex;
-            var prevIndex = currentIndex;
-
-            for (var i = 0; i < bladeCount; i++)
-            {
-                prevIndex -= 1;
-
-                if (prevIndex >= 0)
+                for (var i = 0; i < Items.Count; i++)
                 {
-                    indexes.Insert(0, prevIndex);
-                    weightTotal += weights[prevIndex];
-                }
+                    prevIndex -= 1;
 
-                if (weightTotal >= bladeCount) { break; }
+                    if (prevIndex >= 0 && this[prevIndex] is Blade previousBlade)
+                    {
+                        if (prominenceTotal < maxBladeCount)
+                        {
+                            previousBlade.Visibility = Visibility.Visible;
+                            ActiveBlades.Insert(0, previousBlade);
+                            prominenceTotal += (int)GetProminence(previousBlade);
+                        }
+                        else
+                        {
+                            previousBlade.Visibility = Visibility.Collapsed;
+                        }
+                    }
 
-                nextIndex += 1;
+                    nextIndex += 1;
 
-                if (nextIndex < items.Length) 
-                {
-                    indexes.Add(nextIndex);
-                    weightTotal += weights[nextIndex]; 
-                }
-
-                if (weightTotal >= bladeCount) { break; }
-            }
-
-            return indexes.ToArray();
-        }
-
-        private void UpdateColumns(int count)
-        {
-            var diff = count - rootGrid.ColumnDefinitions.Count;
-
-            if (diff > 0)
-            {
-                var startingIndex = rootGrid.ColumnDefinitions.Count;
-
-                for (int i = startingIndex; i < startingIndex + diff; i++)
-                {
-                    var coldef = new ColumnDefinition() { Width = length };
-                    rootGrid.ColumnDefinitions.Add(coldef);
-                }
-            }
-            else if (diff < 0)
-            {
-                var lastIndex = rootGrid.ColumnDefinitions.Count - 1;
-
-                for (int i = lastIndex; i > lastIndex + diff; i--)
-                {
-                    rootGrid.ColumnDefinitions.RemoveAt(i);
-                }
-            }
-        }
-
-        private void UpdateRows(int count)
-        {
-            var diff = count - rootGrid.RowDefinitions.Count;
-
-            if (diff > 0)
-            {
-                var startingIndex = rootGrid.RowDefinitions.Count;
-
-                for (int i = startingIndex; i < startingIndex + diff; i++)
-                {
-                    var rowDef = new RowDefinition() { Height = length };
-                    rootGrid.RowDefinitions.Add(rowDef);
-                }
-            }
-            else if (diff < 0)
-            {
-                var lastIndex = rootGrid.RowDefinitions.Count - 1;
-
-                for (int i = lastIndex; i > lastIndex + diff; i--)
-                {
-                    rootGrid.RowDefinitions.RemoveAt(i);
+                    if (nextIndex < Items.Count && this[nextIndex] is Blade nextBlade)
+                    {
+                        if (prominenceTotal < maxBladeCount)
+                        {
+                            nextBlade.Visibility = Visibility.Visible;
+                            ActiveBlades.Add(nextBlade);
+                            prominenceTotal += (int)GetProminence(nextBlade);
+                        }
+                        else
+                        {
+                            nextBlade.Visibility = Visibility.Collapsed;
+                        }
+                    }
                 }
             }
         }

@@ -4,24 +4,24 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
 
     <Style TargetType="controls:Blade">
-        <Setter Property="HorizontalAlignment" Value="Stretch"/>
-        <Setter Property="VerticalAlignment" Value="Stretch"/>
+        <Setter Property="Margin" Value="0,0,1,0"/>
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="controls:Blade">
-                    <Grid x:Name="PART_RootGrid">
+                    <Grid x:Name="PART_RootGrid"
+                          Margin="{TemplateBinding Margin}"
+                          Width="{TemplateBinding Width}">
                         <Grid.RowDefinitions>
                             <RowDefinition x:Name="PART_HeaderRow" Height="Auto"/>
                             <RowDefinition x:Name="PART_ContentRow" Height="*"/>
                             <RowDefinition x:Name="PART_FooterRow" Height="Auto"/>
                         </Grid.RowDefinitions>
-                        <ContentPresenter x:Name="PART_ContentPresenter" Grid.RowSpan="3"
-                                          ContentTemplate="{TemplateBinding ContentTemplate}"
-                                          Content="{TemplateBinding Content}"/>
+                        <ContentPresenter x:Name="ContentPresenter" Grid.RowSpan="3"
+                                          HorizontalContentAlignment="Stretch"/>
                     </Grid>
                 </ControlTemplate>
             </Setter.Value>
         </Setter>
     </Style>
-    
+
 </ResourceDictionary>
