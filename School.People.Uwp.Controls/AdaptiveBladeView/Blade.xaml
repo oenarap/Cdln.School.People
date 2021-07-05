@@ -9,9 +9,7 @@
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="controls:Blade">
-                    <Grid x:Name="PART_RootGrid"
-                          Margin="{TemplateBinding Margin}"
-                          Width="{TemplateBinding Width}">
+                    <Grid x:Name="PART_RootGrid" Margin="{TemplateBinding Margin}">
                         <Grid.RowDefinitions>
                             <RowDefinition x:Name="PART_HeaderRow" Height="Auto"/>
                             <RowDefinition x:Name="PART_ContentRow" Height="*"/>

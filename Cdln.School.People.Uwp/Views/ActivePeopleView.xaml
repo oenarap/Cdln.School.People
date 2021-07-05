@@ -9,6 +9,9 @@
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
 
     <Grid>
+        <!--<controls:AdaptiveBladeView 
+            DesiredBladeLength="280" 
+            ItemsSource="{x:Bind Panes}"/>-->
 
         <controls:AdaptiveBladeView 
             DesiredBladeLength="280" 
@@ -34,41 +37,5 @@
                 </DataTemplate>
             </controls:AdaptiveBladeView.ItemTemplate>
         </controls:AdaptiveBladeView>
-
-        <!--<ItemsControl ItemsSource="{x:Bind People}">
-            <ItemsControl.ItemTemplate>
-                <DataTemplate>
-                    <Grid Background="ForestGreen">
-                        <Grid.RowDefinitions>
-                            <RowDefinition/>
-                            <RowDefinition/>
-                            <RowDefinition/>
-                        </Grid.RowDefinitions>
-                        <TextBlock Text="{Binding LastName}" FontSize="32" 
-                                   VerticalAlignment="Center"
-                                   HorizontalAlignment="Center"/>
-                        <TextBlock Text="{Binding FirstName}" FontSize="24" Grid.Row="1" 
-                                   VerticalAlignment="Center"
-                                   HorizontalAlignment="Center"/>
-                        <TextBlock Text="{Binding MiddleName}" FontSize="16" Grid.Row="2" 
-                                   VerticalAlignment="Center"
-                                   HorizontalAlignment="Center"/>
-                    </Grid>
-                </DataTemplate>
-            </ItemsControl.ItemTemplate>
-        </ItemsControl>-->
-
-        <!--<controls:AdaptiveBladePanel DesiredStackLength="280">
-            <controls:Blade Background="DeepSkyBlue" Width="200" Height="500">
-                <controls:Blade.Content>
-                    <TextBlock Text="Blade 1" FontSize="32" Foreground="White"/>
-                </controls:Blade.Content>
-            </controls:Blade>
-            <controls:Blade Background="DeepPink">
-                <controls:Blade.Content>
-                    <TextBlock Text="Blade 2" FontSize="32" Foreground="White"/>
-                </controls:Blade.Content>
-            </controls:Blade>
-        </controls:AdaptiveBladePanel>-->
     </Grid>
 </Page>

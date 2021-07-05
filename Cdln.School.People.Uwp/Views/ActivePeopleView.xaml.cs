@@ -38,7 +38,7 @@ namespace Cdln.School.People.Uwp.Views
                 new Person(Guid.NewGuid(), "Potter", "Harry James", "Bond"),
                 new Person(Guid.NewGuid(), "Wesley", "Ronald Bilius", "Snipes"),
                 new Person(Guid.NewGuid(), "Granger", "Hermione Jean", "Grey"),
-                new Person(Guid.NewGuid(), "Wesley", "Ginny Babe", "Snipes"),
+                new Person(Guid.NewGuid(), "Snape", "Severus", "Prince"),
                 new Person(Guid.NewGuid(), "Dumbledore", "Albus Wulfric Brian", "Adams"),
                 new Person(Guid.NewGuid(), "Malfoy", "Draco", "Bachtin"),
                 new Person(Guid.NewGuid(), "Longbottom", "Neville", "Aaron")
