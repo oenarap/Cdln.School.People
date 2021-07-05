@@ -3,6 +3,7 @@ using Windows.UI.Xaml;
 using Windows.UI.Xaml.Data;
 using Windows.UI.Xaml.Controls;
 using System.Collections.Generic;
+using Windows.UI.Xaml.Input;
 
 namespace School.People.Uwp.Controls
 {
