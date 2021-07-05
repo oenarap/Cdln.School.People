@@ -3,7 +3,6 @@ using Windows.UI.Xaml;
 using Windows.UI.Xaml.Data;
 using Windows.UI.Xaml.Controls;
 using System.Collections.Generic;
-using Windows.UI.Xaml.Input;
 
 namespace School.People.Uwp.Controls
 {
@@ -103,13 +102,11 @@ namespace School.People.Uwp.Controls
 
                     if (nextIndex < view.Items.Count && view[nextIndex] is Blade nextBlade)
                     {
-                        var nextBladeProminence = (int)GetProminence(nextBlade);
-
-                        if (prominenceTotal + nextBladeProminence <= maxBladeCount)
+                        if (prominenceTotal < maxBladeCount)
                         {
                             nextBlade.Visibility = Visibility.Visible;
                             view.ActiveBlades.Add(nextBlade);
-                            prominenceTotal += nextBladeProminence;
+                            prominenceTotal += (int)GetProminence(nextBlade);
                         }
                         else
                         {
