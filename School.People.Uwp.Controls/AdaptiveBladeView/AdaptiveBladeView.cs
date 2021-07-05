@@ -67,52 +67,56 @@ namespace School.People.Uwp.Controls
         {
             var view = (AdaptiveBladeView)d;
 
-            //if (view[view.currentIndex] is Blade currentBlade)
-            //{
-            //    var maxBladeCount = (int)e.NewValue;
-            //    var nextIndex = view.currentIndex;
-            //    var prevIndex = view.currentIndex;
+            if (view[view.currentIndex] is Blade currentBlade)
+            {
+                var maxBladeCount = (int)e.NewValue;
+                var nextIndex = view.currentIndex;
+                var prevIndex = view.currentIndex;
 
-            //    view.ActiveBlades.Clear();
-            //    view.ActiveBlades.Add(currentBlade);
+                view.ActiveBlades.Clear();
+                view.ActiveBlades.Add(currentBlade);
 
-            //    var prominenceTotal = (int)GetProminence(currentBlade);
+                var prominenceTotal = (int)GetProminence(currentBlade);
 
-            //    for (var i = 0; i < view.Items.Count; i++)
-            //    {
-            //        prevIndex -= 1;
+                for (var i = 0; i < view.Items.Count; i++)
+                {
+                    prevIndex -= 1;
 
-            //        if (prevIndex >= 0 && view[prevIndex] is Blade previousBlade)
-            //        {
-            //            if (prominenceTotal < maxBladeCount)
-            //            {
-            //                previousBlade.Visibility = Visibility.Visible;
-            //                view.ActiveBlades.Insert(0, previousBlade);
-            //                prominenceTotal += (int)GetProminence(previousBlade);
-            //            }
-            //            else
-            //            {
-            //                previousBlade.Visibility = Visibility.Collapsed;
-            //            }
-            //        }
+                    if (prevIndex >= 0 && view[prevIndex] is Blade previousBlade)
+                    {
+                        var prevBladeProminence = (int)GetProminence(previousBlade);
 
-            //        nextIndex += 1;
+                        if (prominenceTotal + prevBladeProminence <= maxBladeCount)
+                        {
+                            previousBlade.Visibility = Visibility.Visible;
+                            view.ActiveBlades.Insert(0, previousBlade);
+                            prominenceTotal += prevBladeProminence;
+                        }
+                        else
+                        {
+                            previousBlade.Visibility = Visibility.Collapsed;
+                        }
+                    }
 
-            //        if (nextIndex < view.Items.Count && view[nextIndex] is Blade nextBlade)
-            //        {
-            //            if (prominenceTotal < maxBladeCount)
-            //            {
-            //                nextBlade.Visibility = Visibility.Visible;
-            //                view.ActiveBlades.Add(nextBlade);
-            //                prominenceTotal += (int)GetProminence(nextBlade);
-            //            }
-            //            else
-            //            {
-            //                nextBlade.Visibility = Visibility.Collapsed;
-            //            }
-            //        }
-            //    }
-            //}
+                    nextIndex += 1;
+
+                    if (nextIndex < view.Items.Count && view[nextIndex] is Blade nextBlade)
+                    {
+                        var nextBladeProminence = (int)GetProminence(nextBlade);
+
+                        if (prominenceTotal + nextBladeProminence <= maxBladeCount)
+                        {
+                            nextBlade.Visibility = Visibility.Visible;
+                            view.ActiveBlades.Add(nextBlade);
+                            prominenceTotal += nextBladeProminence;
+                        }
+                        else
+                        {
+                            nextBlade.Visibility = Visibility.Collapsed;
+                        }
+                    }
+                }
+            }
         }
 
         // STEP 3: ADJUST BLADES' WIDTHS
