@@ -121,6 +121,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="AdaptiveBladeView\AdaptiveBladeView.cs" />
+    <Compile Include="AdaptiveBladeView\AdaptiveBladeView.Methods.cs" />
     <Compile Include="AdaptiveBladeView\AdaptiveBladeView.Properties.cs" />
     <Compile Include="AdaptiveBladeView\Blade.cs" />
     <Compile Include="Converters.cs" />
