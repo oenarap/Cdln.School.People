@@ -14,8 +14,10 @@ namespace Cdln.School.People.Uwp.Lists
     public class PeopleContextsProvider : MessagingModel, IContextProvider
     {
         private static readonly DependencyProperty ContextsProperty = DependencyProperty.Register(nameof(Contexts), typeof(ICollectionView), typeof(PeopleContextsProvider), new PropertyMetadata(null, OnContextsPropertyChanged));
+        private static readonly DependencyProperty CurrentProperty = DependencyProperty.Register(nameof(Current), typeof(PeopleContextDescriptor), typeof(PeopleContextsProvider), new PropertyMetadata(null));
 
         public ICollectionView Contexts => (ICollectionView)GetValue(ContextsProperty);
+        public PeopleContextDescriptor Current => (PeopleContextDescriptor)GetValue(CurrentProperty);
 
         private static void OnContextsPropertyChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
         {
@@ -32,10 +34,13 @@ namespace Cdln.School.People.Uwp.Lists
         private void OnCurrentContextChanged(object sender, object e)
         {
             var view = (ICollectionView)sender;
-            if (view.CurrentItem is PeopleContextDescriptor descriptor)
+            if (view.CurrentItem is PeopleContextDescriptor newValue)
             {
+                var oldValue = Current;
+                SetValue(CurrentProperty, newValue);
+
                 Logger.Log(Logkey, view.CurrentPosition);
-                Hub.Dispatch(new PeopleContextChangedEvent(Id, descriptor));
+                Hub.Dispatch(new PeopleContextChangedEvent(Id, (newValue, oldValue)));
             }
             else { Hub.Dispatch(new NoCurrentPeopleContextEvent(Id)); }
         }

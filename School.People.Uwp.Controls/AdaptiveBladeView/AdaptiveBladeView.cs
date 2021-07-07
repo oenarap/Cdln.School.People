@@ -37,7 +37,6 @@ namespace School.People.Uwp.Controls
             }
         }
 
-        // 1. RESIZE TRIGGERED
         private void OnRootGridSizeChanged(object sender, SizeChangedEventArgs e)
         {
             var width = e.NewSize.Width;
@@ -51,10 +50,13 @@ namespace School.People.Uwp.Controls
             SetValue(ActualBladeLengthProperty, width / maxBlades); // step 3
         }
 
-        public AdaptiveBladeView()
+        private void SetCurrentIndex(object sender, RoutedEventArgs e)
         {
-            this.DefaultStyleKey = typeof(AdaptiveBladeView);
-            this.ActiveBlades = new List<Blade>();
+            if (sender is Blade blade)
+            {
+                var item = ItemFromContainer(blade);
+                currentIndex = Items.IndexOf(item);
+            }
         }
 
         /// <inheritdoc/>
@@ -72,12 +74,6 @@ namespace School.People.Uwp.Controls
             });
 
             return container;
-        }
-
-        private void SetCurrentIndex(object sender, RoutedEventArgs e)
-        {
-            if (sender is Blade blade)
-            { currentIndex = Items.IndexOf(ItemFromContainer(blade)); }
         }
 
         /// <inheritdoc/>
@@ -99,6 +95,13 @@ namespace School.People.Uwp.Controls
             }
 
             base.PrepareContainerForItemOverride(element, item);
+        }
+
+        /// <inheritdoc/>
+        public AdaptiveBladeView()
+        {
+            this.DefaultStyleKey = typeof(AdaptiveBladeView);
+            this.ActiveBlades = new List<Blade>();
         }
     }
 }

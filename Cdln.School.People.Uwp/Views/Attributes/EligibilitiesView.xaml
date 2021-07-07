@@ -5,10 +5,30 @@
     xmlns:local="using:Cdln.School.People.Uwp.Views.Attributes"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    mc:Ignorable="d"
-    Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+    mc:Ignorable="d">
 
     <Grid>
-
+        <Grid.Background>
+            <ImageBrush ImageSource="ms-appx:///Assets/keys_turbosquiddotcom.png" Stretch="None" Opacity="0.075">
+                <ImageBrush.Transform>
+                    <TransformGroup>
+                        <ScaleTransform ScaleX="0.8" ScaleY="0.8" />
+                        <TranslateTransform X="50" Y="150"/>
+                    </TransformGroup>
+                </ImageBrush.Transform>
+            </ImageBrush>
+        </Grid.Background>
+        <!--<GridView ItemsSource="{x:Bind Eligibilities}" ItemsPanel="{StaticResource ActiveItemsPanelTemplate}"
+                  ItemContainerStyle="{StaticResource SelectorItemStyle}">
+            <GridView.ItemTemplate>
+                <DataTemplate>
+                    <StackPanel Orientation="Vertical" HorizontalAlignment="Left" Padding="16,0,4,16">
+                        <TextBlock Text="{Binding EligibilityName}" FontSize="20" FontWeight="ExtraLight" TextWrapping="Wrap" Margin="0,0,0,8"/>
+                        <TextBlock Text="{Binding Rating}" FontSize="16" Margin="0,4,0,4" TextWrapping="Wrap"/>
+                        <TextBlock Text="{Binding LicenseNumberIfApplicable}" TextWrapping="Wrap" Foreground="{ThemeResource SemiTransparentLowBrush}"/>
+                    </StackPanel>
+                </DataTemplate>
+            </GridView.ItemTemplate>
+        </GridView>-->
     </Grid>
 </Page>

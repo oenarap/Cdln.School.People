@@ -1,14 +1,47 @@
-﻿<Page
+﻿<Page x:Name="auxiliary"
     x:Class="Cdln.School.People.Uwp.Views.Panes.Auxiliary"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-    xmlns:local="using:Cdln.School.People.Uwp.Views.Panes"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    mc:Ignorable="d"
-    Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+    mc:Ignorable="d">
 
     <Grid>
-        <TextBox Text="Auxiliary Pane"/>
+        <Grid.RowDefinitions>
+            <RowDefinition x:Name="headerRow" Height="Auto"/>
+            <RowDefinition x:Name="contentRow" Height="*"/>
+            <RowDefinition x:Name="footerRow" Height="Auto"/>
+        </Grid.RowDefinitions>
+        <Grid x:Name="headerGrid" Margin="{StaticResource HeaderMargin}">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition/>
+                <ColumnDefinition Width="Auto"/>
+            </Grid.ColumnDefinitions>
+            <Button Style="{StaticResource PaneHeaderButtonStyle}" 
+                    Foreground="{ThemeResource SystemControlForegroundBaseMediumLowBrush}"
+                    Content="&#xE134;">
+                                                    <!--Command="{x:Bind services:InputCommands.MoveFocusToPageCommand}"
+                                                    CommandParameter="{Binding Auxiliary.Content, ElementName=activePeopleView}"--> 
+                <Button.KeyboardAccelerators>
+                    <KeyboardAccelerator Modifiers="Control" Key="Number3"/>
+                    <KeyboardAccelerator Modifiers="Control" Key="NumberPad3"/>
+                </Button.KeyboardAccelerators>
+            </Button>
+            <TextBlock Grid.Column="1"
+                       VerticalAlignment="Center"
+                       FontSize="26" 
+                       TextTrimming="CharacterEllipsis"
+                       FontWeight="ExtraLight"
+                       Text="Comments"
+                       Foreground="{ThemeResource SystemControlForegroundBaseMediumLowBrush}"/>
+        </Grid>
+        <ScrollViewer x:Name="contentScroller" 
+                      Content="{Binding ViewModel.Content, ElementName=auxiliary}"
+                      Grid.Row="1"
+                      Margin="{StaticResource ContentMargin}" 
+                      IsTabStop="True"
+                      HorizontalAlignment="Stretch"
+                      HorizontalContentAlignment="Stretch"/>
     </Grid>
 </Page>

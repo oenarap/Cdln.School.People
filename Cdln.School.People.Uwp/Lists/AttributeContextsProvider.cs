@@ -12,8 +12,10 @@ namespace Cdln.School.People.Uwp.Lists
     public class AttributeContextsProvider : MessagingModel, IContextProvider
     {
         private static readonly DependencyProperty ContextsProperty = DependencyProperty.Register(nameof(Contexts), typeof(ICollectionView), typeof(AttributeContextsProvider), new PropertyMetadata(null, OnContextsPropertyChanged));
+        private static readonly DependencyProperty CurrentProperty = DependencyProperty.Register(nameof(Current), typeof(AttributeContextDescriptor), typeof(AttributeContextsProvider), new PropertyMetadata(null));
 
         public ICollectionView Contexts => (ICollectionView)GetValue(ContextsProperty);
+        public AttributeContextDescriptor Current => (AttributeContextDescriptor)GetValue(CurrentProperty);
 
 
         private static void OnContextsPropertyChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
@@ -34,7 +36,7 @@ namespace Cdln.School.People.Uwp.Lists
             if (view.CurrentItem is AttributeContextDescriptor newValue)
             {
                 var oldValue = Current;
-                Current = newValue;
+                SetValue(CurrentProperty, newValue);
 
                 Logger.Log(Logkey, view.CurrentPosition);
                 Hub.Dispatch(new AttributeContextChangedEvent(Id, (newValue, oldValue)));
@@ -52,8 +54,6 @@ namespace Cdln.School.People.Uwp.Lists
             var viewSource = new CollectionViewSource() { Source = contexts };
             SetValue(ContextsProperty, viewSource.View);
         }
-
-        private AttributeContextDescriptor Current;
 
         private readonly string Logkey;
         private readonly IIndexLogger Logger;

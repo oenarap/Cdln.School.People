@@ -21,14 +21,12 @@ namespace Cdln.School.People.Uwp
             // api client
             builder.RegisterType<ApiClient>().As<IApiClient>().SingleInstance();
 
-            // view models
-            builder.RegisterType<FamilyBackgroundViewModel>().SingleInstance();
-            builder.RegisterType<PeopleListProvider>().SingleInstance();
-            builder.RegisterType<PeopleContextsProvider>().SingleInstance();
-            builder.RegisterType<AttributeContextsProvider>().SingleInstance();
+            // view models 
+            builder.RegisterType<PeopleListViewModel>().SingleInstance();
             builder.RegisterType<AttributePaneViewModel>().SingleInstance();
             builder.RegisterType<ConspectusViewModel>().SingleInstance();
-            builder.RegisterType<CommentsViewModel>().SingleInstance();
+            builder.RegisterType<AuxiliaryViewModel>().SingleInstance();
+            builder.RegisterType<FamilyBackgroundViewModel>().SingleInstance();
 
             // utilities
             builder.RegisterType<MessageHub>().As<IMessageHub>().SingleInstance();
@@ -39,7 +37,10 @@ namespace Cdln.School.People.Uwp
             builder.RegisterType<Auxiliary>().SingleInstance();
             builder.RegisterType<AddPersonDialog>().SingleInstance();
 
-            // local data repos
+            // ui data & local repos
+            builder.RegisterType<PeopleListProvider>().SingleInstance();
+            builder.RegisterType<PeopleContextsProvider>().SingleInstance();
+            builder.RegisterType<AttributeContextsProvider>().SingleInstance();
             builder.RegisterType<CommentsRepository>().As<ICommentsRepository>().SingleInstance();
 
 

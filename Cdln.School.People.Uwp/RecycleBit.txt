@@ -1,0 +1,38 @@
+﻿//People = new List<Person>()
+            //{
+            //    new Person(Guid.NewGuid(), "Potter", "Harry James", "Bond"),
+            //    new Person(Guid.NewGuid(), "Wesley", "Ronald Bilius", "Snipes"),
+            //    new Person(Guid.NewGuid(), "Granger", "Hermione Jean", "Grey"),
+            //    new Person(Guid.NewGuid(), "Snape", "Severus", "Prince"),
+            //    new Person(Guid.NewGuid(), "Dumbledore", "Albus Wulfric Brian", "Adams"),
+            //    new Person(Guid.NewGuid(), "Malfoy", "Draco", "Bachtin"),
+            //    new Person(Guid.NewGuid(), "Longbottom", "Neville", "Aaron")
+            //};
+
+            //AdaptiveBladeView.SetProminence(People[2], BladeProminence.Prominent);
+
+
+<!--<controls:AdaptiveBladeView 
+            DesiredBladeLength="280" 
+            ItemsSource="{x:Bind People}">
+            <controls:AdaptiveBladeView.ItemTemplate>
+                <DataTemplate>
+                    <Grid Background="ForestGreen">
+                        <Grid.RowDefinitions>
+                            <RowDefinition/>
+                            <RowDefinition/>
+                            <RowDefinition/>
+                        </Grid.RowDefinitions>
+                        <TextBlock Text="{Binding LastName}" FontSize="32" 
+                                   VerticalAlignment="Center"
+                                   HorizontalAlignment="Center"/>
+                        <TextBlock Text="{Binding FirstName}" FontSize="24" Grid.Row="1" 
+                                   VerticalAlignment="Center"
+                                   HorizontalAlignment="Center"/>
+                        <TextBlock Text="{Binding MiddleName}" FontSize="16" Grid.Row="2" 
+                                   VerticalAlignment="Center"
+                                   HorizontalAlignment="Center"/>
+                    </Grid>
+                </DataTemplate>
+            </controls:AdaptiveBladeView.ItemTemplate>
+        </controls:AdaptiveBladeView>-->

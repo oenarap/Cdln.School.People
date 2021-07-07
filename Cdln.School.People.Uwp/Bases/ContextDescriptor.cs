@@ -20,5 +20,7 @@ namespace Cdln.School.People.Uwp
         public string Glyph { get; }
         public KeyboardAccelerator KeyboardAccelerator { get; set; }
         public Type AssociatedViewType { get; }
+
+        public override string ToString() => Description ?? Type.ToString();
     }
 }

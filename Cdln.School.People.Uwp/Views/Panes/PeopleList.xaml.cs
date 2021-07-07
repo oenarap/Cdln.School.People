@@ -1,30 +1,30 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Runtime.InteropServices.WindowsRuntime;
-using Windows.Foundation;
-using Windows.Foundation.Collections;
+using Autofac;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
-using Windows.UI.Xaml.Controls.Primitives;
-using Windows.UI.Xaml.Data;
-using Windows.UI.Xaml.Input;
-using Windows.UI.Xaml.Media;
-using Windows.UI.Xaml.Navigation;
-
-// The Blank Page item template is documented at https://go.microsoft.com/fwlink/?LinkId=234238
+using Cdln.School.People.Uwp.Lists;
 
 namespace Cdln.School.People.Uwp.Views.Panes
 {
-    /// <summary>
-    /// An empty page that can be used on its own or navigated to within a Frame.
-    /// </summary>
     public sealed partial class PeopleList : Page
     {
+        private static readonly DependencyProperty PeopleListProviderProperty = DependencyProperty.Register(nameof(PeopleListProvider), typeof(PeopleListProvider), typeof(PeopleList), new PropertyMetadata(null));
+        private static readonly DependencyProperty ContextProviderProperty = DependencyProperty.Register(nameof(ContextProvider), typeof(PeopleContextsProvider), typeof(PeopleList), new PropertyMetadata(null));
+
+        public PeopleListProvider PeopleListProvider => (PeopleListProvider)GetValue(PeopleListProviderProperty);
+        public PeopleContextsProvider ContextProvider => (PeopleContextsProvider)GetValue(ContextProviderProperty);
+
         public PeopleList()
         {
             this.InitializeComponent();
+
+            SetValue(ContextProviderProperty, App.Container.Resolve<PeopleContextsProvider>() ?? throw new NullReferenceException());
+            SetValue(PeopleListProviderProperty, App.Container.Resolve<PeopleListProvider>() ?? throw new NullReferenceException());
+        }
+
+        private void OnPeopleListItemClicked(object sender, ItemClickEventArgs e)
+        {
+            // TODO:
         }
     }
 }

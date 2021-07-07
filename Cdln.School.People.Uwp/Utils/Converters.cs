@@ -8,6 +8,26 @@ using Windows.Globalization.DateTimeFormatting;
 
 namespace Cdln.School.People.Uwp.Utils
 {
+    public class ContextDescriptorToPeopleSearchTextboxPlaceholderTextConverter : IValueConverter
+    {
+        public object Convert(object value, Type targetType, object parameter, string language)
+        {
+            if (value is IContextDescriptor context && context.Description is string description)
+            {
+                var normalized = description.ToLower();
+                var lastIndex = normalized.Length - 1;
+                if (normalized.LastIndexOf("s") == lastIndex) { normalized = normalized.Substring(0, lastIndex); }
+                return $"Find a {normalized}";
+            }
+            return "Find a person";
+        }
+
+        public object ConvertBack(object value, Type targetType, object parameter, string language)
+        {
+            throw new NotImplementedException();
+        }
+    }
+
     public class TextLenghtToRemainingCharactersConverter : IValueConverter
     {
         public object Convert(object value, Type targetType, object parameter, string language)

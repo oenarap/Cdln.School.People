@@ -1,30 +1,22 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Runtime.InteropServices.WindowsRuntime;
-using Windows.Foundation;
-using Windows.Foundation.Collections;
+using Autofac;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
-using Windows.UI.Xaml.Controls.Primitives;
-using Windows.UI.Xaml.Data;
-using Windows.UI.Xaml.Input;
-using Windows.UI.Xaml.Media;
-using Windows.UI.Xaml.Navigation;
-
-// The Blank Page item template is documented at https://go.microsoft.com/fwlink/?LinkId=234238
+using Cdln.School.People.Uwp.ViewModels.Attributes;
 
 namespace Cdln.School.People.Uwp.Views.Attributes
 {
-    /// <summary>
-    /// An empty page that can be used on its own or navigated to within a Frame.
-    /// </summary>
     public sealed partial class FamilyBackgroundView : Page
     {
+        private static readonly DependencyProperty ViewModelProperty = DependencyProperty.Register(nameof(ViewModel), typeof(FamilyBackgroundViewModel), typeof(FamilyBackgroundView), new PropertyMetadata(null));
+
+        public FamilyBackgroundViewModel ViewModel => (FamilyBackgroundViewModel)GetValue(ViewModelProperty);
+
         public FamilyBackgroundView()
         {
             this.InitializeComponent();
+
+            SetValue(ViewModelProperty, App.Container.Resolve<FamilyBackgroundViewModel>() ?? throw new NullReferenceException());
         }
     }
 }

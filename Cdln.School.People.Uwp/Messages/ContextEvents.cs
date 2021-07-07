@@ -3,9 +3,9 @@ using Cdln.School.People.Uwp.Models;
 
 namespace Cdln.School.People.Uwp.Messages
 {
-    public class PeopleContextChangedEvent : Message<PeopleContextDescriptor>
+    public class PeopleContextChangedEvent : Message<(PeopleContextDescriptor NewValue, PeopleContextDescriptor OldValue)>
     {
-        public PeopleContextChangedEvent(Guid id, PeopleContextDescriptor data)
+        public PeopleContextChangedEvent(Guid id, (PeopleContextDescriptor NewValue, PeopleContextDescriptor OldValue) data)
             : base(id, data) { }
     }
 

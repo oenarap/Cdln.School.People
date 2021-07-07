@@ -68,6 +68,8 @@
             </x:String>
 
             <Thickness x:Key="CustomHeaderMargin">0,0,0,8</Thickness>
+            <Thickness x:Key="HeaderMargin">4,32,4,4</Thickness>
+            <Thickness x:Key="ContentMargin">8,8,8,8</Thickness>
 
             <MenuFlyout x:Key="CrudMenuFlyout">
                 <MenuFlyoutItem Text="Edit" Icon="Edit"/>
@@ -79,13 +81,13 @@
 
             <DataTemplate x:Key="InputControlsHeaderTemplate">
                 <ContentPresenter Content="{Binding}"
-                                  Margin="0,0,0,8"
+                                  Margin="4,0,4,8"
                                   FontWeight="Normal"
                                   Foreground="{ThemeResource SystemControlForegroundBaseMediumBrush}"/>
             </DataTemplate>
 
             <Style x:Key="InputControlsStyle" TargetType="Control">
-                <Setter Property="Margin" Value="0,8,24,8"/>
+                <Setter Property="Margin" Value="0,0,8,8"/>
                 <Setter Property="BorderThickness" Value="1"/>
                 <Setter Property="BorderBrush" Value="{ThemeResource SystemControlBackgroundBaseLowBrush}"/>
                 <Setter Property="Background" Value="{ThemeResource SystemControlBackgroundAltHighBrush}"/>
@@ -115,16 +117,16 @@
             -->
 
             <Style x:Key="PaneHeaderButtonStyle" TargetType="Button">
+                <Setter Property="Margin" Value="0,0,8,0"/>
                 <Setter Property="IsTabStop" Value="False"/>
-                <Setter Property="Background" Value="{ThemeResource SystemControlBackgroundBaseLowBrush}"/>
                 <Setter Property="BorderThickness" Value="1"/>
+                <Setter Property="Background" Value="{ThemeResource SystemControlBackgroundBaseLowBrush}"/>
                 <Setter Property="BorderBrush" Value="{ThemeResource SystemControlForegroundBaseMediumBrush}"/>
                 <Setter Property="Foreground" Value="{ThemeResource SystemControlForegroundBaseMediumBrush}"/>
                 <Setter Property="Template">
                     <Setter.Value>
                         <ControlTemplate TargetType="Button">
                             <Border Height="24" Width="24" 
-                                    Margin="0,2,8,0"
                                     BorderThickness="{TemplateBinding BorderThickness}"
                                     BorderBrush="{TemplateBinding BorderBrush}"
                                     Background="{TemplateBinding Background}" 

@@ -213,7 +213,9 @@
     <Compile Include="ViewModels\AttributePaneViewModel.cs" />
     <Compile Include="ViewModels\Attributes\FamilyBackgroundViewModel.cs" />
     <Compile Include="ViewModels\Auxiliaries\CommentsViewModel.cs" />
+    <Compile Include="ViewModels\AuxiliaryViewModel.cs" />
     <Compile Include="ViewModels\ConspectusViewModel.cs" />
+    <Compile Include="ViewModels\PeopleListViewModel.cs" />
     <Compile Include="Views\ActivePeopleView.xaml.cs">
       <DependentUpon>ActivePeopleView.xaml</DependentUpon>
     </Compile>
@@ -253,6 +255,9 @@
     <Compile Include="Views\Auxiliaries\CommentsView.xaml.cs">
       <DependentUpon>CommentsView.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Views\Blank.xaml.cs">
+      <DependentUpon>Blank.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\ErrorPage.xaml.cs">
       <DependentUpon>ErrorPage.xaml</DependentUpon>
     </Compile>
@@ -284,11 +289,13 @@
     <Content Include="Assets\arch.png" />
     <Content Include="Assets\briefcase_cgtraderdotcom.png" />
     <Content Include="Assets\cdln.png" />
-    <Content Include="Assets\family-storieo-dot-com.png" />
+    <Content Include="Assets\clipartkey.png" />
     <Content Include="Assets\gears_istockphotodotcom.png" />
     <Content Include="Assets\globe_turbosquiddotcom.png" />
     <Content Include="Assets\gradcap_corrupteddevelopmentdotcom.png" />
     <Content Include="Assets\keys_turbosquiddotcom.png" />
+    <Content Include="Assets\qmark_thumbs_dreamstime_com.png" />
+    <Content Include="Assets\thumbs_dreamstime_com.png" />
     <Content Include="Assets\tools_cdndotmysitemywaydotcom.png" />
     <Content Include="Properties\Default.rd.xml" />
     <Content Include="Assets\LockScreenLogo.scale-200.png" />
@@ -298,6 +305,7 @@
     <Content Include="Assets\Square44x44Logo.targetsize-24_altform-unplated.png" />
     <Content Include="Assets\StoreLogo.png" />
     <Content Include="Assets\Wide310x150Logo.scale-200.png" />
+    <Content Include="RecycleBit.txt" />
   </ItemGroup>
   <ItemGroup>
     <ApplicationDefinition Include="App.xaml">
@@ -384,6 +392,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Views\Blank.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Views\ErrorPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -442,6 +454,11 @@
       <Project>{b2a5f284-2d64-460e-a5fe-87f88225135a}</Project>
       <Name>School.People.Uwp.Controls</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Reference Include="Microsoft.Toolkit.Uwp.UI.Controls.Layout">
+      <HintPath>..\..\WindowsCommunityToolkit\Microsoft.Toolkit.Uwp.UI.Controls.Layout\obj\Debug\uap10.0.17763\intermediatexaml\Microsoft.Toolkit.Uwp.UI.Controls.Layout.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <PropertyGroup Condition=" '$(VisualStudioVersion)' == '' or '$(VisualStudioVersion)' &lt; '14.0' ">
     <VisualStudioVersion>14.0</VisualStudioVersion>

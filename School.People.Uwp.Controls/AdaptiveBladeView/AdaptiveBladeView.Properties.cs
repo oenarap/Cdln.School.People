@@ -57,7 +57,7 @@ namespace School.People.Uwp.Controls
         }
 
         /// <summary>
-        /// Gets/sets the actual blades' length.
+        /// Gets the actual blades' length.
         /// </summary>
         public double ActualBladeLength => (double)GetValue(ActualBladeLengthProperty);
 
@@ -137,6 +137,7 @@ namespace School.People.Uwp.Controls
             var length = (double)e.NewValue;
             var availableLength = length * view.MaxBladeCount;
             var lastIndex = view.ActiveBlades.Count - 1;
+            var opacityFactor = 1.0 / lastIndex;
 
             for (int i = 0; i < lastIndex; i++)
             {
@@ -144,10 +145,12 @@ namespace School.People.Uwp.Controls
                 var prominence = (int)GetProminence(blade);
                 var bladeWidth = length * prominence;
 
+                blade.BackgroundOpacity = opacityFactor * i;
                 availableLength -= bladeWidth;
                 blade.SetValue(WidthProperty, bladeWidth);
             }
 
+            view.ActiveBlades[lastIndex].BackgroundOpacity = 1.0;
             view.ActiveBlades[lastIndex].SetValue(WidthProperty, availableLength);
         }
     }

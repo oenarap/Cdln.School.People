@@ -54,7 +54,22 @@ namespace Cdln.School.People.Uwp
         {
             await Dispatcher.RunAsync(CoreDispatcherPriority.Normal, () =>
             {
-                NavigationService.Navigate(message.Data?.AssociatedViewType ?? typeof(ErrorPage), NavigationContext);
+                try
+                {
+                    if (message.Data.NewValue?.AssociatedViewType is Type type)
+                    {
+                        NavigationService.Navigate(type, NavigationContext);
+                    }
+                    else
+                    {
+                        NavigationService.Navigate(typeof(Blank), NavigationContext);
+                    }
+                }
+                catch (Exception ex)
+                {
+                    NavigationContext.Add(ex);
+                    NavigationService.Navigate(typeof(ErrorPage), NavigationContext);
+                }
             });
         }
 
@@ -62,8 +77,7 @@ namespace Cdln.School.People.Uwp
         {
             if (args.IsSettingsInvoked == false) 
             {
-                var context = args.InvokedItem as IContextDescriptor ?? 
-                    args.InvokedItemContainer.DataContext as IContextDescriptor;
+                var context = args.InvokedItem as IContextDescriptor ?? args.InvokedItemContainer.DataContext as IContextDescriptor;
                 ContextsProvider.Contexts.MoveCurrentTo(context);
                 return;
             }

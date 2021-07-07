@@ -1,14 +1,79 @@
-﻿<Page
+﻿<Page x:Name="attributePane"
     x:Class="Cdln.School.People.Uwp.Views.Panes.AttributePane"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-    xmlns:local="using:Cdln.School.People.Uwp.Views.Panes"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    mc:Ignorable="d"
-    Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+    mc:Ignorable="d">
 
     <Grid>
-        <TextBox Text="Attribute Pane"/>
+        <Grid.RowDefinitions>
+            <RowDefinition x:Name="headerRow" Height="Auto"/>
+            <RowDefinition x:Name="contentRow" Height="*"/>
+            <RowDefinition x:Name="footerRow" Height="Auto"/>
+        </Grid.RowDefinitions>
+        <Grid x:Name="headerGrid" Margin="{StaticResource HeaderMargin}">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition/>
+                <ColumnDefinition Width="Auto"/>
+            </Grid.ColumnDefinitions>
+            <Button Style="{StaticResource PaneHeaderButtonStyle}"
+                    Content="{Binding ContextProvider.Current.Glyph, ElementName=attributePane}">
+                <!--Command="{x:Bind services:InputCommands.MoveFocusToPageCommand}"
+                    CommandParameter="{Binding AttributePane.AttributePaneViewModel.Page, ElementName=attributePane}">-->
+                <Button.KeyboardAccelerators>
+                    <KeyboardAccelerator Modifiers="Control" Key="Number2"/>
+                    <KeyboardAccelerator Modifiers="Control" Key="NumberPad2"/>
+                </Button.KeyboardAccelerators>
+            </Button>
+            <TextBlock Grid.Column="1" 
+                       VerticalAlignment="Center"
+                       FontSize="26" 
+                       TextTrimming="CharacterEllipsis"
+                       FontWeight="ExtraLight"
+                       Foreground="{ThemeResource SystemControlForegroundBaseMediumBrush}"
+                       Text="{Binding ContextProvider.Current.Description, ElementName=attributePane}"/>
+            <CommandBar Background="{x:Null}" 
+                        FontSize="20"
+                        Grid.Column="2">
+                <AppBarButton Command="{x:Bind MovePrevious}"
+                    Label="Previous" Icon="Back">
+                    <AppBarButton.KeyboardAccelerators>
+                        <KeyboardAccelerator Modifiers="Control, Shift" Key="Left"/>
+                        <KeyboardAccelerator Modifiers="Control, Shift" Key="Up"/>
+                    </AppBarButton.KeyboardAccelerators>
+                </AppBarButton>
+                <AppBarButton Command="{x:Bind MoveNext}"
+                    Label="Next" Icon="Forward">
+                    <AppBarButton.KeyboardAccelerators>
+                        <KeyboardAccelerator Modifiers="Control, Shift" Key="Right"/>
+                        <KeyboardAccelerator Modifiers="Control, Shift" Key="Down"/>
+                    </AppBarButton.KeyboardAccelerators>
+                </AppBarButton>
+                <AppBarButton Label="New" Icon="Add">
+                    <!--Visibility="{Binding AttributePane.AttributePaneViewModel.Page, ElementName=attributePane, Converter={StaticResource ObjectToAddNewButtonVisibilityConverter}}"
+                                                      CommandParameter="{Binding AttributePane.AttributePaneViewModel.Page, ElementName=attributePane}"
+                                                      Command="{x:Bind services:InputCommands.AddNewItemCommand}">-->
+                    <AppBarButton.KeyboardAccelerators>
+                        <KeyboardAccelerator Modifiers="Control, Shift" Key="N"/>
+                    </AppBarButton.KeyboardAccelerators>
+                </AppBarButton>
+                <AppBarButton x:Name="viewAuxButton"
+                              Label="Extras" Icon="OpenPane">
+                                                      <!--CommandParameter="{x:Bind ViewA}"
+                                                      Command="{x:Bind services:InputCommands.FindNextLinkedViewCommand}"-->
+                                                      
+                    <AppBarButton.KeyboardAccelerators>
+                        <KeyboardAccelerator Modifiers="Control" Key="Number3"/>
+                        <KeyboardAccelerator Modifiers="Control" Key="NumberPad3"/>
+                    </AppBarButton.KeyboardAccelerators>
+                </AppBarButton>
+            </CommandBar>
+        </Grid>
+        <ScrollViewer x:Name="contentScroller" Grid.Row="1"
+                      Margin="{StaticResource ContentMargin}">
+            <Frame x:Name="contentFrame"/>
+        </ScrollViewer>
     </Grid>
 </Page>

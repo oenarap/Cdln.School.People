@@ -1,4 +1,5 @@
-﻿using Autofac;
+﻿using System;
+using Autofac;
 using Windows.UI.Xaml;
 using Cdln.School.Content.Uwp;
 using Windows.UI.Xaml.Controls;
@@ -8,16 +9,15 @@ namespace Cdln.School.People.Uwp.Views.Panes
 {
     public sealed partial class Auxiliary : Page
     {
-        private static readonly DependencyProperty ViewModelProperty = DependencyProperty.Register(nameof(ViewModel), typeof(CommentsViewModel), typeof(Auxiliary), new PropertyMetadata(null));
+        private static readonly DependencyProperty ViewModelProperty = DependencyProperty.Register(nameof(ViewModel), typeof(AuxiliaryViewModel), typeof(Auxiliary), new PropertyMetadata(null));
 
-        public CommentsViewModel ViewModel => (CommentsViewModel)GetValue(ViewModelProperty);
+        public AuxiliaryViewModel ViewModel => (AuxiliaryViewModel)GetValue(ViewModelProperty);
 
         public Auxiliary()
         {
             this.InitializeComponent();
-
-            //var model = App.Container.Resolve<CommentsViewModel>();
-            //SetValue(ViewModelProperty, model);
+;
+            //SetValue(ViewModelProperty, App.Container.Resolve<AuxiliaryViewModel>() ?? throw new NullReferenceException());
         }
     }
 }

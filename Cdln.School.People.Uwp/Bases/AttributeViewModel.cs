@@ -30,7 +30,7 @@ namespace Cdln.School.People.Uwp
             if ((bool)e.OldValue) { viewModel.SetValue(IdProperty, Guid.Empty); }
             if ((bool)e.NewValue) 
             {
-                if (viewModel.PeopleListProvider.People.CurrentItem is IPerson person)
+                if (viewModel.PeopleListProvider.People?.CurrentItem is IPerson person)
                 { 
                     if (viewModel.Id != person.Id) { viewModel.SetValue(IdProperty, person.Id); }
                     else { viewModel.RequestData(person.Id); } // fail-safe

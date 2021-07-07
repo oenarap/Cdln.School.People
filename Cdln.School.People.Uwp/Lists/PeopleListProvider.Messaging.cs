@@ -57,7 +57,7 @@ namespace Cdln.School.People.Uwp.Lists
 
         public async Task Handle(PeopleContextChangedEvent message)
         {
-            if (message.Data is PeopleContextDescriptor context)
+            if (message.Data.NewValue is PeopleContextDescriptor context)
             {
                 await Dispatcher.RunAsync(CoreDispatcherPriority.Normal, () =>
                 {

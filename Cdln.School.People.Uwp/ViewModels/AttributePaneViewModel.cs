@@ -3,8 +3,8 @@ using Windows.UI.Core;
 using Windows.UI.Xaml;
 using System.Threading.Tasks;
 using Apps.Communication.Core;
-using Cdln.School.People.Uwp.Messages;
 using Cdln.School.People.Uwp.Views;
+using Cdln.School.People.Uwp.Messages;
 
 namespace Cdln.School.People.Uwp.ViewModels
 {
@@ -18,8 +18,17 @@ namespace Cdln.School.People.Uwp.ViewModels
         {
             await Dispatcher.RunAsync(CoreDispatcherPriority.Normal, () =>
             {
-                var type = message.Data.NewValue?.AssociatedViewType;
-                SetValue(ContentProperty, Activator.CreateInstance(type ?? typeof(ErrorPage)));
+                //try
+                //{
+                //    if (message.Data.NewValue?.AssociatedViewType is Type type)
+                //    {
+                //        SetValue(ContentProperty, Activator.CreateInstance(type));
+                //    }
+                //}
+                //catch
+                //{
+                //    SetValue(ContentProperty, Activator.CreateInstance(typeof(ErrorPage)));
+                //}
             });
         }
 

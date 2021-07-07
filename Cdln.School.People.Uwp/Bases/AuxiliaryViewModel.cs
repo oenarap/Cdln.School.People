@@ -10,6 +10,9 @@ namespace Cdln.School.Content.Uwp
 
         public object Content => GetValue(ContentProperty);
 
-        public AuxiliaryViewModel(CommentsView comments) => SetValue(ContentProperty, comments);
+        public AuxiliaryViewModel()
+        {
+            SetValue(ContentProperty, new CommentsView());
+        }
     }
 }

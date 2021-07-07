@@ -4,18 +4,24 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
 
     <Style TargetType="controls:Blade">
-        <Setter Property="Margin" Value="0,0,1,0"/>
         <Setter Property="VerticalAlignment" Value="Stretch"/>
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="controls:Blade">
-                    <Grid x:Name="PART_RootGrid" Margin="{TemplateBinding Margin}">
+                    <Grid x:Name="PART_RootGrid" 
+                          Margin="{TemplateBinding Margin}">
+                        <Grid.Background>
+                            <SolidColorBrush Color="Black" 
+                                             Opacity="{Binding BackgroundOpacity, RelativeSource={RelativeSource Mode=TemplatedParent}}"/>
+                        </Grid.Background>
                         <Grid.RowDefinitions>
                             <RowDefinition x:Name="PART_HeaderRow" Height="Auto"/>
                             <RowDefinition x:Name="PART_ContentRow" Height="*"/>
                             <RowDefinition x:Name="PART_FooterRow" Height="Auto"/>
                         </Grid.RowDefinitions>
-                        <ContentPresenter x:Name="ContentPresenter" Grid.RowSpan="3"
+                        <ContentPresenter x:Name="ContentPresenter" 
+                                          Background="{TemplateBinding Background}"
+                                          Grid.RowSpan="3"
                                           HorizontalContentAlignment="Stretch"/>
                     </Grid>
                 </ControlTemplate>
