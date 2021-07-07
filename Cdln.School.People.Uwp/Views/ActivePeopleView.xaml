@@ -10,6 +10,6 @@
     <Grid>
         <controls:AdaptiveBladeView 
             DesiredBladeLength="280" 
-            ItemsSource="{x:Bind Panes}"/>
+            ItemsSource="{x:Bind Frames}"/>
     </Grid>
 </Page>

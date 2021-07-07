@@ -1,4 +1,5 @@
 ﻿using System;
+using Autofac;
 using Windows.UI.Xaml;
 using Windows.UI.Core;
 using System.Threading.Tasks;
@@ -6,6 +7,8 @@ using Apps.Communication.Core;
 using Windows.UI.Xaml.Controls;
 using Cdln.School.People.Uwp.Lists;
 using Cdln.School.People.Uwp.Messages;
+using Windows.UI.Xaml.Navigation;
+using School.People.Core;
 
 namespace Cdln.School.People.Uwp.Views.Panes
 {
@@ -14,6 +17,39 @@ namespace Cdln.School.People.Uwp.Views.Panes
         private static readonly DependencyProperty ContextProviderProperty = DependencyProperty.Register(nameof(ContextProvider), typeof(AttributeContextsProvider), typeof(AttributePane), new PropertyMetadata(null));
 
         public AttributeContextsProvider ContextProvider => (AttributeContextsProvider)GetValue(ContextProviderProperty);
+
+
+        protected override void OnNavigatedTo(NavigationEventArgs e)
+        {
+            try
+            {
+                if (e.Parameter is NavigationContext navContext)
+                {
+                    var attributeContexts = navContext.GetInstance<AttributeContextsProvider>();
+                    var currentContext = attributeContexts.Current;
+                    var peopleProvider = navContext.GetInstance<PeopleListProvider>();
+                    var person = peopleProvider?.People?.CurrentItem as IPerson;
+                    var type = currentContext?.AssociatedViewType;
+                    var hub = navContext.GetInstance<IMessageHub>();
+
+                    hub?.RegisterHandler<AttributePane, AttributeContextChangedEvent>(this);
+                    SetValue(ContextProviderProperty, attributeContexts);
+
+                    if (type != null)
+                    {
+                        contentFrame.Navigate(type, person);
+                        return;
+                    }
+                }
+
+                contentFrame.Navigate(typeof(Blank));
+            }
+            catch (Exception ex)
+            {
+                contentFrame.Navigate(typeof(ErrorPage), ex);
+            }
+        }
+
 
         public async Task Handle(AttributeContextChangedEvent message)
         {
@@ -79,13 +115,7 @@ namespace Cdln.School.People.Uwp.Views.Panes
             }
         }
 
-        public AttributePane(IMessageHub hub, AttributeContextsProvider contextsProvider)
-        {
-            this.InitializeComponent();
-
-            hub.RegisterHandler<AttributePane, AttributeContextChangedEvent>(this);
-            SetValue(ContextProviderProperty, contextsProvider);
-        }
+        public AttributePane() => this.InitializeComponent();
 
         private Command moveNext;
         private Command movePrevious;

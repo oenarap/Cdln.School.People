@@ -31,13 +31,14 @@ namespace Cdln.School.People.Uwp
             this.appNavigationView.BackRequested += (sender, args) => NavigationService.GoBack();
 
             NavigationService = new NavigationService(this.contentFrame);
-            NavigationContext = new NavigationContext();
+            NavigationContext = new NavigationContext(NavigationService);
 
             var hub = App.Container.Resolve<IMessageHub>();
             
             hub.RegisterHandler<MainPage, PeopleContextChangedEvent>(this);
             hub.RegisterHandler<MainPage, SericeStatusChangedEvent>(this);
 
+            NavigationContext.Add(hub);
             SetValue(ContextsProviderProperty, App.Container.Resolve<PeopleContextsProvider>());
         }
 
@@ -56,13 +57,16 @@ namespace Cdln.School.People.Uwp
             {
                 try
                 {
-                    if (message.Data.NewValue?.AssociatedViewType is Type type)
+                    var context = message.Data.NewValue;
+
+                    if (context?.AssociatedViewType is Type type)
                     {
+                        NavigationContext.Add(context);
                         NavigationService.Navigate(type, NavigationContext);
                     }
                     else
                     {
-                        NavigationService.Navigate(typeof(Blank), NavigationContext);
+                        NavigationService.Navigate(typeof(Blank));
                     }
                 }
                 catch (Exception ex)
@@ -75,13 +79,23 @@ namespace Cdln.School.People.Uwp
 
         private void OnAppNavigationViewItemInvoked(NavigationView sender, NavigationViewItemInvokedEventArgs args)
         {
-            if (args.IsSettingsInvoked == false) 
+            if (args.IsSettingsInvoked == true)
             {
-                var context = args.InvokedItem as IContextDescriptor ?? args.InvokedItemContainer.DataContext as IContextDescriptor;
+                NavigationService.Navigate(typeof(SettingsView));
+                return;
+            }
+
+            var contextFromItem = args.InvokedItem as IContextDescriptor;
+            var contextFromContainer = args.InvokedItemContainer?.DataContext as IContextDescriptor;
+            var context = contextFromItem ?? contextFromContainer;
+
+            if (context != null)
+            {
                 ContextsProvider.Contexts.MoveCurrentTo(context);
                 return;
             }
-            NavigationService.Navigate(typeof(SettingsView), NavigationContext);
+
+            NavigationService.Navigate(typeof(Blank));
         }
     }
 }

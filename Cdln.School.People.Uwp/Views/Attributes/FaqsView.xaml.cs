@@ -1,4 +1,5 @@
-﻿using System;
+﻿using School.People.Core;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -22,6 +23,18 @@ namespace Cdln.School.People.Uwp.Views.Attributes
     /// </summary>
     public sealed partial class FaqsView : Page
     {
+        protected override void OnNavigatedTo(NavigationEventArgs e)
+        {
+            if (e.Parameter is IPerson person)
+            {
+                // TODO: request for data
+            }
+            else
+            {
+                // TODO: reset content & lock the page for editing
+            }
+        }
+
         public FaqsView()
         {
             this.InitializeComponent();

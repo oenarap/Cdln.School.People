@@ -10,9 +10,11 @@ namespace Cdln.School.People.Uwp
     public class NavigationContext : INavigationContext
     {
         private readonly Dictionary<Type, object> NavigationParameters;
+        public NavigationService Root { get; }
 
-        public NavigationContext()
+        public NavigationContext(NavigationService root = null)
         {
+            Root = root;
             NavigationParameters = new Dictionary<Type, object>();
         }
 

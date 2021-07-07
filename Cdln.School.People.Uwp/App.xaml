@@ -2,8 +2,7 @@
     x:Class="Cdln.School.People.Uwp.App"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-    xmlns:utils="using:Cdln.School.People.Uwp.Utils"
-    xmlns:local="using:Cdln.School.People.Uwp">
+    xmlns:utils="using:Cdln.School.People.Uwp.Utils">
 
     <Application.Resources>
         <ResourceDictionary>
