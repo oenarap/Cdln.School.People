@@ -1,13 +1,13 @@
 ﻿<Page x:Name="mainpage"
-    x:Class="Cdln.School.People.Uwp.MainPage"
-    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    xmlns:controls="using:School.People.Uwp.Controls"
-    xmlns:models="using:Cdln.School.People.Uwp.Models"
-    Background="{ThemeResource NavigationViewDefaultPaneBackground}"
-    mc:Ignorable="d">
+      x:Class="Cdln.School.People.Uwp.MainPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+      xmlns:controls="using:School.People.Uwp.Controls"
+      xmlns:models="using:Cdln.School.People.Uwp.Models"
+      Background="{ThemeResource NavigationViewDefaultPaneBackground}"
+      mc:Ignorable="d">
 
     <Page.Resources>
         <controls:DoubleToGridLengthGridLengthToDoubleConverter x:Key="DoubleToGridLengthGridLengthToDoubleConverter"/>
@@ -50,8 +50,13 @@
                     </NavigationViewItem>
                 </DataTemplate>
             </NavigationView.MenuItemTemplate>
-            <Frame x:Name="contentFrame" 
+            
+            <Frame x:Name="contentFrame"
                    Margin="0,-32,0,0"/>
+            <!--<controls:AdaptiveBladeView x:Name="bladeView"
+                                        DesiredBladeLength="280" 
+                                        ItemsSource="{x:Bind Frames}"
+                                        Margin="0,-32,0,0"/>-->
             <NavigationView.PaneFooter>
                 <StackPanel Orientation="Vertical">
                     <NavigationViewItem Content="{Binding Username, ElementName=mainpage}">

@@ -17,7 +17,7 @@ namespace School.People.Uwp.Controls
         /// <summary>
         /// Identifies the <see cref="DesiredBladeLength"/> property.
         /// </summary>
-        private static readonly DependencyProperty DesiredBladeLengthProperty = DependencyProperty.Register(nameof(DesiredBladeLength), typeof(int), typeof(AdaptiveBladeView), new PropertyMetadata(0, OnDesiredBladeLengthPropertyChanged));
+        private static readonly DependencyProperty DesiredBladeLengthProperty = DependencyProperty.Register(nameof(DesiredBladeLength), typeof(int), typeof(AdaptiveBladeView), new PropertyMetadata(1, OnDesiredBladeLengthPropertyChanged));
 
         /// <summary>
         /// Identifies the <see cref="ActualBladeLength"/> property.
@@ -53,7 +53,7 @@ namespace School.People.Uwp.Controls
         public int DesiredBladeLength
         {
             get { return (int)GetValue(DesiredBladeLengthProperty); }
-            set { SetValue(DesiredBladeLengthProperty, Math.Abs(value)); }
+            set { SetValue(DesiredBladeLengthProperty, Math.Max(1, value)); }
         }
 
         /// <summary>
@@ -137,6 +137,9 @@ namespace School.People.Uwp.Controls
             var length = (double)e.NewValue;
             var availableLength = length * view.MaxBladeCount;
             var lastIndex = view.ActiveBlades.Count - 1;
+
+            if (lastIndex < 0) { return; }
+
             var opacityFactor = 1.0 / lastIndex;
 
             for (int i = 0; i < lastIndex; i++)

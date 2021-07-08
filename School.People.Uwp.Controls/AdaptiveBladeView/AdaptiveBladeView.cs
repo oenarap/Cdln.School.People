@@ -13,7 +13,7 @@ namespace School.People.Uwp.Controls
     public sealed partial class AdaptiveBladeView : ItemsControl
     {
         private Grid rootGrid;
-        private int minBladeLength = 0;
+        private int minBladeLength = 1;
         private int currentIndex = 0;
         private readonly IList<Blade> ActiveBlades;
 

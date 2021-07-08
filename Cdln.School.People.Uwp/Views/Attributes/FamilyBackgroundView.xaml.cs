@@ -24,6 +24,8 @@ namespace Cdln.School.People.Uwp.Views.Attributes
             {
                 // TODO: reset content & lock the page for editing
             }
+
+            base.OnNavigatedTo(e);
         }
 
         public FamilyBackgroundView()

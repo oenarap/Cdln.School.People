@@ -1,5 +1,6 @@
 ﻿using System;
 using Autofac;
+using System.Threading.Tasks;
 using Windows.UI.Xaml.Controls;
 using School.People.Uwp.Controls;
 using Windows.UI.Xaml.Navigation;
@@ -11,7 +12,6 @@ namespace Cdln.School.People.Uwp.Views
 {
     public sealed partial class ActivePeopleView : Page
     {
-        private PeopleContextDescriptor peopleContext;
         public readonly Frame[] Frames;
 
         public ActivePeopleView()
@@ -27,13 +27,19 @@ namespace Cdln.School.People.Uwp.Views
             Frames = new Frame[4] { peopleList, conspectus, attributes, auxiliary }; // Note: the order matters
         }
 
-        protected override async void OnNavigatedTo(NavigationEventArgs e)
+        protected override void OnNavigatedTo(NavigationEventArgs e)
         {
-            if (e.Parameter is NavigationContext navContext)
+            NavigateToPanes(e.Parameter).FireAndForget(false);
+            base.OnNavigatedTo(e);
+        }
+
+        private async Task NavigateToPanes(object param)
+        {
+            if (param is NavigationContext navContext)
             {
                 await Dispatcher.RunAsync(Windows.UI.Core.CoreDispatcherPriority.Normal, () =>
                 {
-                    peopleContext = navContext.GetInstance<PeopleContextDescriptor>();
+                    var peopleContext = navContext.GetInstance<PeopleContextDescriptor>();
 
                     if (peopleContext != null)
                     {
@@ -43,10 +49,10 @@ namespace Cdln.School.People.Uwp.Views
                         navContext.Add(peopleProvider);
                         navContext.Add(attributeContexts);
 
-                        Frames[0].Navigate(typeof(PeopleList), navContext);
-                        Frames[1].Navigate(typeof(Conspectus), navContext);
                         Frames[3].Navigate(typeof(Auxiliary), navContext);
                         Frames[2].Navigate(typeof(AttributePane), navContext);
+                        Frames[1].Navigate(typeof(Conspectus), navContext);
+                        Frames[0].Navigate(typeof(PeopleList), navContext);
                     }
                     else
                     {

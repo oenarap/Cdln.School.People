@@ -1,4 +1,55 @@
-﻿//People = new List<Person>()
+﻿public async Task Handle(PeopleContextChangedEvent message)
+        {
+            await Dispatcher.RunAsync(CoreDispatcherPriority.Normal, () =>
+            {
+                try
+                {
+                    var context = message.Data.NewValue;
+
+                    if (context?.AssociatedViewTypes is Type[] types)
+                    {
+                        SetFramesCount(types.Length);  // match number of frames to the number of associated types.
+
+                        for (var i = 0; i < types.Length; i++)
+                        {
+                            Frames[i].Navigate(types[i]);
+                        }
+                    }
+                    else
+                    {
+                        Frames[0].Navigate(typeof(Blank));
+                    }
+                }
+                catch (Exception ex)
+                {
+                    Frames[0].Navigate(typeof(ErrorPage), ex);
+                }
+            });
+        }
+
+        private void SetFramesCount(int count)
+        {
+            var currentCount = Frames.Count;
+            var countDiff = currentCount - count;
+
+            if (countDiff > 0)
+            {
+                for (var i = currentCount - 1; i >= count; i--)
+                {
+                    Frames.RemoveAt(i);
+                }
+            }
+            else if (countDiff < 0)
+            {
+                for (var i = 0; i < Math.Abs(countDiff); i++)
+                {
+                    Frames.Add(new Frame());
+                }
+            }
+        }
+
+
+//People = new List<Person>()
             //{
             //    new Person(Guid.NewGuid(), "Potter", "Harry James", "Bond"),
             //    new Person(Guid.NewGuid(), "Wesley", "Ronald Bilius", "Snipes"),

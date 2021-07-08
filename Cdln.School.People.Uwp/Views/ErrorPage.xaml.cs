@@ -1,4 +1,5 @@
-﻿using Windows.UI.Xaml;
+﻿using System;
+using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Navigation;
 
@@ -17,8 +18,17 @@ namespace Cdln.School.People.Uwp.Views
 
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
+            if (e.Parameter is NavigationContext navContext)
+            {
+                var exception = navContext.GetInstance<Exception>();
+                SetValue(ErrorMessageProperty, exception?.Message ?? "Unknown Error.");
+            }
+            else
+            {
+                SetValue(ErrorMessageProperty, e.Parameter.ToString());
+            }
+
             base.OnNavigatedTo(e);
-            SetValue(ErrorMessageProperty, e.Parameter.ToString());
         }
     }
 }

@@ -6,6 +6,8 @@ using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Navigation;
 using Cdln.School.People.Uwp.Lists;
 using Cdln.School.People.Uwp.ViewModels;
+using System.Threading.Tasks;
+using Windows.UI.Core;
 
 namespace Cdln.School.People.Uwp.Views.Attributes
 {
@@ -22,14 +24,23 @@ namespace Cdln.School.People.Uwp.Views.Attributes
 
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
-            if (e.Parameter is IPerson person)
+            SetupPage(e.Parameter).FireAndForget(false);
+            base.OnNavigatedTo(e);
+        }
+
+        private async Task SetupPage(object param)
+        {
+            await Dispatcher.RunAsync(CoreDispatcherPriority.Normal, () =>
             {
-                // TODO: request for data
-            }
-            else
-            {
-                // TODO: reset content & lock the page for editing
-            }
+                if (param is IPerson person)
+                {
+                    // TODO: request for data
+                }
+                else
+                {
+                    // TODO: reset content & lock the page for editing
+                }
+            });
         }
     }
 }

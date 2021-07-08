@@ -8,6 +8,7 @@ using System.Collections.Generic;
 using Cdln.School.People.Uwp.Views;
 using Cdln.School.People.Uwp.Models;
 using Cdln.School.People.Uwp.Messages;
+using Cdln.School.People.Uwp.Views.Panes;
 
 namespace Cdln.School.People.Uwp.Lists
 {
@@ -61,9 +62,13 @@ namespace Cdln.School.People.Uwp.Lists
         private static readonly List<PeopleContextDescriptor> contexts = new List<PeopleContextDescriptor>()
         {
             new PeopleContextDescriptor(PeopleContext.Personnel, "Personnel", typeof(ActivePeopleView),
-                "", new KeyboardAccelerator() { Key = VirtualKey.F12 }),
+                "", new KeyboardAccelerator() { Key = VirtualKey.F9 }), // { AssociatedViewTypes = new Type[4] {
+                    //typeof(PeopleList), typeof(Conspectus), typeof(AttributePane), typeof(Auxiliary)
+                //} },
             new PeopleContextDescriptor(PeopleContext.Students, "Students", typeof(ActivePeopleView),
-                "", new KeyboardAccelerator() { Key = VirtualKey.F10 }),
+                "", new KeyboardAccelerator() { Key = VirtualKey.F10 }), // { AssociatedViewTypes = new Type[4] {
+                    //typeof(PeopleList), typeof(Conspectus), typeof(AttributePane), typeof(Auxiliary)
+                //} },
             new PeopleContextDescriptor(PeopleContext.Others, "Others", typeof(InactivePeopleView),
                 "", new KeyboardAccelerator() { Key = VirtualKey.F11 }),
             new PeopleContextDescriptor(PeopleContext.Archived, "Archived", typeof(InactivePeopleView),
