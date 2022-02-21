@@ -19,6 +19,7 @@ namespace Cdln.School.People.Uwp.Models
         private static void OnIsOngoingPropertyChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
         {
             Education model = (Education)d;
+
             if ((bool)e.NewValue)
             {
                 model.SetValue(EndDateProperty, DateTimeOffset.Now);

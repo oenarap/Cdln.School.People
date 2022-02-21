@@ -15,6 +15,8 @@ namespace Cdln.School.People.Uwp
     sealed partial class App : Application
     {
         public static IContainer Container;
+        public static INavigationService NavigationService;
+        
         public UserCredentials Credentials { get; private set; }
         
         public App()
@@ -23,6 +25,7 @@ namespace Cdln.School.People.Uwp
             this.Suspending += OnSuspending;
 
             Container = Ioc.BuildContainer();
+            NavigationService = new NavigationService();
         }
 
         protected override void OnLaunched(LaunchActivatedEventArgs e)
